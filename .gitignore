@@ -41,6 +41,9 @@ BrushFit-Guide-PURCHASED.pdf
 # vercel
 .vercel
 
+# claude worktrees
+.claude/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

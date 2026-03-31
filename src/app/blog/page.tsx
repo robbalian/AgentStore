@@ -106,6 +106,46 @@ const posts = [
     category: "Agent Payments",
     date: "2025-09-05",
   },
+  {
+    slug: "standing-exercises-while-working",
+    title: "12 Standing Exercises You Can Do While Working From Home",
+    description:
+      "Multitasking exercises for your standing desk or work-from-home setup. Build strength without leaving your workspace.",
+    category: "Fitness Guide",
+    date: "2026-01-15",
+  },
+  {
+    slug: "exercise-snacking-guide",
+    title: "Exercise Snacking: The Complete Guide to Movement Snacks",
+    description:
+      "Short bursts of exercise throughout the day add up to real fitness gains. The science behind exercise snacking and how to start.",
+    category: "Fitness Science",
+    date: "2026-02-01",
+  },
+  {
+    slug: "two-minute-workout-routine",
+    title: "The Best 2-Minute Workout Routines That Actually Work",
+    description:
+      "Science-backed 2-minute workout routines for every fitness level. Quick exercises that deliver real results.",
+    category: "Fitness Guide",
+    date: "2026-02-15",
+  },
+  {
+    slug: "agent-economy-2025",
+    title: "The Agent Economy in 2025: How AI Agents Are Changing Commerce",
+    description:
+      "AI agents are making autonomous purchases, comparing products, and driving a new agent-to-agent economy. Here's what's happening.",
+    category: "Agentic Commerce",
+    date: "2026-03-01",
+  },
+  {
+    slug: "multitasking-workouts-busy-people",
+    title: "Multitasking Workouts for Busy People: Exercise Without Extra Time",
+    description:
+      "No time for the gym? Exercise while doing chores, brushing teeth, or waiting in line. The busy person's guide to fitness.",
+    category: "Fitness Guide",
+    date: "2026-03-15",
+  },
 ];
 
 export default function BlogIndex() {

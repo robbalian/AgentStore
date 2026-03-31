@@ -4,4 +4,6 @@
 Contact: mailto:rob@robbalian.com
 Preferred-Languages: en
 Canonical: https://agentstore.vercel.app/.well-known/security.txt
-Expires: 2027-03-31T00:00:00.000Z
+Policy: https://agentstore.vercel.app
+Acknowledgments: https://agentstore.vercel.app
+Expires: 2027-12-31T23:59:59.000Z

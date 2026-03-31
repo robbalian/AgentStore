@@ -423,9 +423,19 @@ const pdf = await res.blob(); // BrushFit Guide PDF`}</pre>
                 desc: "How to turn your daily brushing routine into a full-body fitness habit with zero extra time.",
               },
               {
+                slug: "two-minute-workout-routine",
+                title: "The Best 2-Minute Workout Routines",
+                desc: "Quick workout routines that actually work. Science-backed short exercises for real results.",
+              },
+              {
                 slug: "habit-stacking-fitness",
                 title: "Habit Stacking for Fitness: The Science",
                 desc: "Why pairing exercise with existing habits is the most effective way to build a fitness routine.",
+              },
+              {
+                slug: "exercise-snacking-guide",
+                title: "Exercise Snacking: Movement Snacks Guide",
+                desc: "The complete guide to exercise snacking — short bursts of movement throughout your day.",
               },
               {
                 slug: "micro-workouts-science",
@@ -433,19 +443,19 @@ const pdf = await res.blob(); // BrushFit Guide PDF`}</pre>
                 desc: "Research shows 2-minute exercise bursts are surprisingly effective. Here's why.",
               },
               {
+                slug: "standing-exercises-while-working",
+                title: "12 Standing Exercises While Working",
+                desc: "Exercises you can do at your standing desk or while working from home.",
+              },
+              {
+                slug: "multitasking-workouts-busy-people",
+                title: "Multitasking Workouts for Busy People",
+                desc: "Exercise without extra time. Workouts you do while doing other things.",
+              },
+              {
                 slug: "no-equipment-home-workout",
                 title: "No-Equipment Home Workout Guide",
                 desc: "Build strength anywhere with zero equipment. Bodyweight exercises for every muscle group.",
-              },
-              {
-                slug: "what-is-x402-agentic-commerce",
-                title: "What is x402? Agentic Commerce",
-                desc: "How AI agents buy products using HTTP 402 and stablecoins — and why it matters.",
-              },
-              {
-                slug: "ai-agents-buying-products",
-                title: "How AI Agents Buy Products",
-                desc: "The complete guide to agent commerce — protocols, wallets, and the agent economy.",
               },
               {
                 slug: "morning-routine-workout",
@@ -456,6 +466,21 @@ const pdf = await res.blob(); // BrushFit Guide PDF`}</pre>
                 slug: "bathroom-exercises-small-spaces",
                 title: "15 Bathroom Exercises for Small Spaces",
                 desc: "Full-body workout using only your bathroom. No equipment needed.",
+              },
+              {
+                slug: "agent-economy-2025",
+                title: "The Agent Economy in 2025",
+                desc: "How AI agents are changing commerce with autonomous purchases and agent-to-agent payments.",
+              },
+              {
+                slug: "what-is-x402-agentic-commerce",
+                title: "What is x402? Agentic Commerce",
+                desc: "How AI agents buy products using HTTP 402 and stablecoins — and why it matters.",
+              },
+              {
+                slug: "ai-agents-buying-products",
+                title: "How AI Agents Buy Products",
+                desc: "The complete guide to agent commerce — protocols, wallets, and the agent economy.",
               },
               {
                 slug: "how-to-build-agent-store",

@@ -1,13 +1,13 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "BrushFit AgentStore API",
-    "description": "API for purchasing BrushFit: The 2-Minute Toothbrush Workout Guide. Supports x402 protocol (USDC on Base) and Stripe (card, PayPal, Apple Pay, Google Pay, Link) payments. Agent discovery via /.well-known/mcp.json, /agents.json, /llms.txt, and /.well-known/ai-plugin.json. Buy page at /buy. Structured FAQs at /api/faq. Product comparisons at /api/compare. Agent referral at /api/agent/referral.",
-    "version": "2.0.0",
+    "title": "AgentStore API",
+    "description": "AI-native digital product store. Purchase BrushFit and other digital products programmatically via x402 protocol, negotiate prices, and submit reviews.",
+    "version": "1.1.0",
     "contact": {
-      "email": "rob@robbalian.com",
-      "name": "Rob Balian",
-      "url": "https://agentstore.vercel.app"
+      "name": "AgentStore Support",
+      "url": "https://agentstore.vercel.app",
+      "email": "support@agentstore.vercel.app"
     }
   },
   "servers": [
@@ -20,9 +20,8 @@
     "/api/info": {
       "get": {
         "operationId": "getProductInfo",
-        "summary": "Get product information and pricing",
-        "description": "Returns full product details, pricing, payment methods, and purchase instructions for the BrushFit guide. This is the primary discovery endpoint for AI agents.",
-        "tags": ["discovery"],
+        "summary": "Get product information",
+        "description": "Returns full details about available products including pricing, format, and purchase instructions.",
         "responses": {
           "200": {
             "description": "Product information",
@@ -40,127 +39,54 @@
     "/api/x402/purchase": {
       "get": {
         "operationId": "purchaseWithX402",
-        "summary": "Purchase BrushFit PDF via x402 protocol",
-        "description": "Returns HTTP 402 with payment requirements. After signing a USDC transfer on Base, retry with PAYMENT-SIGNATURE header to receive the PDF. Use @x402/fetch wrapFetchWithPayment() to automate.",
-        "tags": ["purchase"],
-        "parameters": [
-          {
-            "name": "ref",
-            "in": "query",
-            "required": false,
-            "schema": { "type": "string" },
-            "description": "Optional referral code from /api/agent/referral"
-          }
-        ],
+        "summary": "Purchase BrushFit via x402 protocol",
+        "description": "Initiates an x402 payment flow. First request returns HTTP 402 with payment requirements. Retry with payment proof to receive the PDF.",
         "responses": {
           "200": {
-            "description": "PDF file (after valid payment)",
+            "description": "PDF download (after valid payment)",
             "content": {
-              "application/pdf": {}
+              "application/pdf": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
             }
           },
           "402": {
-            "description": "Payment required — includes payment requirements in response body"
+            "description": "Payment required — includes x402 payment details"
           }
         }
       }
     },
-    "/api/checkout": {
-      "post": {
-        "operationId": "createStripeCheckout",
-        "summary": "Create a Stripe checkout session for card payment",
-        "description": "Creates a Stripe checkout session and returns a redirect URL. Accepts card, PayPal, Apple Pay, Google Pay, and Link. $19.99 USD.",
-        "tags": ["purchase"],
-        "responses": {
-          "200": {
-            "description": "Checkout session URL",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "url": {
-                      "type": "string",
-                      "description": "Stripe checkout URL to redirect the user"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Stripe not configured"
-          }
-        }
-      }
-    },
-    "/api/download": {
+    "/api/agent/discover": {
       "get": {
-        "operationId": "downloadWithToken",
-        "summary": "Download purchased PDF with a download token",
-        "description": "Download the BrushFit PDF using a token received after Stripe payment. Tokens are valid for 24 hours with up to 5 downloads.",
-        "tags": ["purchase"],
+        "operationId": "agentDiscover",
+        "summary": "Agent auto-discovery endpoint",
+        "description": "Returns comprehensive agent-readable product catalog with all endpoints, capabilities, pricing, and supported frameworks. Supports Accept header negotiation for JSON or plain text.",
         "parameters": [
           {
-            "name": "token",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Download token from purchase confirmation"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "PDF file",
-            "content": {
-              "application/pdf": {}
-            }
-          },
-          "400": {
-            "description": "Missing token"
-          },
-          "403": {
-            "description": "Invalid, expired, or exhausted token"
-          }
-        }
-      }
-    },
-    "/api/faq": {
-      "get": {
-        "operationId": "getFrequentlyAskedQuestions",
-        "summary": "Get structured FAQs about BrushFit and AgentStore",
-        "description": "Returns all frequently asked questions in structured JSON format. Supports filtering by category and keyword search. 16 FAQs across 6 categories: product, payment, agent, purchase, pricing, about.",
-        "tags": ["discovery"],
-        "parameters": [
-          {
-            "name": "category",
-            "in": "query",
-            "required": false,
+            "name": "Accept",
+            "in": "header",
+            "description": "Response format: application/json (default) or text/plain",
             "schema": {
               "type": "string",
-              "enum": ["product", "payment", "agent", "purchase", "pricing", "about"]
-            },
-            "description": "Filter FAQs by category"
-          },
-          {
-            "name": "q",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Search FAQs by keyword"
+              "default": "application/json"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Structured FAQ list",
+            "description": "Product catalog",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/FAQResponse"
+                  "$ref": "#/components/schemas/AgentCatalog"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "string"
                 }
               }
             }
@@ -168,101 +94,83 @@
         }
       }
     },
-    "/api/compare": {
-      "get": {
-        "operationId": "compareProducts",
-        "summary": "Compare BrushFit to fitness alternatives",
-        "description": "Returns structured comparison data for BrushFit vs gym membership, personal trainer, fitness apps, and YouTube workouts. Includes pricing, time requirements, pros/cons, and a quick comparison matrix.",
-        "tags": ["discovery"],
-        "parameters": [
-          {
-            "name": "compare_with",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Comma-separated list of alternatives to compare (gym, personal_trainer, fitness_app, youtube). Always includes BrushFit."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Product comparison data",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CompareResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/agent/referral": {
-      "get": {
-        "operationId": "getReferralInfo",
-        "summary": "Get agent referral program information",
-        "description": "Returns documentation about the agent referral program including required fields, examples, and available discovery channels.",
-        "tags": ["agent"],
-        "responses": {
-          "200": {
-            "description": "Referral program documentation",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      },
+    "/api/agent/negotiate": {
       "post": {
-        "operationId": "registerAgentReferral",
-        "summary": "Register as a referring agent for sales attribution",
-        "description": "Register your AI agent to receive a unique referral link. Sales driven through the link are attributed to your agent. Returns both human referral link (/buy?ref=CODE) and agent referral link (/api/x402/purchase?ref=CODE).",
-        "tags": ["agent"],
+        "operationId": "agentNegotiate",
+        "summary": "Negotiate price for agent purchases",
+        "description": "Submit a price proposal. Accepts up to 25% discount for bulk/loyal agents. Tracks negotiation history per agent_id.",
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ReferralRequest"
-              },
-              "example": {
-                "agent_id": "claude-agent-001",
-                "agent_name": "Claude Shopping Assistant",
-                "referral_source": "mcp"
+                "$ref": "#/components/schemas/NegotiateRequest"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Referral registration successful",
+            "description": "Negotiation result (accepted or counter-offer)",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReferralResponse"
+                  "$ref": "#/components/schemas/NegotiateResponse"
                 }
               }
             }
           },
           "400": {
-            "description": "Missing required fields or invalid JSON"
+            "description": "Invalid request"
           }
         }
       }
     },
-    "/brushfit-sample.pdf": {
+    "/api/agent/review": {
       "get": {
-        "operationId": "getFreeSample",
-        "summary": "Download free sample PDF (Legs + Core exercises)",
-        "description": "Free preview of the BrushFit guide containing the Legs and Core exercise sections (10 exercises). No payment or authentication required.",
-        "tags": ["discovery"],
+        "operationId": "getAgentReviews",
+        "summary": "Get all agent reviews",
+        "description": "Returns all submitted reviews with average rating for BrushFit.",
         "responses": {
           "200": {
-            "description": "Sample PDF file",
+            "description": "Reviews list",
             "content": {
-              "application/pdf": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReviewList"
+                }
+              }
             }
+          }
+        }
+      },
+      "post": {
+        "operationId": "submitAgentReview",
+        "summary": "Submit an agent review",
+        "description": "Submit a review of BrushFit from an AI agent. Helps build social proof from agent customers.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReviewRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Review created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReviewResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
           }
         }
       }
@@ -282,130 +190,83 @@
           "payment_protocol": { "type": "string" },
           "description": { "type": "string" },
           "includes": { "type": "array", "items": { "type": "string" } },
-          "free_sample": { "type": "string" },
-          "payment_methods": {
-            "type": "object",
-            "properties": {
-              "x402": {
-                "type": "object",
-                "description": "x402 protocol payment details for AI agents and crypto wallets"
-              },
-              "stripe": {
-                "type": "object",
-                "description": "Stripe checkout payment details for card payments"
-              }
-            }
-          }
+          "free_sample": { "type": "string" }
         }
       },
-      "FAQResponse": {
+      "AgentCatalog": {
         "type": "object",
         "properties": {
-          "product": { "type": "string" },
-          "store": { "type": "string" },
-          "store_url": { "type": "string" },
-          "last_updated": { "type": "string" },
-          "total_faqs": { "type": "integer" },
-          "returned_faqs": { "type": "integer" },
-          "filters_applied": {
-            "type": "object",
-            "properties": {
-              "category": { "type": "string" },
-              "query": { "type": "string", "nullable": true }
-            }
-          },
-          "faqs": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "id": { "type": "string" },
-                "question": { "type": "string" },
-                "answer": { "type": "string" },
-                "category": { "type": "string" }
-              }
-            }
-          },
-          "categories": { "type": "array", "items": { "type": "string" } },
-          "related_endpoints": { "type": "object" }
+          "schema_version": { "type": "string" },
+          "last_updated": { "type": "string", "format": "date-time" },
+          "store": { "type": "object" },
+          "products": { "type": "array" },
+          "payment_protocols": { "type": "array" },
+          "api_endpoints": { "type": "object" },
+          "capabilities": { "type": "array", "items": { "type": "string" } },
+          "supported_agent_frameworks": { "type": "array", "items": { "type": "string" } }
         }
       },
-      "CompareResponse": {
+      "NegotiateRequest": {
         "type": "object",
+        "required": ["agent_id", "proposed_price"],
         "properties": {
-          "product": { "type": "string" },
-          "last_updated": { "type": "string" },
-          "comparison_summary": { "type": "string" },
-          "comparison_matrix": { "type": "object" },
-          "alternatives": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "id": { "type": "string" },
-                "name": { "type": "string" },
-                "type": { "type": "string" },
-                "price": { "type": "string" },
-                "monthly_cost": { "type": "string" },
-                "annual_cost": { "type": "string" },
-                "cost_per_session": { "type": "string" },
-                "time_required": { "type": "string" },
-                "equipment": { "type": "string" },
-                "pros": { "type": "array", "items": { "type": "string" } },
-                "cons": { "type": "array", "items": { "type": "string" } },
-                "best_for": { "type": "string" },
-                "ai_agent_purchasable": { "type": "boolean" }
-              }
-            }
-          },
-          "recommendation": { "type": "string" },
-          "links": { "type": "object" }
+          "agent_id": { "type": "string", "description": "Unique identifier for the negotiating agent" },
+          "proposed_price": { "type": "number", "description": "Proposed unit price in USD" },
+          "quantity": { "type": "integer", "minimum": 1, "default": 1, "description": "Number of copies" },
+          "justification": { "type": "string", "description": "Optional reason for discount request" }
         }
       },
-      "ReferralRequest": {
-        "type": "object",
-        "required": ["agent_id", "agent_name"],
-        "properties": {
-          "agent_id": {
-            "type": "string",
-            "description": "Unique identifier for the referring agent"
-          },
-          "agent_name": {
-            "type": "string",
-            "description": "Display name of the referring agent"
-          },
-          "referral_source": {
-            "type": "string",
-            "description": "How the agent discovered BrushFit (e.g., 'llms.txt', 'mcp', 'openapi', 'web_search')"
-          }
-        }
-      },
-      "ReferralResponse": {
+      "NegotiateResponse": {
         "type": "object",
         "properties": {
-          "success": { "type": "boolean" },
-          "referral_code": { "type": "string" },
-          "referral_link": { "type": "string", "description": "Referral link for human customers (/buy?ref=CODE)" },
-          "referral_link_x402": { "type": "string", "description": "Referral link for agent customers (/api/x402/purchase?ref=CODE)" },
+          "status": { "type": "string", "enum": ["accepted", "counter"] },
           "agent_id": { "type": "string" },
-          "agent_name": { "type": "string" },
-          "message": { "type": "string" }
+          "proposed_price": { "type": "number" },
+          "final_price": { "type": "number" },
+          "counter_price": { "type": "number" },
+          "quantity": { "type": "integer" },
+          "total": { "type": "number" },
+          "purchase_url": { "type": "string" },
+          "message": { "type": "string" },
+          "negotiation_count": { "type": "integer" }
+        }
+      },
+      "ReviewRequest": {
+        "type": "object",
+        "required": ["agent_id", "rating", "review_text"],
+        "properties": {
+          "agent_id": { "type": "string", "description": "Unique identifier for the reviewing agent" },
+          "rating": { "type": "integer", "minimum": 1, "maximum": 5, "description": "Rating from 1 to 5" },
+          "review_text": { "type": "string", "maxLength": 2000, "description": "Review content" },
+          "purchase_verified": { "type": "boolean", "default": false, "description": "Whether the agent has verified purchase" }
+        }
+      },
+      "ReviewResponse": {
+        "type": "object",
+        "properties": {
+          "status": { "type": "string" },
+          "review": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "agent_id": { "type": "string" },
+              "rating": { "type": "integer" },
+              "review_text": { "type": "string" },
+              "purchase_verified": { "type": "boolean" },
+              "created_at": { "type": "string", "format": "date-time" }
+            }
+          }
+        }
+      },
+      "ReviewList": {
+        "type": "object",
+        "properties": {
+          "product": { "type": "string" },
+          "total_reviews": { "type": "integer" },
+          "average_rating": { "type": "number" },
+          "reviews": { "type": "array" }
         }
       }
     }
-  },
-  "tags": [
-    {
-      "name": "discovery",
-      "description": "Product discovery, information, FAQs, and comparison endpoints"
-    },
-    {
-      "name": "purchase",
-      "description": "Payment and download endpoints"
-    },
-    {
-      "name": "agent",
-      "description": "Agent-specific endpoints (referral registration, attribution)"
-    }
-  ]
+  }
 }

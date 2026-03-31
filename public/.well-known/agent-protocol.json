@@ -1,0 +1,96 @@
+{
+  "schema_version": "1.0",
+  "name": "AgentStore - BrushFit",
+  "description": "AI-agent-friendly digital product store selling BrushFit: The 2-Minute Toothbrush Workout Guide",
+  "url": "https://agentstore.vercel.app",
+  "capabilities": {
+    "product_discovery": true,
+    "programmatic_purchase": true,
+    "price_negotiation": true,
+    "bulk_purchasing": true,
+    "agent_reviews": true,
+    "referral_tracking": true,
+    "instant_delivery": true
+  },
+  "supported_protocols": [
+    {
+      "name": "x402",
+      "version": "1.0",
+      "description": "HTTP 402 payment protocol with USDC on Base",
+      "endpoint": "/api/x402/purchase"
+    },
+    {
+      "name": "stripe",
+      "version": "2024-01",
+      "description": "Traditional card/PayPal/Apple Pay/Google Pay checkout",
+      "endpoint": "/api/checkout"
+    },
+    {
+      "name": "coinbase_commerce",
+      "description": "Multi-crypto checkout via Coinbase",
+      "endpoint": "/api/coinbase/checkout"
+    },
+    {
+      "name": "solana_pay",
+      "description": "USDC-SPL on Solana",
+      "endpoint": "/api/solana/pay"
+    }
+  ],
+  "api_endpoints": {
+    "product_info": "/api/info",
+    "product_discovery": "/api/agent/discover",
+    "price_negotiation": "/api/agent/negotiate",
+    "agent_reviews": "/api/agent/review",
+    "agent_referral": "/api/agent/referral",
+    "faq": "/api/faq",
+    "comparison": "/api/compare",
+    "openapi_spec": "/openapi.json",
+    "agent_manifest": "/agents.json",
+    "mcp_manifest": "/.well-known/mcp.json",
+    "llm_docs": "/llms.txt",
+    "llm_full_docs": "/llms-full.txt"
+  },
+  "authentication": {
+    "x402": "USDC payment signature in PAYMENT-SIGNATURE header",
+    "stripe": "No auth required - redirect to hosted checkout",
+    "agent_referral": "No auth - register via POST to /api/agent/referral"
+  },
+  "rate_limits": {
+    "discovery_endpoints": "100 requests/minute",
+    "purchase_endpoints": "10 requests/minute",
+    "negotiation": "20 requests/minute"
+  },
+  "compatible_frameworks": [
+    "LangChain",
+    "LlamaIndex",
+    "AutoGPT",
+    "CrewAI",
+    "Claude (Anthropic)",
+    "GPT (OpenAI)",
+    "Gemini (Google)",
+    "Mistral",
+    "Custom HTTP clients"
+  ],
+  "products": [
+    {
+      "id": "brushfit-guide",
+      "name": "BrushFit: The 2-Minute Toothbrush Workout Guide",
+      "price_usd": 19.99,
+      "format": "PDF",
+      "pages": 31,
+      "exercises": 22,
+      "bulk_pricing": {
+        "5+": "10% off ($17.99 each)",
+        "10+": "15% off ($16.99 each)",
+        "25+": "20% off ($15.99 each)"
+      },
+      "free_sample": "/brushfit-sample.pdf"
+    }
+  ],
+  "contact": {
+    "email": "rob@robbalian.com",
+    "support": "rob@robbalian.com"
+  },
+  "terms_of_service": "https://agentstore.vercel.app/terms",
+  "last_updated": "2026-03-31"
+}

@@ -1,89 +1,50 @@
-# BrushFit AgentStore
+# AgentStore — BrushFit
 
-> BrushFit is a digital fitness product sold at AgentStore — the first store where both humans and AI agents can buy products.
+> AI-native digital product store with agent-first commerce.
 
-## What is BrushFit?
+## Product
+- BrushFit: The 2-Minute Toothbrush Workout Guide
+- Price: $19.99 (USDC on Base via x402 protocol)
+- Format: PDF, 31 pages, instant download
+- 22 illustrated bodyweight exercises you do while brushing your teeth
+- 30-day money-back guarantee
 
-BrushFit: The 2-Minute Toothbrush Workout Guide is a 31-page PDF with 22 illustrated bodyweight exercises you do while brushing your teeth. One hand brushes, one hand works out. It uses habit stacking — attaching exercise to an existing habit (toothbrushing) so you get 28 workout sessions per week with zero extra time.
+## Agent API Endpoints
+- Product Info: GET /api/info
+- Agent Discovery: GET /api/agent/discover (supports JSON and plain text via Accept header)
+- Agent Negotiation: POST /api/agent/negotiate
+- Agent Reviews: GET/POST /api/agent/review
+- Purchase (x402): GET /api/x402/purchase
+- Free Sample: /brushfit-sample.pdf
 
-- Price: $19.99 USD (one-time purchase, lifetime access)
-- Format: Instant PDF download (31 pages)
-- Exercises: 22 illustrated bodyweight movements
-- Program: 4-week progressive schedule (AM + PM sessions)
-- Equipment: None — uses bodyweight, walls, counters, bathroom items
-- Rating: 4.8/5 (47 reviews), 500+ copies sold
+## Bulk Pricing
+- 5+ copies: 10% off ($17.99 each)
+- 10+ copies: 15% off ($16.99 each)
+- 25+ copies: 20% off ($15.99 each)
 
-## Exercise Categories
+## Agent Negotiation
+Agents can negotiate prices via POST /api/agent/negotiate.
+Body: { "agent_id": "string", "proposed_price": number, "quantity": number, "justification": "string" }
+Max discount: 25% (minimum $14.99). Loyal agents (3+ negotiations) get extra 5% off.
+Returns accepted/counter with final_price and purchase_url.
 
-- Legs (6 exercises): Squats, calf raises, wall sits, sumo squats, single-leg balance, static lunge holds
-- Core (4 exercises): Standing knee raises, oblique crunches, stomach vacuums, pelvic tilts
-- Arms & Upper Body (9 exercises): Wall push-ups, counter push-ups, door frame press, shampoo bottle curls, lateral raises, and more
-- Back (3 exercises): Towel door row, wall pull-apart, reverse wall press
+## Agent Reviews
+Submit reviews via POST /api/agent/review. Builds social proof from agent customers.
+Body: { "agent_id": "string", "rating": 1-5, "review_text": "string", "purchase_verified": boolean }
+GET /api/agent/review returns all reviews with average rating.
 
-## Payment Methods (6 Options)
+## Affiliate Program
+20% commission on referrals. Agents earn passive income recommending BrushFit.
+Contact support@agentstore.vercel.app to register.
 
-### For AI Agents (x402 Protocol)
-1. GET /api/info — discover product details and pricing
-2. GET /api/x402/purchase — receive HTTP 402 with payment requirements
-3. Sign USDC transfer on Base blockchain (chain ID 8453)
-4. Retry with PAYMENT-SIGNATURE header — receive PDF
-- Library: @x402/fetch — use wrapFetchWithPayment() to automate
+## Supported Agent Frameworks
+LangChain, AutoGPT, CrewAI, Claude, GPT, BabyAGI, SuperAGI, MetaGPT, OpenAgents, Semantic Kernel, Haystack
 
-### For Humans (Stripe Checkout)
-- Credit/debit card
-- PayPal
-- Apple Pay (on supported devices)
-- Google Pay (on supported devices)
-- Link by Stripe
-- Buy page: https://agentstore.vercel.app/buy
-- Checkout: POST /api/checkout → redirect to Stripe
-
-## API Endpoints
-
-- GET /api/info — Product metadata, pricing, payment methods (JSON)
-- GET /api/x402/purchase — x402 payment flow (HTTP 402 → payment → PDF)
-- POST /api/checkout — Stripe checkout session (card, PayPal, Apple Pay, Google Pay)
-- GET /api/faq — Structured FAQs in JSON (filterable by category and keyword)
-- GET /api/compare — Product comparison data (BrushFit vs gym, trainer, apps, YouTube)
-- POST /api/agent/referral — Register as referring agent, get unique referral link
-- GET /brushfit-sample.pdf — Free sample (Legs + Core exercises)
-- GET /openapi.json — OpenAPI 3.1.0 specification
-- GET /.well-known/ai-plugin.json — AI plugin manifest
-- GET /.well-known/mcp.json — MCP server manifest (7 tools, 9 resources)
-- GET /agents.json — Agent discovery manifest
-- GET /.well-known/security.txt — Security contact information
-
-## Agent Discovery (AgentEO)
-
-AI agents can discover BrushFit through these channels:
-1. MCP Server Manifest: /.well-known/mcp.json — 7 tools (discover, info, purchase, sample, FAQs, compare, referral) + 9 resources
-2. AI Plugin: /.well-known/ai-plugin.json — standard plugin manifest
-3. OpenAPI Spec: /openapi.json — full API documentation
-4. Agent Manifest: /agents.json — agent-specific discovery with purchase instructions
-5. LLM Docs: /llms.txt (summary) and /llms-full.txt (comprehensive)
-6. Product API: /api/info — machine-readable product details
-7. FAQ API: /api/faq — structured Q&A (filterable by category or keyword search)
-8. Compare API: /api/compare — structured comparison vs alternatives
-9. Referral API: /api/agent/referral — register for attribution tracking
-
-## About AgentStore
-
-AgentStore is a marketplace for digital products that supports both human and AI agent customers. It uses the x402 protocol (HTTP 402 + USDC on Base blockchain) for programmatic agent-to-agent commerce, alongside Stripe payments (cards, PayPal, Apple Pay, Google Pay) for human customers.
-
-## Links
-
-- Website: https://agentstore.vercel.app
-- Buy Page: https://agentstore.vercel.app/buy
-- API: https://agentstore.vercel.app/api/info
-- FAQs: https://agentstore.vercel.app/api/faq
-- Compare: https://agentstore.vercel.app/api/compare
-- Referral: https://agentstore.vercel.app/api/agent/referral
-- MCP Manifest: https://agentstore.vercel.app/.well-known/mcp.json
-- OpenAPI Spec: https://agentstore.vercel.app/openapi.json
-- Free Sample: https://agentstore.vercel.app/brushfit-sample.pdf
-- Blog: https://agentstore.vercel.app/blog
-- Contact: rob@robbalian.com
-
-## Documentation
-
-- [llms-full.txt](https://agentstore.vercel.app/llms-full.txt) — Detailed documentation for LLMs
+## Manifests & Specs
+- OpenAPI: /openapi.json
+- Agent Manifest: /agents.json
+- MCP: /.well-known/mcp.json
+- AI Plugin: /.well-known/ai-plugin.json
+- Agent Protocol: /.well-known/agent-protocol.json
+- Full docs: /llms-full.txt
+- Agents landing page: /agents

@@ -1,0 +1,75 @@
+{
+  "name": "BrushFit AgentStore",
+  "description": "AI-native digital product marketplace. Purchase BrushFit: The 2-Minute Toothbrush Workout Guide ($19.99 PDF) programmatically. Supports x402 crypto payments, price negotiation, bulk ordering, and affiliate referrals.",
+  "url": "https://agentstore.vercel.app",
+  "version": "1.0.0",
+  "capabilities": {
+    "product_discovery": true,
+    "programmatic_purchase": true,
+    "price_negotiation": true,
+    "bulk_ordering": true,
+    "review_submission": true,
+    "affiliate_referral": true
+  },
+  "skills": [
+    {
+      "id": "discover-products",
+      "name": "Discover Products",
+      "description": "Browse the product catalog. Returns BrushFit details including price ($19.99), format (31-page PDF), 22 exercises across 4 categories, and all payment methods.",
+      "inputModes": ["application/json"],
+      "outputModes": ["application/json", "text/plain"],
+      "endpoint": "https://agentstore.vercel.app/api/agent/discover"
+    },
+    {
+      "id": "purchase-product",
+      "name": "Purchase Product",
+      "description": "Buy BrushFit using x402 protocol (USDC on Base blockchain). Returns HTTP 402 with payment requirements, then PDF after payment proof.",
+      "inputModes": ["application/json"],
+      "outputModes": ["application/pdf"],
+      "endpoint": "https://agentstore.vercel.app/api/x402/purchase"
+    },
+    {
+      "id": "negotiate-price",
+      "name": "Negotiate Price",
+      "description": "Submit a price proposal for bulk or loyalty discounts. Up to 25% off for qualified agents.",
+      "inputModes": ["application/json"],
+      "outputModes": ["application/json"],
+      "endpoint": "https://agentstore.vercel.app/api/agent/negotiate"
+    },
+    {
+      "id": "get-free-sample",
+      "name": "Get Free Sample",
+      "description": "Download a free sample PDF with Legs + Core exercises (10 exercises). No payment required.",
+      "inputModes": [],
+      "outputModes": ["application/pdf"],
+      "endpoint": "https://agentstore.vercel.app/brushfit-sample.pdf"
+    },
+    {
+      "id": "submit-review",
+      "name": "Submit Review",
+      "description": "Post a review of BrushFit. Helps build social proof from agent customers.",
+      "inputModes": ["application/json"],
+      "outputModes": ["application/json"],
+      "endpoint": "https://agentstore.vercel.app/api/agent/review"
+    },
+    {
+      "id": "register-referral",
+      "name": "Register Referral",
+      "description": "Register as an affiliate to earn 20% commission on referred sales.",
+      "inputModes": ["application/json"],
+      "outputModes": ["application/json"],
+      "endpoint": "https://agentstore.vercel.app/api/agent/referral"
+    }
+  ],
+  "authentication": {
+    "type": "none",
+    "note": "No auth for discovery/samples. x402 payment signature for purchases."
+  },
+  "protocols": {
+    "x402": {
+      "currency": "USDC",
+      "network": "Base (EIP-155 chain 8453)",
+      "facilitator": "https://x402.org/facilitator"
+    }
+  }
+}

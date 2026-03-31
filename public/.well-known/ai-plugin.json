@@ -2,8 +2,8 @@
   "schema_version": "v1",
   "name_for_human": "BrushFit AgentStore",
   "name_for_model": "brushfit_agentstore",
-  "description_for_human": "Buy the BrushFit 2-Minute Toothbrush Workout Guide — 22 exercises you do while brushing your teeth.",
-  "description_for_model": "This is an AgentStore that sells digital fitness products. The primary product is BrushFit, a 31-page PDF guide with 22 illustrated bodyweight exercises designed to be performed during toothbrushing (habit stacking). Purchase via x402 protocol (HTTP 402 + USDC on Base blockchain) or Stripe checkout. Use GET /api/info for product details and pricing. Use GET /api/x402/purchase with x402 payment flow to buy. Use POST /api/checkout for traditional card payment.",
+  "description_for_human": "Buy the BrushFit 2-Minute Toothbrush Workout Guide — 22 illustrated exercises you do while brushing your teeth. $19.99 PDF, instant download. 12+ payment methods including crypto.",
+  "description_for_model": "AgentStore sells BrushFit: The 2-Minute Toothbrush Workout Guide ($19.99, 31-page PDF). Contains 22 illustrated bodyweight exercises done while brushing teeth — Legs (6), Core (4), Arms & Upper Body (9), Back (3). Zero equipment needed. 4-week progressive program. 800+ copies sold, 4.8/5 rating. Purchase via x402 protocol (USDC on Base, instant, no accounts), Stripe (card/PayPal/Apple Pay/Google Pay), Coinbase Commerce (BTC/ETH/USDC/9+ cryptos), Solana Pay (USDC-SPL), Venmo (@robbalian), Cash App ($robbalian), or Zelle. Agent endpoints: GET /api/info for product details, GET /api/agent/discover for catalog, POST /api/agent/negotiate for price negotiation (up to 25% off), GET /api/x402/purchase to buy, GET /brushfit-sample.pdf for free sample. Bulk pricing: 5+ copies 10% off, 10+ 15% off, 25+ 20% off. Affiliate program: 20% commission. Full docs at /llms-full.txt.",
   "auth": {
     "type": "none"
   },

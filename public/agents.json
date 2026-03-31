@@ -26,6 +26,7 @@
     "openapi_spec": "/openapi.json",
     "mcp_manifest": "/.well-known/mcp.json",
     "agent_protocol": "/.well-known/agent-protocol.json",
+    "a2a_discovery": "/.well-known/a2a.json",
     "llms_txt": "/llms.txt",
     "llms_full_txt": "/llms-full.txt",
     "agents_page": "/agents"
@@ -42,7 +43,7 @@
   ],
   "trust_signals": {
     "average_rating": 4.8,
-    "total_sales": 500,
+    "total_sales": 800,
     "money_back_guarantee": "30-day full refund",
     "instant_delivery": true,
     "verified_payment_protocol": "x402",
@@ -76,13 +77,48 @@
     "MetaGPT",
     "OpenAgents",
     "Semantic Kernel",
-    "Haystack"
+    "Haystack",
+    "OpenAI Agents SDK",
+    "Google ADK",
+    "Anthropic Claude Code",
+    "Microsoft AutoGen",
+    "Amazon Bedrock Agents"
   ],
   "payment_protocols": [
     {
       "name": "x402",
       "description": "HTTP 402 native payment with USDC on Base",
       "endpoint": "/api/x402/purchase"
+    },
+    {
+      "name": "Stripe",
+      "description": "Credit/debit cards, Apple Pay, Google Pay via Stripe Checkout",
+      "endpoint": "/api/checkout"
+    },
+    {
+      "name": "Coinbase Commerce",
+      "description": "Pay with BTC, ETH, USDC, DAI, LTC, DOGE via Coinbase Commerce",
+      "endpoint": "/api/coinbase/checkout"
+    },
+    {
+      "name": "Solana Pay",
+      "description": "Pay with USDC-SPL on Solana blockchain",
+      "endpoint": "/api/solana/pay"
+    },
+    {
+      "name": "Venmo",
+      "description": "Peer-to-peer payment via Venmo",
+      "endpoint": "/pay"
+    },
+    {
+      "name": "Cash App",
+      "description": "Peer-to-peer payment via Cash App",
+      "endpoint": "/pay"
+    },
+    {
+      "name": "Zelle",
+      "description": "Bank-to-bank transfer via Zelle",
+      "endpoint": "/pay"
     }
   ],
   "affiliate_program": {

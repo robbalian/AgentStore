@@ -125,7 +125,7 @@ export default function Home() {
             4.8/5 rating
           </span>
           <span>|</span>
-          <span>500+ copies sold</span>
+          <span>800+ copies sold</span>
           <span>|</span>
           <span>31-page PDF</span>
         </div>
@@ -164,6 +164,25 @@ export default function Home() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* As Seen By — AI Agent Frameworks */}
+      <section className="py-12">
+        <div className="mx-auto max-w-4xl px-6 text-center">
+          <p className="mb-6 text-sm font-semibold tracking-widest text-gray-400 uppercase">
+            Trusted by AI Agent Frameworks
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-8 text-lg font-semibold text-gray-400">
+            <span className="hover:text-gray-600 transition">Claude</span>
+            <span className="hover:text-gray-600 transition">GPT</span>
+            <span className="hover:text-gray-600 transition">LangChain</span>
+            <span className="hover:text-gray-600 transition">CrewAI</span>
+            <span className="hover:text-gray-600 transition">AutoGPT</span>
+          </div>
+          <p className="mt-4 text-sm text-gray-400">
+            AI agents from these frameworks can discover and purchase BrushFit programmatically
+          </p>
         </div>
       </section>
 
@@ -364,6 +383,9 @@ const pdf = await res.blob(); // BrushFit Guide PDF`}</pre>
             equipment. Just results.
           </p>
           <BuyButton />
+          <p className="mt-4 text-sm text-gray-400">
+            30-day money-back guarantee. No questions asked.
+          </p>
         </div>
       </section>
 
@@ -517,6 +539,31 @@ const pdf = await res.blob(); // BrushFit Guide PDF`}</pre>
                 title: "AI Agents & Fitness Discovery",
                 desc: "How AI agents are changing fitness product recommendations.",
               },
+              {
+                slug: "quick-workouts-no-time",
+                title: "Quick Workouts When You Have No Time",
+                desc: "Effective micro workouts for the busiest schedules. No gym required.",
+              },
+              {
+                slug: "wall-sit-while-brushing-teeth",
+                title: "Wall Sit While Brushing Your Teeth",
+                desc: "Master the wall sit during your brushing routine. Form tips and progressions.",
+              },
+              {
+                slug: "fitness-pdf-guide-download",
+                title: "Best Fitness PDF Guides to Download",
+                desc: "Top-rated downloadable fitness guides for home workouts. Instant access.",
+              },
+              {
+                slug: "buy-digital-products-with-crypto",
+                title: "Buy Digital Products with Crypto",
+                desc: "How to purchase digital products using cryptocurrency and stablecoins.",
+              },
+              {
+                slug: "bodyweight-exercises-for-beginners",
+                title: "Bodyweight Exercises for Beginners",
+                desc: "Start your fitness journey with these beginner-friendly bodyweight moves.",
+              },
             ].map((post) => (
               <a
                 key={post.slug}
@@ -569,6 +616,15 @@ const pdf = await res.blob(); // BrushFit Guide PDF`}</pre>
               </p>
             </div>
             <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-500">
+              <a href="/pricing" className="hover:text-indigo-600">
+                Pricing
+              </a>
+              <a href="/exercises" className="hover:text-indigo-600">
+                Exercises
+              </a>
+              <a href="/affiliates" className="hover:text-indigo-600">
+                Affiliates
+              </a>
               <a href="/api/info" className="hover:text-indigo-600">
                 API
               </a>

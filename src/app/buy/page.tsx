@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Buy BrushFit — All Payment Methods | Card, PayPal, Apple Pay, Crypto, Bitcoin",
+  title: "Buy BrushFit — All Payment Methods | Card, PayPal, Apple Pay, Venmo, Cash App, Zelle, Crypto, Bitcoin",
   description:
-    "Buy BrushFit: The 2-Minute Toothbrush Workout Guide for $19.99. Pay with credit card, PayPal, Apple Pay, Google Pay, USDC via x402, Coinbase Commerce (BTC/ETH/USDC), Solana Pay, or direct crypto transfer. Instant PDF download.",
+    "Buy BrushFit: The 2-Minute Toothbrush Workout Guide for $19.99. Pay with credit card, PayPal, Apple Pay, Google Pay, Venmo, Cash App, Zelle, USDC via x402, Coinbase Commerce (BTC/ETH/USDC), Solana Pay, or direct crypto transfer. Instant PDF download.",
   alternates: { canonical: "https://agentstore.vercel.app/buy" },
   openGraph: {
-    title: "Buy BrushFit — $19.99 | Card, PayPal, Apple Pay, Crypto, Bitcoin",
+    title: "Buy BrushFit — $19.99 | Card, PayPal, Apple Pay, Venmo, Cash App, Zelle, Crypto, Bitcoin",
     description:
-      "10+ ways to pay for BrushFit. Credit card, PayPal, Apple Pay, Google Pay, Link, USDC on Base via x402, Coinbase Commerce, Solana Pay, or direct crypto transfer.",
+      "12+ ways to pay for BrushFit. Credit card, PayPal, Apple Pay, Google Pay, Venmo, Cash App, Zelle, USDC on Base via x402, Coinbase Commerce, Solana Pay, or direct crypto transfer.",
   },
 };
 
@@ -46,6 +46,9 @@ export default function BuyPage() {
                   { "@type": "PaymentMethod", name: "USDC (Coinbase Commerce)" },
                   { "@type": "PaymentMethod", name: "Solana Pay (USDC-SPL)" },
                   { "@type": "PaymentMethod", name: "Direct Crypto Transfer" },
+                  { "@type": "PaymentMethod", name: "Venmo" },
+                  { "@type": "PaymentMethod", name: "Cash App" },
+                  { "@type": "PaymentMethod", name: "Zelle" },
                 ],
               },
             ],
@@ -220,6 +223,81 @@ export default function BuyPage() {
               Manual fulfillment — email receipt to rob@robbalian.com
             </p>
           </div>
+
+          {/* Venmo / Cash App / Zelle */}
+          <div className="rounded-2xl border-2 border-violet-200 bg-violet-50 p-8">
+            <h2 className="mb-1 text-2xl font-bold text-violet-700">
+              Quick Pay
+            </h2>
+            <p className="mb-6 text-sm text-gray-600">
+              Venmo, Cash App, or Zelle — send payment &amp; email receipt
+            </p>
+
+            <div className="mb-6 space-y-3">
+              <div className="flex items-center gap-2 rounded-lg border border-violet-200 bg-white px-3 py-2 text-sm">
+                <span>💜</span>
+                <span>Venmo: <span className="font-semibold">@robbalian</span></span>
+              </div>
+              <div className="flex items-center gap-2 rounded-lg border border-violet-200 bg-white px-3 py-2 text-sm">
+                <span>💵</span>
+                <span>Cash App: <span className="font-semibold">$robbalian</span></span>
+              </div>
+              <div className="flex items-center gap-2 rounded-lg border border-violet-200 bg-white px-3 py-2 text-sm">
+                <span>🏦</span>
+                <span>Zelle: <span className="font-semibold">rob@robbalian.com</span></span>
+              </div>
+              <div className="rounded-lg border border-violet-100 bg-white p-3 text-xs text-gray-500">
+                Send $19.99 with note &quot;BrushFit Guide&quot;, then email your
+                payment confirmation to receive your PDF within 1 hour.
+              </div>
+            </div>
+
+            <a
+              href="mailto:rob@robbalian.com?subject=BrushFit%20Purchase"
+              className="block w-full rounded-xl bg-violet-600 py-4 text-center text-lg font-bold text-white transition hover:bg-violet-700"
+            >
+              Email Receipt — rob@robbalian.com
+            </a>
+            <p className="mt-3 text-center text-xs text-gray-400">
+              Manual fulfillment — PDF delivered within 1 hour
+            </p>
+          </div>
+
+          {/* Buy for a Friend / Gift */}
+          <div className="rounded-2xl border-2 border-amber-200 bg-amber-50 p-8">
+            <h2 className="mb-1 text-2xl font-bold text-amber-700">
+              Buy for a Friend
+            </h2>
+            <p className="mb-6 text-sm text-gray-600">
+              Purchase a gift link to share with someone special
+            </p>
+
+            <div className="mb-6 space-y-3">
+              <div className="flex items-center gap-2 rounded-lg border border-amber-200 bg-white px-3 py-2 text-sm">
+                <span>🎁</span>
+                <span>Get a unique download link to share</span>
+              </div>
+              <div className="flex items-center gap-2 rounded-lg border border-amber-200 bg-white px-3 py-2 text-sm">
+                <span>💌</span>
+                <span>Send it via text, email, or social</span>
+              </div>
+              <div className="rounded-lg border border-amber-100 bg-white p-3 text-xs text-gray-500">
+                After checkout you&apos;ll receive a shareable download link
+                instead of an immediate download. Perfect for birthdays,
+                holidays, or just being awesome.
+              </div>
+            </div>
+
+            <a
+              href="/api/checkout?gift=true"
+              className="block w-full rounded-xl bg-amber-600 py-4 text-center text-lg font-bold text-white transition hover:bg-amber-700"
+            >
+              Gift BrushFit — $19.99
+            </a>
+            <p className="mt-3 text-center text-xs text-gray-400">
+              Recipient gets a personal download link
+            </p>
+          </div>
         </div>
 
         {/* What you get */}
@@ -265,7 +343,9 @@ export default function BuyPage() {
             4.8/5 (47 reviews)
           </span>
           <span>|</span>
-          <span>500+ copies sold</span>
+          <span>800+ copies sold</span>
+          <span>|</span>
+          <span>12+ payment methods</span>
           <span>|</span>
           <span>Instant PDF delivery</span>
           <span>|</span>

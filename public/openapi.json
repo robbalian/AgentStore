@@ -3,7 +3,7 @@
   "info": {
     "title": "AgentStore API",
     "description": "AI-native digital product store. Purchase BrushFit and other digital products programmatically via x402 protocol, negotiate prices, and submit reviews.",
-    "version": "1.1.0",
+    "version": "2.0.0",
     "contact": {
       "name": "AgentStore Support",
       "url": "https://agentstore.vercel.app",
@@ -174,6 +174,172 @@
           }
         }
       }
+    },
+    "/api/faq": {
+      "get": {
+        "operationId": "getFAQ",
+        "summary": "Get frequently asked questions",
+        "description": "Returns a list of frequently asked questions and answers about BrushFit and AgentStore.",
+        "responses": {
+          "200": {
+            "description": "FAQ list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "faqs": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "question": { "type": "string" },
+                          "answer": { "type": "string" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/compare": {
+      "get": {
+        "operationId": "compareProducts",
+        "summary": "Compare BrushFit with alternatives",
+        "description": "Returns a comparison of BrushFit against other fitness guides, highlighting unique features and value.",
+        "responses": {
+          "200": {
+            "description": "Comparison data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "product": { "type": "string" },
+                    "comparisons": { "type": "array" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/venmo": {
+      "post": {
+        "operationId": "purchaseWithVenmo",
+        "summary": "Purchase BrushFit via Venmo",
+        "description": "Initiates a Venmo payment flow for purchasing BrushFit. Returns Venmo payment link or QR code.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": { "type": "string", "format": "email", "description": "Email for PDF delivery" }
+                },
+                "required": ["email"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Venmo payment details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "venmo_url": { "type": "string" },
+                    "amount": { "type": "string" },
+                    "status": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/affiliates": {
+      "get": {
+        "operationId": "getAffiliateInfo",
+        "summary": "Get affiliate program information",
+        "description": "Returns details about the BrushFit affiliate program including commission rates, signup instructions, and tracking info.",
+        "responses": {
+          "200": {
+            "description": "Affiliate program details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "program": { "type": "string" },
+                    "commission_rate": { "type": "string" },
+                    "cookie_duration": { "type": "string" },
+                    "signup_url": { "type": "string" },
+                    "dashboard_url": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "registerAffiliate",
+        "summary": "Register as an affiliate",
+        "description": "Sign up for the BrushFit affiliate program to earn commissions on referrals.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": { "type": "string", "format": "email" },
+                  "name": { "type": "string" },
+                  "website": { "type": "string", "format": "uri" }
+                },
+                "required": ["email", "name"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Affiliate registered",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "string" },
+                    "affiliate_id": { "type": "string" },
+                    "referral_link": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-pages": {
+    "/pricing": {
+      "title": "Pricing — BrushFit",
+      "description": "View pricing details and payment options for BrushFit. $19.99 one-time purchase with card, crypto, or AI agent."
+    },
+    "/exercises": {
+      "title": "Exercises — BrushFit",
+      "description": "Browse all 22 BrushFit exercises. Legs, core, arms, and back exercises you can do while brushing your teeth."
     }
   },
   "components": {

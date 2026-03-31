@@ -24,6 +24,30 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
 
+    // Pricing
+    {
+      url: `${baseUrl}/pricing`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+
+    // Exercises
+    {
+      url: `${baseUrl}/exercises`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+
+    // Crypto payment page
+    {
+      url: `${baseUrl}/pay/crypto`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+
     // Affiliates
     {
       url: `${baseUrl}/affiliates`,
@@ -138,6 +162,38 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date("2026-03-31"),
       changeFrequency: "monthly",
       priority: 0.75,
+    },
+
+    // Blog posts — new SEO content
+    {
+      url: `${baseUrl}/blog/quick-workouts-no-time`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/blog/wall-sit-while-brushing-teeth`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/blog/fitness-pdf-guide-download`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/blog/buy-digital-products-with-crypto`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/blog/bodyweight-exercises-for-beginners`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "monthly",
+      priority: 0.8,
     },
 
     // Blog posts — agent commerce

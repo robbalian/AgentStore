@@ -3,7 +3,7 @@
   "server": {
     "name": "BrushFit AgentStore",
     "description": "MCP tool server for BrushFit AgentStore — a digital product marketplace for both humans and AI agents. Discover, evaluate, compare, and purchase BrushFit: The 2-Minute Toothbrush Workout Guide ($19.99 PDF). Supports x402 protocol (USDC on Base) for agent purchases and Stripe for human customers.",
-    "version": "2.0.0",
+    "version": "3.0.0",
     "contact": "rob@robbalian.com",
     "homepage": "https://agentstore.vercel.app",
     "documentation": "https://agentstore.vercel.app/llms-full.txt",
@@ -307,9 +307,44 @@
     "llms_full_txt": "https://agentstore.vercel.app/llms-full.txt",
     "openapi": "https://agentstore.vercel.app/openapi.json",
     "ai_plugin": "https://agentstore.vercel.app/.well-known/ai-plugin.json",
+    "a2a_protocol": "https://agentstore.vercel.app/.well-known/a2a.json",
     "agents_json": "https://agentstore.vercel.app/agents.json",
     "sitemap": "https://agentstore.vercel.app/sitemap.xml",
     "robots": "https://agentstore.vercel.app/robots.txt",
     "security": "https://agentstore.vercel.app/.well-known/security.txt"
+  },
+  "payment_methods": {
+    "x402": {
+      "type": "crypto",
+      "currency": "USDC",
+      "network": "Base (EIP-155 chain 8453)",
+      "endpoint": "/api/x402/purchase",
+      "instant": true
+    },
+    "stripe": {
+      "type": "traditional",
+      "methods": ["card", "paypal", "apple_pay", "google_pay", "link"],
+      "endpoint": "/api/checkout",
+      "instant": true
+    },
+    "coinbase": {
+      "type": "crypto",
+      "currencies": ["BTC", "ETH", "USDC", "DAI", "LTC", "DOGE", "SHIB", "BCH", "APE"],
+      "endpoint": "/api/coinbase/checkout"
+    },
+    "solana": {
+      "type": "crypto",
+      "currency": "USDC-SPL",
+      "endpoint": "/api/solana/pay"
+    },
+    "peer_to_peer": {
+      "type": "manual",
+      "methods": {
+        "venmo": "@robbalian",
+        "cashapp": "$robbalian",
+        "zelle": "rob@robbalian.com"
+      },
+      "endpoint": "/api/venmo"
+    }
   }
 }

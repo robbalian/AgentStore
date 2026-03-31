@@ -4,10 +4,31 @@
 
 ## Product
 - BrushFit: The 2-Minute Toothbrush Workout Guide
-- Price: $19.99 (USDC on Base via x402 protocol)
+- Price: $19.99 (one-time, no subscription)
 - Format: PDF, 31 pages, instant download
 - 22 illustrated bodyweight exercises you do while brushing your teeth
 - 30-day money-back guarantee
+
+## Quick Purchase Guide (for AI Agents)
+1. Discover product: GET /api/agent/discover
+2. Get free sample: GET /brushfit-sample.pdf (no payment needed)
+3. Purchase via x402: GET /api/x402/purchase → receive 402 with payment requirements → sign USDC transfer on Base → re-request with payment proof → receive PDF
+4. Purchase via Stripe: POST /api/checkout → receive Stripe Checkout URL → redirect user
+5. Negotiate price: POST /api/agent/negotiate with { "agent_id", "proposed_price", "quantity", "justification" }
+6. Register as affiliate: POST /api/agent/referral (earn 20% commission)
+
+## Payment Methods
+- Credit/Debit Cards (Visa, Mastercard, Amex) via Stripe
+- PayPal
+- Apple Pay
+- Google Pay
+- Venmo
+- Cash App
+- Zelle
+- USDC on Base (x402 Protocol) — agent-native, no API keys needed
+- Coinbase Commerce (BTC, ETH, USDC, DAI, LTC, DOGE)
+- Solana Pay (USDC-SPL)
+- Direct Crypto Transfer
 
 ## Agent API Endpoints
 - Product Info: GET /api/info
@@ -15,7 +36,17 @@
 - Agent Negotiation: POST /api/agent/negotiate
 - Agent Reviews: GET/POST /api/agent/review
 - Purchase (x402): GET /api/x402/purchase
+- Purchase (Stripe): POST /api/checkout
 - Free Sample: /brushfit-sample.pdf
+
+## Pages
+- Home: /
+- Buy: /buy
+- Pricing: /pricing (all payment methods, bulk discounts, cost comparison)
+- Exercises: /exercises (all 22 exercises with descriptions, 4-week program)
+- Blog: /blog
+- Agents: /agents (integration guide for AI agents)
+- Affiliates: /affiliates
 
 ## Bulk Pricing
 - 5+ copies: 10% off ($17.99 each)
@@ -38,7 +69,7 @@ GET /api/agent/review returns all reviews with average rating.
 Contact support@agentstore.vercel.app to register.
 
 ## Supported Agent Frameworks
-LangChain, AutoGPT, CrewAI, Claude, GPT, BabyAGI, SuperAGI, MetaGPT, OpenAgents, Semantic Kernel, Haystack
+LangChain, AutoGPT, CrewAI, Claude, GPT, BabyAGI, SuperAGI, MetaGPT, OpenAgents, Semantic Kernel, Haystack, OpenAI Agents SDK, Google ADK, Anthropic Claude Code, Microsoft AutoGen, Amazon Bedrock Agents
 
 ## Manifests & Specs
 - OpenAPI: /openapi.json
@@ -46,5 +77,6 @@ LangChain, AutoGPT, CrewAI, Claude, GPT, BabyAGI, SuperAGI, MetaGPT, OpenAgents,
 - MCP: /.well-known/mcp.json
 - AI Plugin: /.well-known/ai-plugin.json
 - Agent Protocol: /.well-known/agent-protocol.json
+- A2A Protocol (Google Agent2Agent): /.well-known/a2a.json
 - Full docs: /llms-full.txt
 - Agents landing page: /agents

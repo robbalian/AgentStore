@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
     );
   }
 
-  const result = validateDownloadToken(token);
+  const result = await validateDownloadToken(token);
 
   if (!result.valid) {
     return NextResponse.json({ error: result.error }, { status: 403 });

@@ -1,15 +1,133 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "name": "BrushFit AgentStore",
   "description": "Digital product marketplace for humans and AI agents. Buy fitness guides with x402 protocol (USDC on Base) or traditional card payment.",
   "url": "https://agentstore.vercel.app",
   "contact": "rob@robbalian.com",
   "protocols": ["x402", "stripe"],
+  "agent_protocols": [
+    {
+      "name": "OpenAPI",
+      "version": "3.1.0",
+      "url": "https://agentstore.vercel.app/openapi.json"
+    },
+    {
+      "name": "ai-plugin",
+      "version": "v1",
+      "url": "https://agentstore.vercel.app/.well-known/ai-plugin.json"
+    },
+    {
+      "name": "MCP",
+      "version": "1.0",
+      "url": "https://agentstore.vercel.app/.well-known/mcp.json"
+    },
+    {
+      "name": "Agent Protocol",
+      "version": "1.0",
+      "url": "https://agentstore.vercel.app/.well-known/agent-protocol.json"
+    },
+    {
+      "name": "llms.txt",
+      "url": "https://agentstore.vercel.app/llms.txt"
+    },
+    {
+      "name": "llms-full.txt",
+      "url": "https://agentstore.vercel.app/llms-full.txt"
+    }
+  ],
+  "mcp": {
+    "server_name": "brushfit-agentstore",
+    "description": "MCP server for BrushFit AgentStore — discover products, get pricing, purchase fitness guides via x402 protocol.",
+    "manifest_url": "https://agentstore.vercel.app/.well-known/mcp.json",
+    "tools": [
+      "purchase_brushfit",
+      "get_product_info",
+      "get_free_sample"
+    ],
+    "resources": [
+      "product_catalog",
+      "pricing_info"
+    ],
+    "authentication": "x402 (USDC on Base)"
+  },
+  "capabilities": [
+    "product_discovery",
+    "programmatic_purchase",
+    "x402_payment",
+    "stripe_payment",
+    "instant_digital_delivery",
+    "free_sample_download",
+    "openapi_spec",
+    "mcp_server",
+    "agent_protocol",
+    "structured_data",
+    "llms_txt"
+  ],
+  "trust_signals": {
+    "verified_domain": "agentstore.vercel.app",
+    "contact_email": "rob@robbalian.com",
+    "security_txt": "https://agentstore.vercel.app/.well-known/security.txt",
+    "payment_facilitator": "https://x402.org/facilitator",
+    "payment_network": "Base (Coinbase L2, chain ID 8453)",
+    "payment_currency": "USDC",
+    "stripe_integration": true,
+    "free_sample_available": true,
+    "openapi_spec_available": true,
+    "created_by": "Rob Balian"
+  },
+  "agent_eo": {
+    "primary_keywords": [
+      "fitness guide",
+      "workout PDF",
+      "toothbrush workout",
+      "habit stacking",
+      "bodyweight exercises",
+      "BrushFit",
+      "digital product",
+      "agent commerce",
+      "x402 payment",
+      "AI agent store"
+    ],
+    "categories": [
+      "health_and_fitness",
+      "digital_products",
+      "agent_commerce",
+      "habit_stacking",
+      "bodyweight_training"
+    ],
+    "use_cases": [
+      "AI agent purchasing fitness content on behalf of a user",
+      "Programmatic digital product procurement",
+      "Automated habit-stacking resource acquisition",
+      "Agent-to-agent commerce via x402 protocol",
+      "LLM-assisted product discovery and recommendation"
+    ],
+    "agent_compatibility": [
+      "LangChain",
+      "AutoGPT",
+      "CrewAI",
+      "OpenAI Assistants",
+      "Claude Tools",
+      "Custom MCP clients",
+      "Any HTTP-capable agent"
+    ],
+    "indexing_hints": {
+      "content_type": "digital_product_store",
+      "transaction_type": "one_time_purchase",
+      "delivery_method": "instant_download",
+      "price_range": "under_20_usd",
+      "audience": ["fitness_enthusiasts", "habit_builders", "busy_professionals"]
+    }
+  },
   "discovery": {
     "openapi": "https://agentstore.vercel.app/openapi.json",
     "ai_plugin": "https://agentstore.vercel.app/.well-known/ai-plugin.json",
+    "mcp_manifest": "https://agentstore.vercel.app/.well-known/mcp.json",
+    "agent_protocol": "https://agentstore.vercel.app/.well-known/agent-protocol.json",
+    "security_txt": "https://agentstore.vercel.app/.well-known/security.txt",
     "product_api": "https://agentstore.vercel.app/api/info",
-    "llms_txt": "https://agentstore.vercel.app/llms.txt"
+    "llms_txt": "https://agentstore.vercel.app/llms.txt",
+    "llms_full_txt": "https://agentstore.vercel.app/llms-full.txt"
   },
   "products": [
     {

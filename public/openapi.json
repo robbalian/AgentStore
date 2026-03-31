@@ -2,10 +2,39 @@
   "openapi": "3.1.0",
   "info": {
     "title": "BrushFit AgentStore API",
-    "description": "API for purchasing BrushFit: The 2-Minute Toothbrush Workout Guide. Supports x402 protocol (crypto) and Stripe (card) payments. Agent discovery via /agents.json, /llms.txt, and /.well-known/ai-plugin.json.",
-    "version": "1.1.0",
+    "description": "API for discovering and purchasing BrushFit: The 2-Minute Toothbrush Workout Guide. A 31-page PDF with 22 illustrated bodyweight exercises you do while brushing your teeth. Supports x402 protocol (USDC on Base blockchain) and Stripe (card) payments. Agent discovery via /agents.json, /.well-known/mcp.json, /.well-known/agent-protocol.json, /llms.txt, and /.well-known/ai-plugin.json.",
+    "version": "1.2.0",
     "contact": {
-      "email": "rob@robbalian.com"
+      "name": "Rob Balian",
+      "email": "rob@robbalian.com",
+      "url": "https://agentstore.vercel.app"
+    },
+    "x-agent-capabilities": [
+      "product_discovery",
+      "programmatic_purchase",
+      "x402_payment",
+      "stripe_payment",
+      "instant_digital_delivery",
+      "free_sample_download",
+      "mcp_server",
+      "agent_protocol"
+    ],
+    "x-payment-protocol": {
+      "primary": "x402",
+      "currency": "USDC",
+      "network": "Base (eip155:8453)",
+      "facilitator": "https://x402.org/facilitator",
+      "recommended_library": "@x402/fetch",
+      "fallback": "stripe"
+    },
+    "x-discovery-endpoints": {
+      "agents_json": "/agents.json",
+      "mcp_manifest": "/.well-known/mcp.json",
+      "agent_protocol": "/.well-known/agent-protocol.json",
+      "ai_plugin": "/.well-known/ai-plugin.json",
+      "llms_txt": "/llms.txt",
+      "llms_full_txt": "/llms-full.txt",
+      "security_txt": "/.well-known/security.txt"
     }
   },
   "servers": [
@@ -19,11 +48,12 @@
       "get": {
         "operationId": "getProductInfo",
         "summary": "Get product information and pricing",
-        "description": "Returns full product details, pricing, payment methods, and purchase instructions for the BrushFit guide. This is the primary discovery endpoint for AI agents.",
+        "description": "Returns full product details, pricing, payment methods, and purchase instructions for the BrushFit guide. This is the primary discovery endpoint for AI agents. Response includes product name, price ($19.99 USD), format (PDF, 31 pages), description, exercise categories, payment methods (x402 and Stripe), free sample URL, and links to OpenAPI spec and AI plugin manifest.",
         "tags": ["discovery"],
+        "x-agent-hint": "Call this endpoint first to discover what is available and how to purchase.",
         "responses": {
           "200": {
-            "description": "Product information",
+            "description": "Product information including pricing, payment methods, and purchase instructions",
             "content": {
               "application/json": {
                 "schema": {
@@ -38,18 +68,42 @@
     "/api/x402/purchase": {
       "get": {
         "operationId": "purchaseWithX402",
-        "summary": "Purchase BrushFit PDF via x402 protocol",
-        "description": "Returns HTTP 402 with payment requirements. After signing a USDC transfer on Base, retry with PAYMENT-SIGNATURE header to receive the PDF. Use @x402/fetch wrapFetchWithPayment() to automate.",
+        "summary": "Purchase BrushFit PDF via x402 protocol (USDC on Base)",
+        "description": "Initiates the x402 payment flow. First request returns HTTP 402 with payment requirements (price, currency, network, recipient address). After signing a USDC transfer authorization on Base blockchain (chain ID 8453), retry the same endpoint with the PAYMENT-SIGNATURE header to receive the PDF. Recommended: use @x402/fetch wrapFetchWithPayment() to automate the entire flow.",
         "tags": ["purchase"],
+        "x-agent-hint": "This endpoint returns HTTP 402 on first call — that is expected, not an error. Parse the 402 response for payment details, sign a USDC transfer, then retry with PAYMENT-SIGNATURE header.",
+        "x-payment-protocol": {
+          "type": "x402",
+          "currency": "USDC",
+          "network": "eip155:8453",
+          "price": "19.99",
+          "header": "PAYMENT-SIGNATURE"
+        },
+        "parameters": [
+          {
+            "name": "PAYMENT-SIGNATURE",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Signed USDC transfer authorization for x402 payment. Omit on first request to receive payment requirements."
+          }
+        ],
         "responses": {
           "200": {
-            "description": "PDF file (after valid payment)",
+            "description": "PDF file delivered after successful x402 payment verification",
             "content": {
-              "application/pdf": {}
+              "application/pdf": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
             }
           },
           "402": {
-            "description": "Payment required — includes payment requirements in response body"
+            "description": "Payment required — response body contains payment requirements including price, currency (USDC), network (Base), and recipient address. This is the expected first response in the x402 flow."
           }
         }
       }
@@ -57,12 +111,13 @@
     "/api/checkout": {
       "post": {
         "operationId": "createStripeCheckout",
-        "summary": "Create a Stripe checkout session for card payment",
-        "description": "Creates a Stripe checkout session and returns a redirect URL for card-based payment. $19.99 USD.",
+        "summary": "Create a Stripe checkout session for card payment ($19.99 USD)",
+        "description": "Creates a Stripe checkout session and returns a redirect URL for card-based payment. Price: $19.99 USD. After successful payment, the user is redirected to a success page with a download link. This endpoint is designed for human customers; AI agents should prefer the x402 protocol at /api/x402/purchase.",
         "tags": ["purchase"],
+        "x-agent-hint": "For AI agents, prefer /api/x402/purchase instead. This endpoint is designed for human customers using credit/debit cards.",
         "responses": {
           "200": {
-            "description": "Checkout session URL",
+            "description": "Stripe checkout session URL",
             "content": {
               "application/json": {
                 "schema": {
@@ -70,7 +125,7 @@
                   "properties": {
                     "url": {
                       "type": "string",
-                      "description": "Stripe checkout URL to redirect the user"
+                      "description": "Stripe-hosted checkout URL — redirect the user to this URL to complete card payment"
                     }
                   }
                 }
@@ -78,7 +133,7 @@
             }
           },
           "503": {
-            "description": "Stripe not configured"
+            "description": "Stripe not configured — use x402 payment method instead"
           }
         }
       }
@@ -87,7 +142,7 @@
       "get": {
         "operationId": "downloadWithToken",
         "summary": "Download purchased PDF with a download token",
-        "description": "Download the BrushFit PDF using a token received after Stripe payment. Tokens are valid for 24 hours with up to 5 downloads.",
+        "description": "Download the BrushFit PDF using a token received after Stripe payment. Tokens are valid for 24 hours with up to 5 downloads. This endpoint is used after Stripe checkout completion.",
         "tags": ["purchase"],
         "parameters": [
           {
@@ -97,21 +152,26 @@
             "schema": {
               "type": "string"
             },
-            "description": "Download token from purchase confirmation"
+            "description": "Download token received from Stripe checkout success redirect"
           }
         ],
         "responses": {
           "200": {
-            "description": "PDF file",
+            "description": "BrushFit PDF file",
             "content": {
-              "application/pdf": {}
+              "application/pdf": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
             }
           },
           "400": {
-            "description": "Missing token"
+            "description": "Missing token parameter"
           },
           "403": {
-            "description": "Invalid, expired, or exhausted token"
+            "description": "Invalid, expired, or exhausted download token"
           }
         }
       }
@@ -119,14 +179,20 @@
     "/brushfit-sample.pdf": {
       "get": {
         "operationId": "getFreeSample",
-        "summary": "Download free sample PDF (Legs + Core exercises)",
-        "description": "Free preview of the BrushFit guide containing the Legs and Core exercise sections. No payment or authentication required.",
+        "summary": "Download free BrushFit sample PDF (Legs + Core exercises)",
+        "description": "Free preview of the BrushFit guide containing the Legs and Core exercise sections. No payment or authentication required. Use this to evaluate the product before purchasing. The sample includes 10 of the 22 exercises with full illustrations.",
         "tags": ["discovery"],
+        "x-agent-hint": "No payment needed. Download this first to evaluate the product quality before recommending purchase.",
         "responses": {
           "200": {
-            "description": "Sample PDF file",
+            "description": "Free sample PDF file with Legs and Core exercise sections",
             "content": {
-              "application/pdf": {}
+              "application/pdf": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
             }
           }
         }
@@ -137,27 +203,52 @@
     "schemas": {
       "ProductInfo": {
         "type": "object",
+        "description": "Complete product information for the BrushFit guide, including pricing, payment methods, and purchase instructions.",
         "properties": {
-          "product": { "type": "string" },
-          "price": { "type": "string" },
-          "currency": { "type": "string" },
-          "network": { "type": "string" },
-          "format": { "type": "string" },
-          "purchase_endpoint": { "type": "string" },
-          "payment_protocol": { "type": "string" },
-          "description": { "type": "string" },
-          "includes": { "type": "array", "items": { "type": "string" } },
-          "free_sample": { "type": "string" },
+          "product": {
+            "type": "string",
+            "description": "Product name: BrushFit: The 2-Minute Toothbrush Workout Guide"
+          },
+          "price": {
+            "type": "string",
+            "description": "Price string (e.g., '$19.99')"
+          },
+          "currency": {
+            "type": "string",
+            "description": "Currency code (USD)"
+          },
+          "network": {
+            "type": "string",
+            "description": "Blockchain network for x402 payment (Base, chain ID 8453)"
+          },
+          "format": {
+            "type": "string",
+            "description": "Product format (PDF, 31 pages)"
+          },
+          "description": {
+            "type": "string",
+            "description": "Product description"
+          },
+          "includes": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "List of features included in the product"
+          },
+          "free_sample": {
+            "type": "string",
+            "description": "URL to download the free sample PDF"
+          },
           "payment_methods": {
             "type": "object",
+            "description": "Available payment methods with endpoints and instructions",
             "properties": {
               "x402": {
                 "type": "object",
-                "description": "x402 protocol payment details for AI agents and crypto wallets"
+                "description": "x402 protocol payment — USDC on Base blockchain. Preferred method for AI agents."
               },
               "stripe": {
                 "type": "object",
-                "description": "Stripe checkout payment details for card payments"
+                "description": "Stripe checkout — credit/debit card payment. Preferred method for human customers."
               }
             }
           }
@@ -168,11 +259,11 @@
   "tags": [
     {
       "name": "discovery",
-      "description": "Product discovery and information endpoints"
+      "description": "Product discovery and information endpoints. Start here to learn what is available."
     },
     {
       "name": "purchase",
-      "description": "Payment and download endpoints"
+      "description": "Payment and download endpoints. Use x402 for programmatic agent purchases, Stripe for card payments."
     }
   ]
 }

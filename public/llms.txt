@@ -21,11 +21,14 @@ BrushFit: The 2-Minute Toothbrush Workout Guide is a 31-page PDF with 22 illustr
 
 ## How to Buy
 
-### For AI Agents (x402 Protocol)
-1. GET /api/info — discover product details and pricing
-2. GET /api/x402/purchase — receive HTTP 402 with payment requirements
-3. Sign USDC transfer on Base blockchain
-4. Retry with PAYMENT-SIGNATURE header — receive PDF
+### For AI Agents (x402 Protocol) — Structured Instructions
+1. GET https://agentstore.vercel.app/api/info — discover product details and pricing (JSON response)
+2. GET https://agentstore.vercel.app/api/x402/purchase — receive HTTP 402 with payment requirements
+3. Parse the 402 response to extract: price, currency (USDC), network (Base, chain ID 8453), recipient address
+4. Sign a USDC transfer authorization on Base blockchain using your wallet private key
+5. Retry GET https://agentstore.vercel.app/api/x402/purchase with the PAYMENT-SIGNATURE header
+6. On HTTP 200, the response body contains the purchased PDF file
+7. Recommended library: @x402/fetch — use wrapFetchWithPayment() to automate steps 2-6
 
 ### For Humans
 - Crypto: Visit https://agentstore.vercel.app and click "Buy with x402"
@@ -39,6 +42,41 @@ BrushFit: The 2-Minute Toothbrush Workout Guide is a 31-page PDF with 22 illustr
 - GET /brushfit-sample.pdf — Free sample (Legs + Core exercises)
 - GET /openapi.json — OpenAPI 3.1.0 specification
 - GET /.well-known/ai-plugin.json — AI plugin manifest
+
+## MCP Discovery (Model Context Protocol)
+
+BrushFit AgentStore provides an MCP server manifest for agent frameworks that support MCP.
+
+- MCP Manifest: https://agentstore.vercel.app/.well-known/mcp.json
+- Available Tools: get_product_info, purchase_brushfit, get_free_sample
+- Available Resources: product_catalog, pricing_info, openapi_spec, free_sample
+- Authentication: x402 protocol (USDC on Base) — no API keys required
+
+To use the MCP server, point your MCP client at the manifest URL above. Tools map directly to the REST API endpoints.
+
+## Agent Protocol Discovery
+
+BrushFit AgentStore supports the Agent Protocol standard for task-based agent interaction.
+
+- Agent Protocol Manifest: https://agentstore.vercel.app/.well-known/agent-protocol.json
+- Available Tasks: discover_product, purchase_product, get_free_sample
+- Each task includes step-by-step instructions with expected inputs and outputs.
+
+## All Discovery Standards Supported
+
+1. agents.json — https://agentstore.vercel.app/agents.json
+2. OpenAPI 3.1.0 — https://agentstore.vercel.app/openapi.json
+3. ai-plugin.json — https://agentstore.vercel.app/.well-known/ai-plugin.json
+4. MCP manifest — https://agentstore.vercel.app/.well-known/mcp.json
+5. Agent Protocol — https://agentstore.vercel.app/.well-known/agent-protocol.json
+6. llms.txt — https://agentstore.vercel.app/llms.txt
+7. llms-full.txt — https://agentstore.vercel.app/llms-full.txt
+8. security.txt — https://agentstore.vercel.app/.well-known/security.txt
+9. Structured Data — JSON-LD Product and FAQPage schemas on homepage
+
+## Keywords
+
+BrushFit, toothbrush workout, habit stacking, bodyweight exercises, fitness PDF, digital product, agent commerce, x402 protocol, USDC payment, Base blockchain, AI agent store, programmatic purchase, agentic commerce, MCP server, agent protocol, LLM discovery, workout guide, micro workout, bathroom exercises, 2-minute workout, no equipment workout, AgentStore, digital marketplace, agent-to-agent commerce, crypto payment
 
 ## About AgentStore
 

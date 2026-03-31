@@ -174,6 +174,15 @@ AI plugin manifest for ChatGPT-style plugin discovery.
 ### GET /agents.json
 Agent discovery manifest listing available products and their purchase endpoints.
 
+### GET /.well-known/mcp.json
+MCP (Model Context Protocol) server manifest with tools, resources, and authentication details.
+
+### GET /.well-known/agent-protocol.json
+Agent Protocol standard discovery file with tasks and step-by-step action definitions.
+
+### GET /.well-known/security.txt
+Standard security contact information.
+
 ---
 
 ## Agent Discovery
@@ -184,8 +193,235 @@ AI agents can discover BrushFit AgentStore through multiple channels:
 2. **OpenAPI spec**: Full API documentation at `/openapi.json`
 3. **agents.json**: Agent-specific discovery at `/agents.json`
 4. **llms.txt**: LLM-optimized documentation at `/llms.txt`
-5. **Product API**: Machine-readable product info at `/api/info`
-6. **Structured data**: JSON-LD Product and FAQPage schemas on the homepage
+5. **llms-full.txt**: Comprehensive LLM documentation at `/llms-full.txt`
+6. **MCP manifest**: Model Context Protocol server manifest at `/.well-known/mcp.json`
+7. **Agent Protocol**: Agent Protocol standard at `/.well-known/agent-protocol.json`
+8. **Product API**: Machine-readable product info at `/api/info`
+9. **Structured data**: JSON-LD Product and FAQPage schemas on the homepage
+10. **security.txt**: Security contact at `/.well-known/security.txt`
+
+---
+
+## MCP Server Documentation
+
+BrushFit AgentStore provides a Model Context Protocol (MCP) server for agent frameworks that support MCP (such as Claude Desktop, Cursor, and other MCP-compatible clients).
+
+### MCP Manifest URL
+https://agentstore.vercel.app/.well-known/mcp.json
+
+### Available MCP Tools
+
+#### get_product_info
+- **Description**: Get full product details, pricing, payment methods, and purchase instructions.
+- **Input**: None required
+- **Output**: JSON with product metadata, pricing, and payment flows
+- **Maps to**: GET /api/info
+
+#### purchase_brushfit
+- **Description**: Purchase the BrushFit PDF via x402 protocol.
+- **Input**: Optional `payment_signature` (string) — omit on first call to receive payment requirements.
+- **Output**: PDF file on successful payment, or HTTP 402 with payment requirements
+- **Maps to**: GET /api/x402/purchase
+
+#### get_free_sample
+- **Description**: Download the free BrushFit sample PDF with Legs and Core exercises.
+- **Input**: None required
+- **Output**: PDF file
+- **Maps to**: GET /brushfit-sample.pdf
+
+### Available MCP Resources
+
+- **product_catalog** — Complete product catalog (JSON from /api/info)
+- **pricing_info** — Current pricing and payment methods (JSON from /api/info)
+- **openapi_spec** — OpenAPI 3.1.0 specification (JSON from /openapi.json)
+- **free_sample** — Free sample PDF (PDF from /brushfit-sample.pdf)
+
+### MCP Authentication
+No API keys or tokens are required. Payment is handled per-transaction via x402 protocol (HTTP 402 + signed USDC transfer on Base blockchain).
+
+---
+
+## Agent Protocol Documentation
+
+BrushFit AgentStore supports the Agent Protocol standard for structured, task-based agent interaction.
+
+### Agent Protocol Manifest URL
+https://agentstore.vercel.app/.well-known/agent-protocol.json
+
+### Available Tasks
+
+#### discover_product
+Retrieve product information including pricing, features, and purchase options.
+- Step 1: GET /api/info -> JSON with product details
+
+#### purchase_product
+Complete the x402 payment flow to purchase and receive the BrushFit PDF.
+- Step 1: GET /api/x402/purchase -> HTTP 402 with payment requirements
+- Step 2: Sign USDC transfer on Base (chain ID 8453) -> Payment signature
+- Step 3: GET /api/x402/purchase with PAYMENT-SIGNATURE header -> HTTP 200 with PDF
+
+#### get_free_sample
+Download the free BrushFit sample PDF for evaluation.
+- Step 1: GET /brushfit-sample.pdf -> PDF file
+
+---
+
+## Agent Integration Examples
+
+### LangChain Integration
+
+```python
+from langchain.tools import Tool
+from langchain.agents import initialize_agent, AgentType
+import requests
+
+def get_brushfit_info(query: str = "") -> str:
+    """Get BrushFit product information from AgentStore."""
+    response = requests.get("https://agentstore.vercel.app/api/info")
+    return response.json()
+
+def get_brushfit_sample(query: str = "") -> str:
+    """Download the free BrushFit sample PDF."""
+    response = requests.get("https://agentstore.vercel.app/brushfit-sample.pdf")
+    with open("brushfit-sample.pdf", "wb") as f:
+        f.write(response.content)
+    return "Sample PDF downloaded as brushfit-sample.pdf"
+
+tools = [
+    Tool(
+        name="BrushFitInfo",
+        func=get_brushfit_info,
+        description="Get product details, pricing, and purchase instructions for the BrushFit toothbrush workout guide ($19.99 PDF)."
+    ),
+    Tool(
+        name="BrushFitSample",
+        func=get_brushfit_sample,
+        description="Download the free BrushFit sample PDF with Legs and Core exercises."
+    ),
+]
+
+# For x402 purchase, use @x402/fetch in a Node.js subprocess
+# or implement the HTTP 402 flow manually with a wallet library.
+```
+
+### AutoGPT Integration
+
+```yaml
+# AutoGPT plugin configuration
+name: brushfit-agentstore
+description: Purchase fitness products from BrushFit AgentStore via x402 protocol
+endpoints:
+  info: https://agentstore.vercel.app/api/info
+  purchase: https://agentstore.vercel.app/api/x402/purchase
+  sample: https://agentstore.vercel.app/brushfit-sample.pdf
+openapi: https://agentstore.vercel.app/openapi.json
+payment:
+  protocol: x402
+  currency: USDC
+  network: base
+  chain_id: 8453
+```
+
+AutoGPT agents can discover BrushFit via the OpenAPI spec at `/openapi.json` or the agents.json at `/agents.json`. The x402 purchase flow requires a wallet with USDC on Base.
+
+### CrewAI Integration
+
+```python
+from crewai import Agent, Task, Crew
+from crewai_tools import tool
+import requests
+
+@tool("BrushFit Product Info")
+def brushfit_info() -> dict:
+    """Get BrushFit product details, pricing, and purchase options from AgentStore.
+    Returns JSON with product name, price ($19.99), format (PDF), exercises (22),
+    and payment methods (x402 with USDC on Base, or Stripe for cards)."""
+    response = requests.get("https://agentstore.vercel.app/api/info")
+    return response.json()
+
+@tool("BrushFit Free Sample")
+def brushfit_sample() -> str:
+    """Download the free BrushFit sample PDF containing Legs and Core exercises.
+    No payment required. Useful for evaluating the product before purchase."""
+    response = requests.get("https://agentstore.vercel.app/brushfit-sample.pdf")
+    with open("brushfit-sample.pdf", "wb") as f:
+        f.write(response.content)
+    return "Free sample saved as brushfit-sample.pdf"
+
+researcher = Agent(
+    role="Fitness Product Researcher",
+    goal="Find and evaluate fitness products available via agent commerce",
+    tools=[brushfit_info, brushfit_sample],
+)
+
+task = Task(
+    description="Research the BrushFit toothbrush workout guide. Get product info and download the free sample.",
+    agent=researcher,
+)
+
+crew = Crew(agents=[researcher], tasks=[task])
+result = crew.kickoff()
+```
+
+### Generic HTTP Agent (Any Framework)
+
+Any agent that can make HTTP requests can interact with BrushFit AgentStore:
+
+```
+# Step 1: Discover the product
+GET https://agentstore.vercel.app/api/info
+Accept: application/json
+
+# Step 2: Download free sample (no payment needed)
+GET https://agentstore.vercel.app/brushfit-sample.pdf
+
+# Step 3: Purchase via x402 (requires USDC wallet on Base)
+GET https://agentstore.vercel.app/api/x402/purchase
+# -> Returns HTTP 402 with payment requirements
+# -> Sign USDC transfer, retry with PAYMENT-SIGNATURE header
+# -> Returns PDF on success
+```
+
+---
+
+## Troubleshooting
+
+### Common Issues
+
+#### "HTTP 402 Payment Required" on purchase endpoint
+This is expected behavior, not an error. The x402 protocol uses HTTP 402 to communicate payment requirements. Parse the response body to extract the payment details (price, currency, network, recipient), sign the USDC transfer, and retry with the PAYMENT-SIGNATURE header.
+
+#### "Cannot connect to Base network"
+Ensure your wallet is configured for the Base blockchain (chain ID 8453). Base is Coinbase's Layer 2 network. RPC endpoint: https://mainnet.base.org
+
+#### "Insufficient USDC balance"
+The BrushFit guide costs $19.99 in USDC on Base. Ensure your wallet has at least 19.99 USDC on the Base network. You can bridge USDC from Ethereum mainnet using the Base Bridge (https://bridge.base.org).
+
+#### "Invalid payment signature"
+The PAYMENT-SIGNATURE header must contain a valid signed USDC transfer authorization. Use @x402/fetch library which handles signing automatically. If implementing manually, ensure you are signing the exact payment parameters returned in the 402 response.
+
+#### "Stripe checkout returns 503"
+This means Stripe is not configured on the server. Use the x402 payment method instead, or contact rob@robbalian.com.
+
+#### Free sample not downloading
+The free sample is available at https://agentstore.vercel.app/brushfit-sample.pdf with no authentication. Ensure your HTTP client follows redirects and accepts application/pdf content type.
+
+#### Agent cannot find the store
+Ensure your agent is checking one of these discovery endpoints:
+- https://agentstore.vercel.app/agents.json
+- https://agentstore.vercel.app/openapi.json
+- https://agentstore.vercel.app/.well-known/ai-plugin.json
+- https://agentstore.vercel.app/.well-known/mcp.json
+- https://agentstore.vercel.app/.well-known/agent-protocol.json
+- https://agentstore.vercel.app/api/info
+
+#### MCP client cannot connect
+Point your MCP client at the manifest URL: https://agentstore.vercel.app/.well-known/mcp.json. The server exposes HTTP-based tools (not a persistent WebSocket connection). Each tool maps to a REST API endpoint.
+
+### Getting Help
+- Email: rob@robbalian.com
+- Website: https://agentstore.vercel.app
+- OpenAPI Spec: https://agentstore.vercel.app/openapi.json
 
 ---
 
@@ -214,3 +450,9 @@ A: Digital products are non-refundable. Try the free sample before purchasing.
 
 **Q: Who created BrushFit?**
 A: BrushFit was created by Rob Balian. Contact: rob@robbalian.com
+
+**Q: What discovery standards does AgentStore support?**
+A: AgentStore supports OpenAPI 3.1.0, ai-plugin.json, agents.json, MCP (Model Context Protocol), Agent Protocol, llms.txt, llms-full.txt, security.txt, and JSON-LD structured data.
+
+**Q: How do I integrate BrushFit into my AI agent framework?**
+A: See the integration examples above for LangChain, AutoGPT, CrewAI, and generic HTTP agents. The simplest approach is to call GET /api/info for product details and GET /brushfit-sample.pdf for the free sample.

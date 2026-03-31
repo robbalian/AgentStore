@@ -2,17 +2,22 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Blog — BrushFit AgentStore",
+  title: "Blog — Fitness Tips, Habit Science & Agentic Commerce",
   description:
-    "Articles about toothbrush workouts, habit stacking fitness, micro workouts, agentic commerce, x402 protocol, and the AI agent economy. Tips, science, and guides.",
+    "Articles about toothbrush workouts, bathroom exercises, habit stacking, morning routine fitness, agentic commerce, x402 protocol, MCP servers, and the AI agent economy.",
   keywords: [
     "fitness blog",
     "toothbrush workout blog",
     "habit stacking articles",
     "micro workout tips",
+    "bathroom workout routine",
+    "morning routine exercises",
     "agentic commerce blog",
     "x402 articles",
     "AI agent economy",
+    "agent store developer guide",
+    "sell digital products AI agents",
+    "MCP server commerce",
   ],
   openGraph: {
     title: "Blog — BrushFit AgentStore",
@@ -26,6 +31,38 @@ export const metadata: Metadata = {
 };
 
 const posts = [
+  {
+    slug: "morning-routine-exercises",
+    title: "10 Morning Routine Exercises You Can Do While Getting Ready",
+    description:
+      "Quick exercises to do during your morning routine — while brushing teeth, waiting for coffee, and getting dressed.",
+    category: "Fitness Guide",
+    date: "2026-03-31",
+  },
+  {
+    slug: "bathroom-workout-routine",
+    title: "The Complete Bathroom Workout Routine: 15 Exercises",
+    description:
+      "A full-body workout routine using only your bathroom — walls, counter, towels, and bodyweight.",
+    category: "Fitness Guide",
+    date: "2026-03-31",
+  },
+  {
+    slug: "sell-digital-products-ai-agents",
+    title: "How to Sell Digital Products to AI Agents in 2026",
+    description:
+      "The emerging market of selling digital products to AI agents — x402 protocol, agent wallets, discovery files, and pricing strategies.",
+    category: "Agentic Commerce",
+    date: "2026-03-31",
+  },
+  {
+    slug: "build-agent-store-x402",
+    title: "Build Your Own Agent Store: A Developer's Guide to x402",
+    description:
+      "Technical guide to building an agent-compatible store with x402 payments, OpenAPI specs, and agent discovery files.",
+    category: "Developer Guide",
+    date: "2026-03-31",
+  },
   {
     slug: "toothbrush-workout-guide",
     title: "The Complete Guide to Toothbrush Workouts",
@@ -43,6 +80,22 @@ const posts = [
     date: "2025-03-30",
   },
   {
+    slug: "micro-workouts-science",
+    title: "The Science of Micro Workouts: Why 2 Minutes Matters",
+    description:
+      "Research shows short exercise bursts are surprisingly effective. Here's why 2-minute workouts work.",
+    category: "Fitness Science",
+    date: "2025-03-31",
+  },
+  {
+    slug: "no-equipment-home-workout",
+    title: "The Ultimate No-Equipment Home Workout Guide",
+    description:
+      "Build strength anywhere with zero equipment. Bodyweight exercises for every muscle group.",
+    category: "Fitness Guide",
+    date: "2025-03-31",
+  },
+  {
     slug: "what-is-x402-agentic-commerce",
     title: "What is x402? The Future of Agentic Commerce",
     description:
@@ -51,26 +104,10 @@ const posts = [
     date: "2025-03-30",
   },
   {
-    slug: "micro-workouts-science",
-    title: "The Science of Micro Workouts: Why 2 Minutes Matters",
-    description:
-      "Research shows short exercise bursts are surprisingly effective. Here's why 2-minute workouts work and how to maximize them.",
-    category: "Fitness Science",
-    date: "2025-03-31",
-  },
-  {
-    slug: "no-equipment-home-workout",
-    title: "The Ultimate No-Equipment Home Workout Guide",
-    description:
-      "Build strength anywhere with zero equipment. Bodyweight exercises for every muscle group using walls, doors, and household items.",
-    category: "Fitness Guide",
-    date: "2025-03-31",
-  },
-  {
     slug: "ai-agents-buying-products",
-    title: "How AI Agents Buy Products: The Complete Guide to Agent Commerce",
+    title: "How AI Agents Buy Products: The Complete Guide",
     description:
-      "Everything you need to know about AI agents making autonomous purchases — protocols, wallets, and the emerging agent economy.",
+      "Everything about AI agents making autonomous purchases — protocols, wallets, and the agent economy.",
     category: "Agentic Commerce",
     date: "2025-03-31",
   },
@@ -79,6 +116,12 @@ const posts = [
 export default function BlogIndex() {
   return (
     <div className="mx-auto max-w-3xl px-6 py-16">
+      <nav className="mb-8">
+        <Link href="/" className="text-sm text-indigo-600 hover:text-indigo-700">
+          &larr; Back to BrushFit
+        </Link>
+      </nav>
+
       <h1 className="mb-4 text-4xl font-extrabold tracking-tight">Blog</h1>
       <p className="mb-12 text-lg text-gray-500">
         Fitness tips, habit science, and the future of agentic commerce.
@@ -115,7 +158,7 @@ export default function BlogIndex() {
             href="/"
             className="inline-block rounded-xl bg-indigo-600 px-8 py-3 font-bold text-white transition hover:bg-indigo-700"
           >
-            Get BrushFit
+            Get BrushFit — $19.99
           </Link>
           <a
             href="/brushfit-sample.pdf"

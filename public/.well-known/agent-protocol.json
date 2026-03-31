@@ -1,0 +1,126 @@
+{
+  "version": "1.0",
+  "name": "BrushFit AgentStore",
+  "description": "Digital product marketplace for humans and AI agents. Purchase the BrushFit 2-Minute Toothbrush Workout Guide via x402 protocol (USDC on Base) or Stripe checkout.",
+  "url": "https://agentstore.vercel.app",
+  "contact": "rob@robbalian.com",
+  "documentation": "https://agentstore.vercel.app/llms-full.txt",
+  "capabilities": {
+    "product_discovery": true,
+    "programmatic_purchase": true,
+    "instant_delivery": true,
+    "free_samples": true,
+    "payment_protocols": ["x402", "stripe"]
+  },
+  "endpoints": {
+    "discovery": {
+      "product_info": {
+        "url": "https://agentstore.vercel.app/api/info",
+        "method": "GET",
+        "description": "Returns full product details, pricing, and payment instructions in JSON."
+      },
+      "openapi": {
+        "url": "https://agentstore.vercel.app/openapi.json",
+        "method": "GET",
+        "description": "OpenAPI 3.1.0 specification for all API endpoints."
+      },
+      "agents_json": {
+        "url": "https://agentstore.vercel.app/agents.json",
+        "method": "GET",
+        "description": "Agent discovery manifest with products, protocols, and capabilities."
+      },
+      "mcp_manifest": {
+        "url": "https://agentstore.vercel.app/.well-known/mcp.json",
+        "method": "GET",
+        "description": "MCP server manifest with tools, resources, and authentication."
+      }
+    },
+    "actions": {
+      "purchase_x402": {
+        "url": "https://agentstore.vercel.app/api/x402/purchase",
+        "method": "GET",
+        "description": "Purchase BrushFit PDF via x402 protocol. Returns HTTP 402 with payment requirements. After signing USDC transfer on Base, retry with PAYMENT-SIGNATURE header.",
+        "authentication": "x402 (USDC on Base, chain ID 8453)",
+        "response_type": "application/pdf"
+      },
+      "purchase_stripe": {
+        "url": "https://agentstore.vercel.app/api/checkout",
+        "method": "POST",
+        "description": "Create Stripe checkout session for card payment. Returns { url } for redirect.",
+        "authentication": "none",
+        "response_type": "application/json"
+      },
+      "download_free_sample": {
+        "url": "https://agentstore.vercel.app/brushfit-sample.pdf",
+        "method": "GET",
+        "description": "Download free sample PDF with Legs and Core exercises. No authentication required.",
+        "authentication": "none",
+        "response_type": "application/pdf"
+      }
+    }
+  },
+  "tasks": [
+    {
+      "id": "discover_product",
+      "name": "Discover BrushFit Product",
+      "description": "Retrieve product information including pricing, features, and purchase options.",
+      "steps": [
+        {
+          "step": 1,
+          "action": "GET /api/info",
+          "expected_result": "JSON with product details, pricing ($19.99), and payment methods"
+        }
+      ]
+    },
+    {
+      "id": "purchase_product",
+      "name": "Purchase BrushFit via x402",
+      "description": "Complete the x402 payment flow to purchase and receive the BrushFit PDF.",
+      "steps": [
+        {
+          "step": 1,
+          "action": "GET /api/x402/purchase",
+          "expected_result": "HTTP 402 with payment requirements"
+        },
+        {
+          "step": 2,
+          "action": "Sign USDC transfer on Base (chain ID 8453)",
+          "expected_result": "Payment signature"
+        },
+        {
+          "step": 3,
+          "action": "GET /api/x402/purchase with PAYMENT-SIGNATURE header",
+          "expected_result": "HTTP 200 with PDF body"
+        }
+      ]
+    },
+    {
+      "id": "get_free_sample",
+      "name": "Download Free Sample",
+      "description": "Download the free BrushFit sample PDF for evaluation.",
+      "steps": [
+        {
+          "step": 1,
+          "action": "GET /brushfit-sample.pdf",
+          "expected_result": "PDF file (Legs + Core exercises)"
+        }
+      ]
+    }
+  ],
+  "authentication": {
+    "type": "x402",
+    "description": "No API keys needed. Payment is per-transaction via x402 protocol (HTTP 402 + signed USDC transfer on Base).",
+    "details": {
+      "currency": "USDC",
+      "network": "Base (eip155:8453)",
+      "facilitator": "https://x402.org/facilitator"
+    }
+  },
+  "related_standards": {
+    "openapi": "https://agentstore.vercel.app/openapi.json",
+    "ai_plugin": "https://agentstore.vercel.app/.well-known/ai-plugin.json",
+    "mcp": "https://agentstore.vercel.app/.well-known/mcp.json",
+    "llms_txt": "https://agentstore.vercel.app/llms.txt",
+    "security_txt": "https://agentstore.vercel.app/.well-known/security.txt"
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "schema_version": "1.0",
+  "server": {
+    "name": "brushfit-agentstore",
+    "description": "MCP server for BrushFit AgentStore. Discover and purchase the BrushFit 2-Minute Toothbrush Workout Guide — a 31-page PDF with 22 illustrated bodyweight exercises. Supports x402 payment protocol (USDC on Base blockchain).",
+    "version": "1.0.0",
+    "url": "https://agentstore.vercel.app",
+    "contact": "rob@robbalian.com"
+  },
+  "tools": [
+    {
+      "name": "get_product_info",
+      "description": "Get full product details, pricing, payment methods, and purchase instructions for the BrushFit guide. Returns JSON with product metadata, pricing ($19.99 USD), and available payment flows (x402 and Stripe).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "endpoint": {
+        "url": "https://agentstore.vercel.app/api/info",
+        "method": "GET",
+        "content_type": "application/json"
+      }
+    },
+    {
+      "name": "purchase_brushfit",
+      "description": "Purchase the BrushFit PDF via x402 protocol. First call returns HTTP 402 with payment requirements. Sign a USDC transfer on Base (chain ID 8453), then retry with PAYMENT-SIGNATURE header to receive the PDF. Use @x402/fetch wrapFetchWithPayment() to automate the flow.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "payment_signature": {
+            "type": "string",
+            "description": "Signed USDC transfer authorization for x402 payment. Omit on first call to receive payment requirements."
+          }
+        },
+        "required": []
+      },
+      "endpoint": {
+        "url": "https://agentstore.vercel.app/api/x402/purchase",
+        "method": "GET",
+        "headers": {
+          "PAYMENT-SIGNATURE": "{payment_signature}"
+        },
+        "content_type": "application/pdf"
+      }
+    },
+    {
+      "name": "get_free_sample",
+      "description": "Download the free BrushFit sample PDF containing Legs and Core exercise sections. No payment or authentication required. Great for evaluating the product before purchase.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "endpoint": {
+        "url": "https://agentstore.vercel.app/brushfit-sample.pdf",
+        "method": "GET",
+        "content_type": "application/pdf"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "name": "product_catalog",
+      "description": "Complete product catalog for BrushFit AgentStore, including product details, exercise lists, and program structure.",
+      "uri": "https://agentstore.vercel.app/api/info",
+      "mimeType": "application/json"
+    },
+    {
+      "name": "pricing_info",
+      "description": "Current pricing and available payment methods for the BrushFit guide. Price: $19.99 USD. Accepts USDC via x402 or cards via Stripe.",
+      "uri": "https://agentstore.vercel.app/api/info",
+      "mimeType": "application/json"
+    },
+    {
+      "name": "openapi_spec",
+      "description": "OpenAPI 3.1.0 specification for the BrushFit AgentStore API.",
+      "uri": "https://agentstore.vercel.app/openapi.json",
+      "mimeType": "application/json"
+    },
+    {
+      "name": "free_sample",
+      "description": "Free sample PDF with Legs and Core exercises from the BrushFit guide.",
+      "uri": "https://agentstore.vercel.app/brushfit-sample.pdf",
+      "mimeType": "application/pdf"
+    }
+  ],
+  "authentication": {
+    "type": "x402",
+    "description": "Payment via x402 protocol — HTTP 402 flow with USDC on Base blockchain. No API keys or authentication tokens required. Payment is made per-transaction via signed USDC transfer.",
+    "details": {
+      "currency": "USDC",
+      "network": "Base (eip155:8453)",
+      "facilitator": "https://x402.org/facilitator",
+      "recommended_library": "@x402/fetch"
+    }
+  },
+  "prompts": [
+    {
+      "name": "discover_brushfit",
+      "description": "Discover the BrushFit product and learn how to purchase it",
+      "template": "Use the get_product_info tool to learn about BrushFit, a 31-page fitness PDF with 22 toothbrush exercises. Then use get_free_sample to preview it, or purchase_brushfit to buy it via x402."
+    }
+  ]
+}

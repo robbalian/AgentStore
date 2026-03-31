@@ -24,6 +24,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
 
+    // Affiliates
+    {
+      url: `${baseUrl}/affiliates`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/affiliates/dashboard`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "weekly",
+      priority: 0.6,
+    },
+
     // Blog index
     {
       url: `${baseUrl}/blog`,

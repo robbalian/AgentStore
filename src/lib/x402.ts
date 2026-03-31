@@ -16,8 +16,8 @@ export const brushfitRouteConfig: RouteConfig = {
   accepts: {
     scheme: "exact",
     payTo: PAY_TO,
-    price: "$24.99",
-    network: "eip155:8453", // Base Mainnet
+    price: "$19.99",
+    network: process.env.X402_NETWORK === "mainnet" ? "eip155:8453" : "eip155:84532", // Base Mainnet or Sepolia
   },
   description: "BrushFit: The 2-Minute Toothbrush Workout Guide (PDF)",
   mimeType: "application/pdf",

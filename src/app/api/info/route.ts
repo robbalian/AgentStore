@@ -5,7 +5,7 @@ export async function GET() {
     product: "BrushFit: The 2-Minute Toothbrush Workout Guide",
     price: "$24.99",
     currency: "USDC",
-    network: "Base (eip155:8453)",
+    network: process.env.X402_NETWORK === "mainnet" ? "Base (eip155:8453)" : "Base Sepolia (eip155:84532)",
     format: "PDF (31 pages)",
     purchase_endpoint: "/api/x402/purchase",
     payment_protocol: "x402",

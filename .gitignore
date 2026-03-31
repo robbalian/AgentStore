@@ -32,6 +32,12 @@ yarn-error.log*
 .env*.local
 .env
 
+# wallet keys
+WALLETS.md
+
+# test artifacts
+BrushFit-Guide-PURCHASED.pdf
+
 # vercel
 .vercel
 

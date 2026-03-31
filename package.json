@@ -15,12 +15,17 @@
     "@types/react-dom": "^19.2.3",
     "@x402/core": "^2.8.0",
     "@x402/evm": "^2.8.0",
+    "@x402/fetch": "^2.8.0",
     "@x402/next": "^2.8.0",
     "next": "^16.2.1",
     "postcss": "^8.5.8",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "tailwindcss": "^4.2.2",
-    "typescript": "^6.0.2"
+    "typescript": "^6.0.2",
+    "viem": "^2.47.6"
+  },
+  "devDependencies": {
+    "tsx": "^4.21.0"
   }
 }

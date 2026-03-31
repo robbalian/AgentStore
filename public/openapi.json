@@ -1,0 +1,118 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "BrushFit AgentStore API",
+    "description": "API for purchasing BrushFit: The 2-Minute Toothbrush Workout Guide. Supports x402 protocol (crypto) and Stripe (card) payments.",
+    "version": "1.0.0",
+    "contact": {
+      "email": "rob@robbalian.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://agentstore.vercel.app",
+      "description": "Production"
+    }
+  ],
+  "paths": {
+    "/api/info": {
+      "get": {
+        "operationId": "getProductInfo",
+        "summary": "Get product information and pricing",
+        "description": "Returns full product details, pricing, payment methods, and purchase instructions for the BrushFit guide.",
+        "responses": {
+          "200": {
+            "description": "Product information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/x402/purchase": {
+      "get": {
+        "operationId": "purchaseWithX402",
+        "summary": "Purchase BrushFit PDF via x402 protocol",
+        "description": "Returns HTTP 402 with payment requirements. After signing a USDC transfer on Base, retry with PAYMENT-SIGNATURE header to receive the PDF. Use @x402/fetch wrapFetchWithPayment() to automate.",
+        "responses": {
+          "200": {
+            "description": "PDF file (after valid payment)",
+            "content": {
+              "application/pdf": {}
+            }
+          },
+          "402": {
+            "description": "Payment required — includes payment requirements in response body"
+          }
+        }
+      }
+    },
+    "/api/checkout": {
+      "post": {
+        "operationId": "createStripeCheckout",
+        "summary": "Create a Stripe checkout session for card payment",
+        "description": "Creates a Stripe checkout session and returns a redirect URL for card-based payment. $19.99 USD.",
+        "responses": {
+          "200": {
+            "description": "Checkout session URL",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "description": "Stripe checkout URL to redirect the user"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Stripe not configured"
+          }
+        }
+      }
+    },
+    "/brushfit-sample.pdf": {
+      "get": {
+        "operationId": "getFreeSample",
+        "summary": "Download free sample PDF (Legs + Core exercises)",
+        "description": "Free preview of the BrushFit guide containing the Legs and Core exercise sections.",
+        "responses": {
+          "200": {
+            "description": "Sample PDF file",
+            "content": {
+              "application/pdf": {}
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ProductInfo": {
+        "type": "object",
+        "properties": {
+          "product": { "type": "string" },
+          "price": { "type": "string" },
+          "currency": { "type": "string" },
+          "network": { "type": "string" },
+          "format": { "type": "string" },
+          "purchase_endpoint": { "type": "string" },
+          "payment_protocol": { "type": "string" },
+          "description": { "type": "string" },
+          "includes": { "type": "array", "items": { "type": "string" } },
+          "free_sample": { "type": "string" }
+        }
+      }
+    }
+  }
+}

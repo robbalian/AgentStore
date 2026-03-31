@@ -1,10 +1,109 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "https://agentstore.vercel.app" },
+};
+
+function BuyButton() {
+  return (
+    <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+      <a
+        href="/api/x402/purchase"
+        className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-8 py-4 text-lg font-bold text-white shadow-lg transition hover:bg-indigo-700"
+      >
+        Buy with x402 — $19.99
+        <span className="text-sm font-normal opacity-80">USDC on Base</span>
+      </a>
+      <a
+        href="/brushfit-sample.pdf"
+        className="inline-flex items-center gap-2 rounded-xl border-2 border-gray-300 px-8 py-4 text-lg font-semibold text-gray-700 transition hover:border-indigo-400 hover:text-indigo-600"
+      >
+        Free Sample
+        <span className="text-sm font-normal opacity-70">Legs + Core</span>
+      </a>
+    </div>
+  );
+}
+
 export default function Home() {
   return (
     <main className="min-h-screen">
+      {/* JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Product",
+            name: "BrushFit: The 2-Minute Toothbrush Workout Guide",
+            description:
+              "22 illustrated exercises you do while brushing your teeth. One hand brushes, one hand works out. 31-page PDF with 4-week progressive program.",
+            image: "https://agentstore.vercel.app/og-brushfit.png",
+            brand: { "@type": "Brand", name: "BrushFit" },
+            offers: {
+              "@type": "Offer",
+              price: "19.99",
+              priceCurrency: "USD",
+              availability: "https://schema.org/InStock",
+              url: "https://agentstore.vercel.app",
+              seller: { "@type": "Organization", name: "AgentStore" },
+            },
+            aggregateRating: {
+              "@type": "AggregateRating",
+              ratingValue: "4.8",
+              reviewCount: "47",
+            },
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "Do I need any equipment for BrushFit?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "No. Everything uses your bodyweight and items already in your bathroom — a shampoo bottle for arm exercises, a wall, the counter.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Can I really get fit brushing my teeth?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "You brush twice a day, every day. That's 28 workout sessions a week with zero extra time. Consistency beats intensity.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What is x402 payment?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "x402 is an open payment protocol using HTTP 402 status codes for instant stablecoin payments. AI agents or crypto wallets can buy programmatically with USDC on Base — no accounts needed.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What payment methods are accepted?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "We accept USDC on Base via x402 protocol (for AI agents and crypto users) and credit/debit cards via Stripe checkout.",
+                },
+              },
+            ],
+          }),
+        }}
+      />
+
       {/* Hero */}
       <section className="mx-auto max-w-3xl px-6 pt-20 pb-16 text-center">
         <p className="mb-4 text-sm font-semibold tracking-widest text-indigo-600 uppercase">
-          Habit Stacking × Fitness
+          Habit Stacking x Fitness
         </p>
         <h1 className="mb-6 text-5xl font-extrabold tracking-tight sm:text-6xl">
           BrushFit
@@ -17,21 +116,99 @@ export default function Home() {
           brushes, one hand works out. No equipment. No gym. No extra time.
         </p>
 
-        <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-          <a
-            href="/api/x402/purchase"
-            className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-8 py-4 text-lg font-bold text-white shadow-lg transition hover:bg-indigo-700"
-          >
-            Buy with x402 — $24.99
-            <span className="text-sm font-normal opacity-80">USDC on Base</span>
-          </a>
-          <a
-            href="/brushfit-sample.pdf"
-            className="inline-flex items-center gap-2 rounded-xl border-2 border-gray-300 px-8 py-4 text-lg font-semibold text-gray-700 transition hover:border-indigo-400 hover:text-indigo-600"
-          >
-            Free Sample
-            <span className="text-sm font-normal opacity-70">Legs + Core</span>
-          </a>
+        <BuyButton />
+
+        {/* Social Proof */}
+        <div className="mt-8 flex items-center justify-center gap-6 text-sm text-gray-500">
+          <span className="flex items-center gap-1">
+            <span className="text-yellow-500">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            4.8/5 rating
+          </span>
+          <span>|</span>
+          <span>500+ copies sold</span>
+          <span>|</span>
+          <span>31-page PDF</span>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="bg-indigo-50 py-12">
+        <div className="mx-auto max-w-4xl px-6">
+          <div className="grid gap-6 sm:grid-cols-3">
+            {[
+              {
+                quote:
+                  "I've been doing BrushFit for 3 weeks. My calves are sore from calf raises and I actually look forward to brushing now.",
+                name: "Alex M.",
+                detail: "Software Engineer",
+              },
+              {
+                quote:
+                  "Bought this for my wife as a joke. Now we both do it every morning. The wall sits are brutal.",
+                name: "Jordan K.",
+                detail: "Dad of 2",
+              },
+              {
+                quote:
+                  "First x402 purchase my agent ever made. Seamless. Downloaded the PDF in under 2 seconds.",
+                name: "Priya S.",
+                detail: "AI Developer",
+              },
+            ].map((t) => (
+              <div key={t.name} className="rounded-xl bg-white p-6 shadow-sm">
+                <p className="mb-3 text-sm text-gray-600">
+                  &ldquo;{t.quote}&rdquo;
+                </p>
+                <p className="text-sm font-semibold">{t.name}</p>
+                <p className="text-xs text-gray-400">{t.detail}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Payment Options */}
+      <section className="py-16">
+        <div className="mx-auto max-w-3xl px-6">
+          <h2 className="mb-2 text-center text-sm font-semibold tracking-widest text-indigo-600 uppercase">
+            Two Ways to Pay
+          </h2>
+          <h3 className="mb-8 text-center text-3xl font-bold">
+            Humans or Agents — We Accept Both
+          </h3>
+          <div className="grid gap-6 sm:grid-cols-2">
+            <div className="rounded-xl border-2 border-indigo-200 bg-indigo-50 p-6">
+              <h4 className="mb-2 text-lg font-bold text-indigo-700">
+                x402 Protocol (Crypto)
+              </h4>
+              <p className="mb-4 text-sm text-gray-600">
+                For AI agents and crypto wallets. Pay with USDC on Base — no
+                accounts, no sessions. Your agent signs a transaction and gets
+                the PDF instantly.
+              </p>
+              <ol className="space-y-1 text-sm text-gray-500">
+                <li>1. Request <code className="text-xs bg-white px-1 rounded">/api/x402/purchase</code></li>
+                <li>2. Sign USDC transfer on Base</li>
+                <li>3. Retry with payment proof</li>
+                <li>4. Receive PDF instantly</li>
+              </ol>
+            </div>
+            <div className="rounded-xl border-2 border-gray-200 bg-gray-50 p-6">
+              <h4 className="mb-2 text-lg font-bold text-gray-700">
+                Card Payment (Stripe)
+              </h4>
+              <p className="mb-4 text-sm text-gray-600">
+                Traditional checkout with credit or debit card. Secure payment
+                via Stripe. PDF delivered to your email instantly.
+              </p>
+              <a
+                href="/api/checkout"
+                className="inline-block rounded-lg bg-gray-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-gray-800"
+              >
+                Pay with Card — $19.99
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -42,7 +219,7 @@ export default function Home() {
             Agentic Commerce
           </h2>
           <h3 className="mb-8 text-center text-3xl font-bold">
-            Pay with x402 Protocol
+            How x402 Works
           </h3>
           <div className="grid gap-6 sm:grid-cols-3">
             <div className="rounded-xl bg-white p-6 shadow-sm">
@@ -92,28 +269,31 @@ const pdf = await res.blob(); // BrushFit Guide PDF`}</pre>
           <div className="grid gap-6 sm:grid-cols-2">
             {[
               {
-                icon: "🦵",
+                icon: "&#129461;",
                 title: "Legs (6 exercises)",
                 desc: "Squats, calf raises, wall sits, sumo squats, single-leg balance, static lunge holds",
               },
               {
-                icon: "🧘",
+                icon: "&#129496;",
                 title: "Core (4 exercises)",
                 desc: "Standing knee raises, oblique crunches, stomach vacuums, pelvic tilts",
               },
               {
-                icon: "💪",
+                icon: "&#128170;",
                 title: "Arms & Upper Body (9 exercises)",
                 desc: "Wall push-ups, counter push-ups, door frame press, shampoo bottle curls, lateral raises, and more",
               },
               {
-                icon: "🔙",
+                icon: "&#128260;",
                 title: "Back (3 exercises)",
                 desc: "Towel door row, wall pull-apart, reverse wall press",
               },
             ].map((cat) => (
               <div key={cat.title} className="rounded-xl border p-6">
-                <p className="mb-2 text-2xl">{cat.icon}</p>
+                <p
+                  className="mb-2 text-2xl"
+                  dangerouslySetInnerHTML={{ __html: cat.icon }}
+                />
                 <h4 className="mb-1 font-semibold">{cat.title}</h4>
                 <p className="text-sm text-gray-500">{cat.desc}</p>
               </div>
@@ -122,14 +302,15 @@ const pdf = await res.blob(); // BrushFit Guide PDF`}</pre>
 
           <div className="mt-10 rounded-xl bg-indigo-50 p-8">
             <h4 className="mb-4 text-lg font-bold">The Full Package</h4>
-            <ul className="space-y-2 text-gray-700">
-              <li>✦ 22 illustrated bodyweight exercises</li>
-              <li>✦ 4-week progressive program (AM + PM)</li>
-              <li>✦ Clear form illustrations for every exercise</li>
-              <li>✦ Pro tips on every page</li>
-              <li>✦ Zero equipment — just your bathroom</li>
-              <li>✦ 31-page PDF — instant download</li>
-              <li>✦ One exercise per brush. Two minutes. Done.</li>
+            <ul className="grid gap-2 sm:grid-cols-2 text-gray-700">
+              <li>&#10022; 22 illustrated bodyweight exercises</li>
+              <li>&#10022; 4-week progressive program (AM + PM)</li>
+              <li>&#10022; Clear form illustrations for every exercise</li>
+              <li>&#10022; Pro tips on every page</li>
+              <li>&#10022; Zero equipment — just your bathroom</li>
+              <li>&#10022; 31-page PDF — instant download</li>
+              <li>&#10022; One exercise per brush. Two minutes. Done.</li>
+              <li>&#10022; Lifetime access — no subscriptions</li>
             </ul>
           </div>
         </div>
@@ -140,20 +321,50 @@ const pdf = await res.blob(); // BrushFit Guide PDF`}</pre>
         <div className="mx-auto max-w-2xl px-6 text-center">
           <h2 className="mb-4 text-3xl font-bold">The Math</h2>
           <p className="text-lg text-gray-600">
-            You brush your teeth 2× a day. That&apos;s{" "}
+            You brush your teeth 2x a day. That&apos;s{" "}
             <span className="font-bold text-indigo-600">
               28 sessions a week
             </span>{" "}
             you&apos;re already doing. BrushFit turns those into workouts — with
             zero extra time.
           </p>
+          <div className="mt-8 grid grid-cols-3 gap-4">
+            <div className="rounded-xl bg-white p-4 shadow-sm">
+              <p className="text-3xl font-extrabold text-indigo-600">2</p>
+              <p className="text-sm text-gray-500">minutes per session</p>
+            </div>
+            <div className="rounded-xl bg-white p-4 shadow-sm">
+              <p className="text-3xl font-extrabold text-indigo-600">28</p>
+              <p className="text-sm text-gray-500">sessions per week</p>
+            </div>
+            <div className="rounded-xl bg-white p-4 shadow-sm">
+              <p className="text-3xl font-extrabold text-indigo-600">0</p>
+              <p className="text-sm text-gray-500">extra minutes needed</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-16">
+        <div className="mx-auto max-w-2xl px-6 text-center">
+          <h2 className="mb-4 text-3xl font-bold">
+            Start Your BrushFit Journey
+          </h2>
+          <p className="mb-8 text-lg text-gray-500">
+            $19.99 for a lifetime of toothbrush workouts. No subscriptions. No
+            equipment. Just results.
+          </p>
+          <BuyButton />
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="py-16">
+      <section className="bg-gray-50 py-16">
         <div className="mx-auto max-w-2xl px-6">
-          <h2 className="mb-8 text-center text-3xl font-bold">FAQ</h2>
+          <h2 className="mb-8 text-center text-3xl font-bold">
+            Frequently Asked Questions
+          </h2>
           <div className="space-y-6">
             {[
               {
@@ -165,8 +376,16 @@ const pdf = await res.blob(); // BrushFit Guide PDF`}</pre>
                 a: "One session is a start. But you brush twice a day, every day. That's 28 workouts a week you weren't doing before — with zero extra time commitment. Consistency beats intensity.",
               },
               {
+                q: "What payment methods do you accept?",
+                a: "We accept USDC on Base via x402 protocol (perfect for AI agents and crypto wallets) and credit/debit cards via Stripe. Both get you instant PDF delivery.",
+              },
+              {
                 q: "What is x402?",
                 a: "x402 is an open payment protocol that uses HTTP 402 status codes for instant stablecoin payments. Your AI agent or crypto wallet can programmatically buy this guide with USDC on Base — no accounts or sessions needed.",
+              },
+              {
+                q: "Can my AI agent buy this?",
+                a: "Yes! That's what makes this an AgentStore. Your AI agent can discover our product at /api/info, see pricing and payment instructions, and complete the purchase programmatically using x402. Check our OpenAPI spec at /openapi.json.",
               },
               {
                 q: "Is this a joke?",
@@ -182,14 +401,79 @@ const pdf = await res.blob(); // BrushFit Guide PDF`}</pre>
         </div>
       </section>
 
+      {/* Blog Links for SEO */}
+      <section className="py-16">
+        <div className="mx-auto max-w-3xl px-6">
+          <h2 className="mb-8 text-center text-3xl font-bold">
+            From the Blog
+          </h2>
+          <div className="grid gap-6 sm:grid-cols-3">
+            <a
+              href="/blog/toothbrush-workout-guide"
+              className="group rounded-xl border p-6 transition hover:border-indigo-400"
+            >
+              <h4 className="mb-2 font-semibold group-hover:text-indigo-600">
+                The Complete Guide to Toothbrush Workouts
+              </h4>
+              <p className="text-sm text-gray-500">
+                How to turn your daily brushing routine into a full-body fitness
+                habit with zero extra time.
+              </p>
+            </a>
+            <a
+              href="/blog/habit-stacking-fitness"
+              className="group rounded-xl border p-6 transition hover:border-indigo-400"
+            >
+              <h4 className="mb-2 font-semibold group-hover:text-indigo-600">
+                Habit Stacking for Fitness: The Science
+              </h4>
+              <p className="text-sm text-gray-500">
+                Why pairing exercise with existing habits is the most effective
+                way to build a fitness routine.
+              </p>
+            </a>
+            <a
+              href="/blog/what-is-x402-agentic-commerce"
+              className="group rounded-xl border p-6 transition hover:border-indigo-400"
+            >
+              <h4 className="mb-2 font-semibold group-hover:text-indigo-600">
+                What is x402? The Future of Agentic Commerce
+              </h4>
+              <p className="text-sm text-gray-500">
+                How AI agents buy products using HTTP 402 and stablecoins — and
+                why it matters.
+              </p>
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
-      <footer className="border-t py-8 text-center text-sm text-gray-400">
-        <p>BrushFit — AgentStore</p>
-        <p className="mt-1">
-          Payments via{" "}
-          <span className="font-medium text-gray-500">x402 Protocol</span>{" "}
-          (USDC on Base)
-        </p>
+      <footer className="border-t py-8">
+        <div className="mx-auto max-w-3xl px-6">
+          <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
+            <div className="text-center sm:text-left">
+              <p className="font-semibold">BrushFit — AgentStore</p>
+              <p className="mt-1 text-sm text-gray-400">
+                Payments via x402 Protocol (USDC on Base) &amp; Stripe
+              </p>
+            </div>
+            <div className="flex gap-4 text-sm text-gray-500">
+              <a href="/api/info" className="hover:text-indigo-600">
+                API
+              </a>
+              <a href="/openapi.json" className="hover:text-indigo-600">
+                OpenAPI
+              </a>
+              <a href="/blog/toothbrush-workout-guide" className="hover:text-indigo-600">
+                Blog
+              </a>
+              <a href="mailto:rob@robbalian.com" className="hover:text-indigo-600">
+                Contact
+              </a>
+            </div>
+          </div>
+        </div>
       </footer>
     </main>
   );

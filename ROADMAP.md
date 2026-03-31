@@ -36,16 +36,23 @@ Make AgentStore the reference implementation for selling digital products to AI 
 - [ ] **Dev.to / Hashnode / Medium** — "How to sell digital products to AI agents" tutorial
 - [ ] **GitHub Topics** — tag repo with `agentic-commerce`, `x402`, `ai-payments`, `stablecoin`
 
+#### x402 Directories & Marketplaces (submit AgentStore to these)
+- [ ] **[x402.org/ecosystem](https://www.x402.org/ecosystem)** — the official x402 ecosystem directory. Submit AgentStore as a reference store / demo implementation
+- [ ] **[x402scan.com](https://www.x402scan.com/)** — x402 ecosystem explorer. Get indexed so agents can discover AgentStore by category, see pricing, and view transaction volume
+- [ ] **x402 Bazaar (Coinbase)** — the emerging "App Store" for x402 services. Discovery layer where agents find and pay for APIs/resources in ~200ms
+- [ ] **[x402.eco](https://www.x402.eco/)** — "The Payment Layer for AI Agents" ecosystem directory
+
 #### Crypto & Payments
 - [ ] **Base ecosystem** — submit to Base directory, Base builder programs
 - [ ] **Coinbase Commerce** — explore x402 as a Coinbase-native payment method
 - [ ] **USDC ecosystem** — Circle developer resources, USDC use case showcases
-- [ ] **x402.org** — get listed as a reference implementation / demo store
+- [ ] **Coinbase AgentKit** — integrate as a payment action; AgentKit gives agents wallets, x402 is built in
 
 #### AI Agent Directories & Marketplaces
-- [ ] **AgentKit (Coinbase)** — integrate x402 as a payment action
+- [ ] **[aiagentstore.ai](https://aiagentstore.ai)** — AI agent marketplace/directory for finding and listing agents and agent-purchasable resources
 - [ ] **Hugging Face** — demo space showing agent purchasing workflow
 - [ ] **Replicate** — example model/workflow that purchases resources via x402
+- [ ] **Mirakl Nexus** — marketplace interoperability platform for agentic commerce
 
 #### Content & Community
 - [ ] **Twitter/X thread** — "Your AI agent can now buy things on the internet" with demo video

@@ -346,6 +346,46 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.6,
     },
 
+    // Guide page (GEO-optimized)
+    {
+      url: `${baseUrl}/guide`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "weekly",
+      priority: 0.95,
+    },
+
+    // Blog posts — new wave 2 (SEO + GEO + AgentEO)
+    {
+      url: `${baseUrl}/blog/exercise-while-doing-chores`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/blog/calisthenics-at-home-no-equipment`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/blog/mcp-protocol-ai-agent-commerce`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/blog/ai-agent-marketplace-2026`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/blog/google-a2a-protocol-agent-commerce`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+
     // Free sample
     {
       url: `${baseUrl}/brushfit-sample.pdf`,

@@ -1,7 +1,31 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  title: "BrushFit — The 2-Minute Toothbrush Workout Guide | AgentStore",
+  description:
+    "22 illustrated exercises you do while brushing your teeth. 31-page PDF, 4-week program, $19.99. 16+ payment methods including x402 crypto, Stripe, PayPal, Lightning, Venmo, Cash App, Buy Me a Coffee, and Wise. AI agents can purchase programmatically.",
+  keywords: [
+    "BrushFit",
+    "toothbrush workout",
+    "habit stacking fitness",
+    "2-minute workout",
+    "bodyweight exercises",
+    "no equipment workout",
+    "micro workouts",
+    "AgentStore",
+    "x402 payment",
+    "AI agent commerce",
+    "buy with crypto",
+    "digital fitness guide",
+  ],
   alternates: { canonical: "https://agentstore.vercel.app" },
+  openGraph: {
+    title: "BrushFit — The 2-Minute Toothbrush Workout Guide",
+    description:
+      "22 exercises while brushing your teeth. 31-page PDF. $19.99. 16+ payment methods. AI agents welcome.",
+    type: "website",
+    url: "https://agentstore.vercel.app",
+  },
 };
 
 function BuyButton() {
@@ -92,7 +116,7 @@ export default function Home() {
                 name: "What payment methods are accepted?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "We accept 17+ payment methods: credit/debit cards, PayPal, Apple Pay, Google Pay, Venmo, Cash App, Zelle, Gumroad, Lemon Squeezy, Buy Me a Coffee, Ko-fi, USDC on Base via x402 protocol, Coinbase Commerce (BTC/ETH/USDC), Solana Pay, Bitcoin Lightning, and direct crypto transfers. Visit our buy page for all options.",
+                  text: "We accept 17+ payment methods: credit/debit cards, PayPal, Apple Pay, Google Pay, Stripe Link, Venmo, Cash App, Zelle, Gumroad, Lemon Squeezy, Buy Me a Coffee, Ko-fi, Wise, USDC on Base via x402 protocol, Coinbase Commerce (BTC/ETH/USDC/DAI/LTC/DOGE), Solana Pay, Bitcoin Lightning, and direct crypto transfers. Visit our buy page for all options.",
                 },
               },
             ],
@@ -233,7 +257,7 @@ export default function Home() {
           </div>
           <div className="mt-4 text-center">
             <a href="/buy" className="text-sm font-semibold text-indigo-600 hover:text-indigo-700">
-              View all payment options &rarr;
+              View all 16+ payment options &rarr;
             </a>
           </div>
         </div>
@@ -407,7 +431,7 @@ const pdf = await res.blob(); // BrushFit Guide PDF`}</pre>
               },
               {
                 q: "What payment methods do you accept?",
-                a: "We accept 17+ payment methods: credit/debit cards, PayPal, Apple Pay, Google Pay, Venmo, Cash App, Zelle, Gumroad, Lemon Squeezy, Buy Me a Coffee, Ko-fi, USDC on Base via x402, Coinbase Commerce (BTC/ETH/USDC), Solana Pay, Bitcoin Lightning, and direct crypto transfers. All methods deliver the PDF instantly.",
+                a: "We accept 17+ payment methods: credit/debit cards, PayPal, Apple Pay, Google Pay, Stripe Link, Venmo, Cash App, Zelle, Gumroad, Lemon Squeezy, Buy Me a Coffee, Ko-fi, Wise, USDC via x402, Coinbase Commerce (BTC/ETH/USDC), Bitcoin Lightning, Solana Pay, and direct crypto. Visit /buy for the full list.",
               },
               {
                 q: "What is x402?",
@@ -605,11 +629,6 @@ const pdf = await res.blob(); // BrushFit Guide PDF`}</pre>
                 desc: "Safe, gentle exercises for older adults. Build balance and prevent falls.",
               },
               {
-                slug: "mcp-protocol-agent-commerce",
-                title: "MCP Protocol for Agent Commerce",
-                desc: "How AI agents use MCP to discover and buy products autonomously.",
-              },
-              {
                 slug: "exercise-while-waiting",
                 title: "Exercises While Waiting",
                 desc: "Turn dead time into workout time. 15 exercises for daily waiting moments.",
@@ -630,14 +649,34 @@ const pdf = await res.blob(); // BrushFit Guide PDF`}</pre>
                 desc: "Build a morning routine around toothbrushing. Zero extra time needed.",
               },
               {
-                slug: "a2a-protocol-agent-commerce",
-                title: "Google A2A Protocol for Agent Commerce",
-                desc: "How agent-to-agent protocols enable autonomous product discovery and purchases.",
-              },
-              {
                 slug: "how-agents-discover-products",
                 title: "How AI Agents Discover Products in 2026",
                 desc: "The 7 protocols agents use to find and buy products. The complete AgentEO guide.",
+              },
+              {
+                slug: "exercise-while-doing-chores",
+                title: "Exercise While Doing Chores",
+                desc: "Turn household chores into fitness. Zero extra time required.",
+              },
+              {
+                slug: "calisthenics-at-home-no-equipment",
+                title: "Calisthenics at Home: No Equipment",
+                desc: "Complete beginner guide to bodyweight calisthenics in any room.",
+              },
+              {
+                slug: "mcp-protocol-ai-agent-commerce",
+                title: "MCP Protocol for Agent Commerce",
+                desc: "How Model Context Protocol enables AI agents to shop autonomously.",
+              },
+              {
+                slug: "ai-agent-marketplace-2026",
+                title: "AI Agent Marketplaces in 2026",
+                desc: "The future of autonomous commerce. How agents buy products.",
+              },
+              {
+                slug: "google-a2a-protocol-agent-commerce",
+                title: "Google A2A Protocol Explained",
+                desc: "Agent-to-agent commerce with Google's A2A protocol.",
               },
             ].map((post) => (
               <a
@@ -708,6 +747,9 @@ const pdf = await res.blob(); // BrushFit Guide PDF`}</pre>
               </a>
               <a href="/agents" className="hover:text-indigo-600">
                 Agents
+              </a>
+              <a href="/guide" className="hover:text-indigo-600">
+                Guide
               </a>
               <a href="/affiliates" className="hover:text-indigo-600">
                 Affiliates

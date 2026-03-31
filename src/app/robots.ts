@@ -73,6 +73,38 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "Google-Extended",
         allow: ["/"],
       },
+      {
+        userAgent: "Applebot",
+        allow: ["/"],
+      },
+      {
+        userAgent: "Applebot-Extended",
+        allow: ["/"],
+      },
+      {
+        userAgent: "anthropic-ai",
+        allow: ["/"],
+      },
+      {
+        userAgent: "Bytespider",
+        allow: ["/"],
+      },
+      {
+        userAgent: "CCBot",
+        allow: ["/"],
+      },
+      {
+        userAgent: "cohere-ai",
+        allow: ["/"],
+      },
+      {
+        userAgent: "Diffbot",
+        allow: ["/"],
+      },
+      {
+        userAgent: "Meta-ExternalAgent",
+        allow: ["/"],
+      },
     ],
     sitemap: `${baseUrl}/sitemap.xml`,
     host: baseUrl,

@@ -23,6 +23,16 @@ export const metadata: Metadata = {
     "x402 payment",
     "buy with crypto",
     "ai agent commerce",
+    "calisthenics at home",
+    "exercise while doing chores",
+    "MCP protocol commerce",
+    "AI agent marketplace",
+    "Google A2A protocol",
+    "quick workouts no time",
+    "digital fitness guide download",
+    "pay with venmo",
+    "pay with lightning bitcoin",
+    "buy me a coffee",
   ],
   authors: [{ name: "Rob Balian" }],
   creator: "Rob Balian",
@@ -82,7 +92,7 @@ export default function RootLayout({
         {/* Top Promo Banner */}
         <div className="bg-indigo-600 text-white text-center text-sm py-2 px-4">
           <a href="/buy" className="hover:underline">
-            Get BrushFit — 22 toothbrush workouts for $19.99. Instant PDF download &rarr;
+            BrushFit — 22 toothbrush workouts, $19.99, 16+ payment methods, instant PDF &rarr;
           </a>
         </div>
 
@@ -98,6 +108,7 @@ export default function RootLayout({
               <a href="/exercises" className="hover:text-indigo-600">Exercises</a>
               <a href="/reviews" className="hover:text-indigo-600">Reviews</a>
               <a href="/blog" className="hover:text-indigo-600">Blog</a>
+              <a href="/guide" className="hover:text-indigo-600">Guide</a>
               <a href="/agents" className="hover:text-indigo-600">Agents</a>
               <a href="/developers" className="hover:text-indigo-600">Developers</a>
               <a href="/affiliates" className="hover:text-indigo-600">Affiliates</a>

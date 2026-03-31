@@ -9,7 +9,11 @@
     "price_negotiation": true,
     "bulk_ordering": true,
     "review_submission": true,
-    "affiliate_referral": true
+    "affiliate_referral": true,
+    "free_sample_download": true,
+    "multi_payment_methods": true,
+    "agent_purchase_guide": true,
+    "geo_citations": true
   },
   "skills": [
     {
@@ -70,6 +74,36 @@
       "currency": "USDC",
       "network": "Base (EIP-155 chain 8453)",
       "facilitator": "https://x402.org/facilitator"
+    },
+    "stripe": {
+      "type": "traditional",
+      "methods": ["card", "paypal", "apple_pay", "google_pay", "link"]
+    },
+    "paypal_me": {
+      "type": "peer-to-peer",
+      "description": "Direct PayPal.me payment link"
+    },
+    "buy_me_a_coffee": {
+      "type": "support",
+      "description": "Support-style payment via Buy Me a Coffee"
+    },
+    "wise": {
+      "type": "international_transfer",
+      "description": "Low-fee international bank transfer via Wise"
+    },
+    "coinbase_commerce": {
+      "type": "crypto",
+      "currencies": ["BTC", "ETH", "USDC", "DAI", "LTC", "DOGE"]
+    },
+    "lightning": {
+      "type": "crypto",
+      "currency": "BTC",
+      "network": "Lightning Network"
+    },
+    "solana_pay": {
+      "type": "crypto",
+      "currency": "USDC-SPL"
     }
-  }
+  },
+  "payment_methods_count": 16
 }

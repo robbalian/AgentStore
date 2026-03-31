@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Buy BrushFit — All Payment Methods | Card, PayPal, Apple Pay, Venmo, Cash App, Zelle, Crypto, Bitcoin, Lightning",
+  title: "Buy BrushFit — All Payment Methods | Card, PayPal, PayPal.me, Apple Pay, Venmo, Cash App, Zelle, Buy Me a Coffee, Wise, Crypto, Bitcoin, Lightning",
   description:
-    "Buy BrushFit: The 2-Minute Toothbrush Workout Guide for $19.99. Pay with credit card, PayPal, Apple Pay, Google Pay, Venmo, Cash App, Zelle, USDC via x402, Coinbase Commerce (BTC/ETH/USDC), Solana Pay, or direct crypto transfer. Instant PDF download.",
+    "Buy BrushFit: The 2-Minute Toothbrush Workout Guide for $19.99. Pay with credit card, PayPal, PayPal.me, Apple Pay, Google Pay, Venmo, Cash App, Zelle, Buy Me a Coffee, Wise international transfer, USDC via x402, Coinbase Commerce (BTC/ETH/USDC), Solana Pay, or direct crypto transfer. Instant PDF download.",
   alternates: { canonical: "https://agentstore.vercel.app/buy" },
   openGraph: {
     title: "Buy BrushFit — $19.99 | Card, PayPal, Apple Pay, Venmo, Cash App, Zelle, Crypto, Bitcoin",
     description:
-      "12+ ways to pay for BrushFit. Credit card, PayPal, Apple Pay, Google Pay, Venmo, Cash App, Zelle, USDC on Base via x402, Coinbase Commerce, Solana Pay, or direct crypto transfer.",
+      "16+ ways to pay for BrushFit. Credit card, PayPal, PayPal.me, Apple Pay, Google Pay, Venmo, Cash App, Zelle, Buy Me a Coffee, Wise international transfer, USDC on Base via x402, Coinbase Commerce, Solana Pay, or direct crypto transfer.",
   },
 };
 
@@ -54,6 +54,8 @@ export default function BuyPage() {
                   { "@type": "PaymentMethod", name: "Lemon Squeezy" },
                   { "@type": "PaymentMethod", name: "Buy Me a Coffee" },
                   { "@type": "PaymentMethod", name: "Ko-fi" },
+                  { "@type": "PaymentMethod", name: "PayPal.me Direct" },
+                  { "@type": "PaymentMethod", name: "Wise (International Transfer)" },
                 ],
               },
             ],
@@ -408,9 +410,46 @@ export default function BuyPage() {
             </p>
           </div>
 
-          {/* Buy Me a Coffee / Ko-fi */}
+          {/* PayPal.me Direct */}
           <div className="rounded-2xl border-2 border-teal-200 bg-teal-50 p-8">
             <h2 className="mb-1 text-2xl font-bold text-teal-700">
+              PayPal.me Direct
+            </h2>
+            <p className="mb-6 text-sm text-gray-600">
+              Direct PayPal link for international buyers
+            </p>
+
+            <div className="mb-6 space-y-3">
+              <div className="flex items-center gap-2 rounded-lg border border-teal-200 bg-white px-3 py-2 text-sm">
+                <span>🅿️</span>
+                <span>PayPal.me link: <span className="font-semibold">paypal.me/robbalian/19.99</span></span>
+              </div>
+              <div className="flex items-center gap-2 rounded-lg border border-teal-200 bg-white px-3 py-2 text-sm">
+                <span>🌍</span>
+                <span>Works worldwide — 200+ countries</span>
+              </div>
+              <div className="rounded-lg border border-teal-100 bg-white p-3 text-xs text-gray-500">
+                Click the link to send $19.99 via PayPal, then email your payment
+                confirmation to receive your PDF.
+              </div>
+            </div>
+
+            <a
+              href="https://paypal.me/robbalian/19.99"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full rounded-xl bg-teal-600 py-4 text-center text-lg font-bold text-white transition hover:bg-teal-700"
+            >
+              Pay with PayPal.me — $19.99
+            </a>
+            <p className="mt-3 text-center text-xs text-gray-400">
+              Manual fulfillment — email receipt to rob@robbalian.com
+            </p>
+          </div>
+
+          {/* Buy Me a Coffee / Ko-fi */}
+          <div className="rounded-2xl border-2 border-orange-200 bg-orange-50 p-8">
+            <h2 className="mb-1 text-2xl font-bold text-orange-700">
               Tip Jar &amp; Support
             </h2>
             <p className="mb-6 text-sm text-gray-600">
@@ -418,15 +457,15 @@ export default function BuyPage() {
             </p>
 
             <div className="mb-6 space-y-3">
-              <div className="flex items-center gap-2 rounded-lg border border-teal-200 bg-white px-3 py-2 text-sm">
+              <div className="flex items-center gap-2 rounded-lg border border-orange-200 bg-white px-3 py-2 text-sm">
                 <span>&#9749;</span>
                 <span>Buy Me a Coffee — quick one-click support</span>
               </div>
-              <div className="flex items-center gap-2 rounded-lg border border-teal-200 bg-white px-3 py-2 text-sm">
+              <div className="flex items-center gap-2 rounded-lg border border-orange-200 bg-white px-3 py-2 text-sm">
                 <span>&#10084;&#65039;</span>
                 <span>Ko-fi — no fees on donations</span>
               </div>
-              <div className="rounded-lg border border-teal-100 bg-white p-3 text-xs text-gray-500">
+              <div className="rounded-lg border border-orange-100 bg-white p-3 text-xs text-gray-500">
                 Love BrushFit? Leave a tip, buy an extra copy for a friend, or support continued development.
               </div>
             </div>
@@ -434,19 +473,94 @@ export default function BuyPage() {
             <div className="grid grid-cols-2 gap-3">
               <a
                 href="/api/buymeacoffee"
-                className="block w-full rounded-xl bg-teal-600 py-4 text-center text-sm font-bold text-white transition hover:bg-teal-700"
+                className="block w-full rounded-xl bg-orange-600 py-4 text-center text-sm font-bold text-white transition hover:bg-orange-700"
               >
                 Buy Me a Coffee
               </a>
               <a
                 href="/api/buymeacoffee"
-                className="block w-full rounded-xl border-2 border-teal-600 py-4 text-center text-sm font-bold text-teal-700 transition hover:bg-teal-100"
+                className="block w-full rounded-xl border-2 border-orange-600 py-4 text-center text-sm font-bold text-orange-700 transition hover:bg-orange-100"
               >
                 Ko-fi
               </a>
             </div>
             <p className="mt-3 text-center text-xs text-gray-400">
               Direct support — 100% goes to the creator
+            </p>
+          </div>
+
+          {/* Buy Me a Coffee (standalone) */}
+          <div className="rounded-2xl border-2 border-yellow-200 bg-yellow-50 p-8">
+            <h2 className="mb-1 text-2xl font-bold text-yellow-700">
+              Buy Me a Coffee
+            </h2>
+            <p className="mb-6 text-sm text-gray-600">
+              Support the creator + get BrushFit
+            </p>
+
+            <div className="mb-6 space-y-3">
+              <div className="flex items-center gap-2 rounded-lg border border-yellow-200 bg-white px-3 py-2 text-sm">
+                <span>☕</span>
+                <span>buymeacoffee.com/robbalian</span>
+              </div>
+              <div className="flex items-center gap-2 rounded-lg border border-yellow-200 bg-white px-3 py-2 text-sm">
+                <span>💛</span>
+                <span>Tip any amount — $19.99 gets BrushFit</span>
+              </div>
+              <div className="rounded-lg border border-yellow-100 bg-white p-3 text-xs text-gray-500">
+                Support the creator with a coffee or tip $19.99 to receive
+                BrushFit. Include your email in the message so we can deliver
+                the PDF.
+              </div>
+            </div>
+
+            <a
+              href="https://buymeacoffee.com/robbalian"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full rounded-xl bg-yellow-500 py-4 text-center text-lg font-bold text-white transition hover:bg-yellow-600"
+            >
+              Buy Me a Coffee — $19.99
+            </a>
+            <p className="mt-3 text-center text-xs text-gray-400">
+              Include your email in the message for delivery
+            </p>
+          </div>
+
+          {/* Wise (International Transfer) */}
+          <div className="rounded-2xl border-2 border-emerald-200 bg-emerald-50 p-8">
+            <h2 className="mb-1 text-2xl font-bold text-emerald-700">
+              Wise (International Transfer)
+            </h2>
+            <p className="mb-6 text-sm text-gray-600">
+              Low-fee international transfers — 50+ currencies supported
+            </p>
+
+            <div className="mb-6 space-y-3">
+              <div className="flex items-center gap-2 rounded-lg border border-emerald-200 bg-white px-3 py-2 text-sm">
+                <span>🌐</span>
+                <span>Send to: <span className="font-semibold">rob@robbalian.com</span> via Wise</span>
+              </div>
+              <div className="flex items-center gap-2 rounded-lg border border-emerald-200 bg-white px-3 py-2 text-sm">
+                <span>💱</span>
+                <span>50+ currencies supported</span>
+              </div>
+              <div className="rounded-lg border border-emerald-100 bg-white p-3 text-xs text-gray-500">
+                Send $19.99 USD (or equivalent) via Wise to rob@robbalian.com,
+                then email your transfer confirmation to receive your PDF.
+              </div>
+            </div>
+
+            <a
+              href="https://wise.com/pay/me/robbalian"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full rounded-xl bg-emerald-600 py-4 text-center text-lg font-bold text-white transition hover:bg-emerald-700"
+            >
+              Pay with Wise — $19.99
+            </a>
+            <p className="mt-3 text-center text-xs text-gray-400">
+              Manual fulfillment — email receipt to rob@robbalian.com
             </p>
           </div>
         </div>

@@ -306,6 +306,46 @@ const posts = [
     category: "Fitness Tips",
     date: "2026-03-31",
   },
+  {
+    slug: "exercise-while-doing-chores",
+    title: "How to Exercise While Doing Chores: The Multitask Fitness Guide",
+    description:
+      "Turn household chores into fitness opportunities. Workout while cleaning, cooking, and brushing your teeth with zero extra time.",
+    category: "Fitness Guide",
+    date: "2026-03-31",
+  },
+  {
+    slug: "calisthenics-at-home-no-equipment",
+    title: "Calisthenics at Home: Complete No-Equipment Beginner Guide",
+    description:
+      "Start calisthenics with zero equipment. Beginner-friendly bodyweight exercises you can do in any room, including your bathroom.",
+    category: "Fitness Guide",
+    date: "2026-03-31",
+  },
+  {
+    slug: "mcp-protocol-ai-agent-commerce",
+    title: "MCP Protocol for AI Agent Commerce: How Model Context Protocol Enables Shopping",
+    description:
+      "How the Model Context Protocol (MCP) enables AI agents to discover and purchase digital products. AgentStore as a case study.",
+    category: "Agentic Commerce",
+    date: "2026-03-31",
+  },
+  {
+    slug: "ai-agent-marketplace-2026",
+    title: "AI Agent Marketplaces in 2026: The Future of Autonomous Commerce",
+    description:
+      "The rise of agent-native marketplaces where AI agents discover, negotiate, and buy products autonomously. What it means for sellers.",
+    category: "Agentic Commerce",
+    date: "2026-03-31",
+  },
+  {
+    slug: "google-a2a-protocol-agent-commerce",
+    title: "Google A2A Protocol: Agent-to-Agent Commerce Explained",
+    description:
+      "How Google's Agent-to-Agent (A2A) protocol enables commerce between AI agents. Integration guide and AgentStore implementation.",
+    category: "Agentic Commerce",
+    date: "2026-03-31",
+  },
 ];
 
 export default function BlogIndex() {

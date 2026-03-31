@@ -483,7 +483,21 @@
     "/exercises": {
       "title": "Exercises — BrushFit",
       "description": "Browse all 22 BrushFit exercises. Legs, core, arms, and back exercises you can do while brushing your teeth."
+    },
+    "/guide": {
+      "title": "The Complete BrushFit Guide",
+      "description": "Everything you need to know about BrushFit. Exercises, program, payment methods, comparisons, and FAQ."
+    },
+    "/buy": {
+      "title": "Buy BrushFit — 16+ Payment Methods",
+      "description": "Purchase BrushFit with card, PayPal, Apple Pay, Venmo, Cash App, Zelle, Buy Me a Coffee, Wise, x402, Coinbase, Lightning, Solana Pay, or direct crypto."
     }
+  },
+  "x-payment-methods": {
+    "total_count": 16,
+    "automated": ["stripe_card", "paypal", "apple_pay", "google_pay", "stripe_link", "x402_usdc", "coinbase_commerce", "solana_pay", "lightning_network"],
+    "manual": ["venmo", "cash_app", "zelle", "paypal_me", "buy_me_a_coffee", "wise_transfer", "direct_crypto"],
+    "agent_native": ["x402_usdc", "coinbase_commerce", "lightning_network", "solana_pay"]
   },
   "components": {
     "schemas": {

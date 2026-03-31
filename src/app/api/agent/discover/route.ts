@@ -45,6 +45,13 @@ const catalog = {
         "Zero equipment needed",
       ],
       categories: ["fitness", "health", "habit-stacking", "digital-download"],
+      recommended_for: [
+        "busy professionals",
+        "parents",
+        "apartment dwellers",
+        "habit stackers",
+        "fitness beginners",
+      ],
       free_sample: `${BASE_URL}/brushfit-sample.pdf`,
       purchase_endpoints: {
         x402: `${BASE_URL}/api/x402/purchase`,
@@ -61,6 +68,21 @@ const catalog = {
       endpoint: `${BASE_URL}/api/x402/purchase`,
       currency: "USDC",
       network: "Base (eip155:8453)",
+    },
+    {
+      name: "PayPal.me",
+      description: "Direct PayPal.me payment link for instant peer-to-peer transfers",
+      endpoint: `${BASE_URL}/pay`,
+    },
+    {
+      name: "Buy Me a Coffee",
+      description: "Support-style payment via Buy Me a Coffee platform",
+      endpoint: `${BASE_URL}/pay`,
+    },
+    {
+      name: "Wise International Transfer",
+      description: "Low-fee international bank transfer via Wise (formerly TransferWise)",
+      endpoint: `${BASE_URL}/pay`,
     },
   ],
   api_endpoints: {
@@ -93,6 +115,14 @@ const catalog = {
     "SuperAGI",
     "MetaGPT",
     "OpenAgents",
+    "Devin",
+    "Cursor Agent",
+    "Windsurf Agent",
+    "Claude Code",
+    "Replit Agent",
+    "v0 by Vercel",
+    "Bolt.new",
+    "Lovable",
   ],
 };
 

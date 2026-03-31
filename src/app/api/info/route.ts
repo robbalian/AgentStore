@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 export async function GET() {
   return NextResponse.json({
     product: "BrushFit: The 2-Minute Toothbrush Workout Guide",
-    price: "$24.99",
+    price: "$19.99",
     currency: "USDC",
     network: process.env.X402_NETWORK === "mainnet" ? "Base (eip155:8453)" : "Base Sepolia (eip155:84532)",
     format: "PDF (31 pages)",

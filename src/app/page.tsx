@@ -22,7 +22,7 @@ export default function Home() {
             href="/api/x402/purchase"
             className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-8 py-4 text-lg font-bold text-white shadow-lg transition hover:bg-indigo-700"
           >
-            Buy with x402 — $24.99
+            Buy with x402 — $19.99
             <span className="text-sm font-normal opacity-80">USDC on Base</span>
           </a>
           <a

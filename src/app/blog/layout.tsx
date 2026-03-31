@@ -13,6 +13,9 @@ export default function BlogLayout({
             BrushFit
           </Link>
           <div className="flex gap-4 text-sm">
+            <Link href="/blog" className="text-gray-500 hover:text-gray-900">
+              Blog
+            </Link>
             <Link href="/" className="text-gray-500 hover:text-gray-900">
               Home
             </Link>

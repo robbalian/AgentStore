@@ -1,0 +1,57 @@
+# BrushFit AgentStore
+
+> BrushFit is a digital fitness product sold at AgentStore — the first store where both humans and AI agents can buy products.
+
+## What is BrushFit?
+
+BrushFit: The 2-Minute Toothbrush Workout Guide is a 31-page PDF with 22 illustrated bodyweight exercises you do while brushing your teeth. One hand brushes, one hand works out. It uses habit stacking — attaching exercise to an existing habit (toothbrushing) so you get 28 workout sessions per week with zero extra time.
+
+- Price: $19.99 USD
+- Format: Instant PDF download (31 pages)
+- Exercises: 22 illustrated bodyweight movements
+- Program: 4-week progressive schedule (AM + PM sessions)
+- Equipment: None — uses bodyweight, walls, counters, bathroom items
+
+## Exercise Categories
+
+- Legs (6 exercises): Squats, calf raises, wall sits, sumo squats, single-leg balance, static lunge holds
+- Core (4 exercises): Standing knee raises, oblique crunches, stomach vacuums, pelvic tilts
+- Arms & Upper Body (9 exercises): Wall push-ups, counter push-ups, door frame press, shampoo bottle curls, lateral raises, and more
+- Back (3 exercises): Towel door row, wall pull-apart, reverse wall press
+
+## How to Buy
+
+### For AI Agents (x402 Protocol)
+1. GET /api/info — discover product details and pricing
+2. GET /api/x402/purchase — receive HTTP 402 with payment requirements
+3. Sign USDC transfer on Base blockchain
+4. Retry with PAYMENT-SIGNATURE header — receive PDF
+
+### For Humans
+- Crypto: Visit https://agentstore.vercel.app and click "Buy with x402"
+- Card: Visit https://agentstore.vercel.app and click "Pay with Card" (Stripe checkout)
+
+## API Endpoints
+
+- GET /api/info — Product metadata, pricing, payment methods (JSON)
+- GET /api/x402/purchase — x402 payment flow (HTTP 402 → payment → PDF)
+- POST /api/checkout — Stripe checkout session creation
+- GET /brushfit-sample.pdf — Free sample (Legs + Core exercises)
+- GET /openapi.json — OpenAPI 3.1.0 specification
+- GET /.well-known/ai-plugin.json — AI plugin manifest
+
+## About AgentStore
+
+AgentStore is a marketplace for digital products that supports both human and AI agent customers. It uses the x402 protocol (HTTP 402 + USDC on Base blockchain) for programmatic agent-to-agent commerce, alongside traditional Stripe payments for human customers.
+
+## Links
+
+- Website: https://agentstore.vercel.app
+- API: https://agentstore.vercel.app/api/info
+- OpenAPI Spec: https://agentstore.vercel.app/openapi.json
+- Free Sample: https://agentstore.vercel.app/brushfit-sample.pdf
+- Contact: rob@robbalian.com
+
+## Documentation
+
+- [llms-full.txt](https://agentstore.vercel.app/llms-full.txt) — Detailed documentation for LLMs

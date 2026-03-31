@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "name": "BrushFit AgentStore",
+  "description": "Digital product marketplace for humans and AI agents. Buy fitness guides with x402 protocol (USDC on Base) or traditional card payment.",
+  "url": "https://agentstore.vercel.app",
+  "contact": "rob@robbalian.com",
+  "protocols": ["x402", "stripe"],
+  "discovery": {
+    "openapi": "https://agentstore.vercel.app/openapi.json",
+    "ai_plugin": "https://agentstore.vercel.app/.well-known/ai-plugin.json",
+    "product_api": "https://agentstore.vercel.app/api/info",
+    "llms_txt": "https://agentstore.vercel.app/llms.txt"
+  },
+  "products": [
+    {
+      "id": "brushfit-guide",
+      "name": "BrushFit: The 2-Minute Toothbrush Workout Guide",
+      "description": "22 illustrated bodyweight exercises you do while brushing your teeth. 31-page PDF with 4-week progressive program.",
+      "price": {
+        "amount": "19.99",
+        "currency": "USD"
+      },
+      "format": "application/pdf",
+      "purchase": {
+        "x402": {
+          "endpoint": "https://agentstore.vercel.app/api/x402/purchase",
+          "method": "GET",
+          "payment_currency": "USDC",
+          "payment_network": "eip155:8453",
+          "flow": "HTTP 402 → sign USDC transfer → retry with PAYMENT-SIGNATURE header → receive PDF"
+        },
+        "stripe": {
+          "endpoint": "https://agentstore.vercel.app/api/checkout",
+          "method": "POST",
+          "payment_currency": "USD",
+          "flow": "POST → receive { url } → redirect to Stripe checkout"
+        }
+      },
+      "free_sample": "https://agentstore.vercel.app/brushfit-sample.pdf",
+      "tags": ["fitness", "pdf", "habit-stacking", "workout", "toothbrush", "bodyweight"]
+    }
+  ],
+  "agent_instructions": {
+    "how_to_purchase": [
+      "1. Call GET /api/info to discover product details and pricing",
+      "2. Call GET /api/x402/purchase to initiate x402 payment flow",
+      "3. You will receive HTTP 402 with payment requirements in the response",
+      "4. Sign a USDC transfer authorization on Base (chain ID 8453) using your wallet",
+      "5. Retry GET /api/x402/purchase with the PAYMENT-SIGNATURE header",
+      "6. On successful payment, you will receive the PDF in the response body"
+    ],
+    "recommended_library": "@x402/fetch — use wrapFetchWithPayment() to automate the entire flow",
+    "free_sample_available": true,
+    "no_authentication_required": true
+  }
+}

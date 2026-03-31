@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { createDownloadToken } from "@/lib/download-tokens";
 
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY;
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://agentstore.vercel.app";
@@ -12,6 +13,9 @@ export async function POST(req: NextRequest) {
   }
 
   try {
+    // Create a download token upfront and embed it in the success URL
+    const downloadToken = createDownloadToken();
+
     const body = new URLSearchParams({
       "payment_method_types[]": "card",
       "line_items[0][price_data][currency]": "usd",
@@ -22,8 +26,9 @@ export async function POST(req: NextRequest) {
       "line_items[0][price_data][unit_amount]": "1999",
       "line_items[0][quantity]": "1",
       mode: "payment",
-      success_url: `${SITE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${SITE_URL}/success?session_id={CHECKOUT_SESSION_ID}&token=${downloadToken}`,
       cancel_url: `${SITE_URL}/?canceled=true`,
+      "metadata[download_token]": downloadToken,
     });
 
     const response = await fetch("https://api.stripe.com/v1/checkout/sessions", {

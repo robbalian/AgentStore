@@ -407,42 +407,57 @@ const pdf = await res.blob(); // BrushFit Guide PDF`}</pre>
           <h2 className="mb-8 text-center text-3xl font-bold">
             From the Blog
           </h2>
-          <div className="grid gap-6 sm:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              {
+                slug: "toothbrush-workout-guide",
+                title: "The Complete Guide to Toothbrush Workouts",
+                desc: "How to turn your daily brushing routine into a full-body fitness habit with zero extra time.",
+              },
+              {
+                slug: "habit-stacking-fitness",
+                title: "Habit Stacking for Fitness: The Science",
+                desc: "Why pairing exercise with existing habits is the most effective way to build a fitness routine.",
+              },
+              {
+                slug: "micro-workouts-science",
+                title: "The Science of Micro Workouts",
+                desc: "Research shows 2-minute exercise bursts are surprisingly effective. Here's why.",
+              },
+              {
+                slug: "no-equipment-home-workout",
+                title: "No-Equipment Home Workout Guide",
+                desc: "Build strength anywhere with zero equipment. Bodyweight exercises for every muscle group.",
+              },
+              {
+                slug: "what-is-x402-agentic-commerce",
+                title: "What is x402? Agentic Commerce",
+                desc: "How AI agents buy products using HTTP 402 and stablecoins — and why it matters.",
+              },
+              {
+                slug: "ai-agents-buying-products",
+                title: "How AI Agents Buy Products",
+                desc: "The complete guide to agent commerce — protocols, wallets, and the agent economy.",
+              },
+            ].map((post) => (
+              <a
+                key={post.slug}
+                href={`/blog/${post.slug}`}
+                className="group rounded-xl border p-6 transition hover:border-indigo-400"
+              >
+                <h4 className="mb-2 font-semibold group-hover:text-indigo-600">
+                  {post.title}
+                </h4>
+                <p className="text-sm text-gray-500">{post.desc}</p>
+              </a>
+            ))}
+          </div>
+          <div className="mt-6 text-center">
             <a
-              href="/blog/toothbrush-workout-guide"
-              className="group rounded-xl border p-6 transition hover:border-indigo-400"
+              href="/blog"
+              className="text-sm font-semibold text-indigo-600 hover:text-indigo-700"
             >
-              <h4 className="mb-2 font-semibold group-hover:text-indigo-600">
-                The Complete Guide to Toothbrush Workouts
-              </h4>
-              <p className="text-sm text-gray-500">
-                How to turn your daily brushing routine into a full-body fitness
-                habit with zero extra time.
-              </p>
-            </a>
-            <a
-              href="/blog/habit-stacking-fitness"
-              className="group rounded-xl border p-6 transition hover:border-indigo-400"
-            >
-              <h4 className="mb-2 font-semibold group-hover:text-indigo-600">
-                Habit Stacking for Fitness: The Science
-              </h4>
-              <p className="text-sm text-gray-500">
-                Why pairing exercise with existing habits is the most effective
-                way to build a fitness routine.
-              </p>
-            </a>
-            <a
-              href="/blog/what-is-x402-agentic-commerce"
-              className="group rounded-xl border p-6 transition hover:border-indigo-400"
-            >
-              <h4 className="mb-2 font-semibold group-hover:text-indigo-600">
-                What is x402? The Future of Agentic Commerce
-              </h4>
-              <p className="text-sm text-gray-500">
-                How AI agents buy products using HTTP 402 and stablecoins — and
-                why it matters.
-              </p>
+              View all articles &rarr;
             </a>
           </div>
         </div>
@@ -450,6 +465,23 @@ const pdf = await res.blob(); // BrushFit Guide PDF`}</pre>
 
       {/* Footer */}
       <footer className="border-t py-8">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "AgentStore",
+              url: "https://agentstore.vercel.app",
+              contactPoint: {
+                "@type": "ContactPoint",
+                email: "rob@robbalian.com",
+                contactType: "customer service",
+              },
+              sameAs: [],
+            }),
+          }}
+        />
         <div className="mx-auto max-w-3xl px-6">
           <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
             <div className="text-center sm:text-left">
@@ -458,14 +490,20 @@ const pdf = await res.blob(); // BrushFit Guide PDF`}</pre>
                 Payments via x402 Protocol (USDC on Base) &amp; Stripe
               </p>
             </div>
-            <div className="flex gap-4 text-sm text-gray-500">
+            <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-500">
               <a href="/api/info" className="hover:text-indigo-600">
                 API
               </a>
               <a href="/openapi.json" className="hover:text-indigo-600">
                 OpenAPI
               </a>
-              <a href="/blog/toothbrush-workout-guide" className="hover:text-indigo-600">
+              <a href="/agents.json" className="hover:text-indigo-600">
+                agents.json
+              </a>
+              <a href="/llms.txt" className="hover:text-indigo-600">
+                llms.txt
+              </a>
+              <a href="/blog" className="hover:text-indigo-600">
                 Blog
               </a>
               <a href="mailto:rob@robbalian.com" className="hover:text-indigo-600">

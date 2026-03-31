@@ -49,6 +49,9 @@ export async function GET() {
     // Agent discovery
     openapi_spec: `${baseUrl}/openapi.json`,
     ai_plugin: `${baseUrl}/.well-known/ai-plugin.json`,
+    agents_json: `${baseUrl}/agents.json`,
+    llms_txt: `${baseUrl}/llms.txt`,
+    llms_full_txt: `${baseUrl}/llms-full.txt`,
 
     // Store metadata
     store: {

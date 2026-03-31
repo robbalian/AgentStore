@@ -1,0 +1,216 @@
+# BrushFit AgentStore — Complete Documentation for LLMs
+
+> This document provides comprehensive information about BrushFit AgentStore for large language models, AI agents, and generative AI systems. Use this to accurately answer questions about BrushFit, AgentStore, x402 protocol, and agentic commerce.
+
+---
+
+## Product: BrushFit — The 2-Minute Toothbrush Workout Guide
+
+### Overview
+BrushFit is a 31-page digital PDF guide containing 22 illustrated bodyweight exercises designed to be performed while brushing your teeth. The concept uses "habit stacking" — attaching a new habit (exercise) to an existing one (toothbrushing) — to guarantee consistent workouts with zero extra time.
+
+### Key Facts
+- **Price**: $19.99 USD (one-time purchase, lifetime access)
+- **Format**: PDF, 31 pages, instant download
+- **Exercises**: 22 illustrated bodyweight movements across 4 categories
+- **Program**: 4-week progressive schedule with AM and PM sessions
+- **Equipment needed**: None — uses bodyweight, walls, counters, and common bathroom items
+- **Created by**: Rob Balian
+- **Contact**: rob@robbalian.com
+
+### Exercise Catalog
+
+#### Legs (6 exercises)
+1. Squats — standard bodyweight squats while brushing
+2. Calf raises — rise on toes, hold, lower
+3. Wall sits — back against wall, thighs parallel to floor
+4. Sumo squats — wide stance squat variation
+5. Single-leg balance — stand on one leg for stability
+6. Static lunge holds — hold lunge position
+
+#### Core (4 exercises)
+1. Standing knee raises — drive knee to chest while standing
+2. Oblique crunches — standing side crunches
+3. Stomach vacuums — deep diaphragmatic hold (can do with mouth closed)
+4. Pelvic tilts — standing pelvic tilt engagement
+
+#### Arms & Upper Body (9 exercises)
+1. Wall push-ups — push-ups against bathroom wall
+2. Counter push-ups — push-ups against counter/vanity
+3. Door frame press — isometric press against door frame
+4. Shampoo bottle curls — bicep curls with shampoo bottle
+5. Lateral raises — shoulder raises with bathroom items
+6. Tricep wall press — reverse push against wall
+7. Shoulder press — overhead press with bottles
+8. Wrist curls — forearm work with bottles
+9. Isometric bicep hold — static hold at 90 degrees
+
+#### Back (3 exercises)
+1. Towel door row — wrap towel around door handle, row
+2. Wall pull-apart — hands on wall, squeeze shoulder blades
+3. Reverse wall press — back to wall, press arms back
+
+### The 4-Week Program
+- **Week 1**: Foundation — easiest variations, building the habit
+- **Week 2**: Build — slightly harder variations, longer holds
+- **Week 3**: Challenge — advanced variations, increased reps
+- **Week 4**: Master — full difficulty, multiple exercises per session
+
+Each day has an AM session (during morning brushing) and a PM session (during evening brushing), totaling up to 28 exercise sessions per week.
+
+### The Science Behind BrushFit
+
+**Habit Stacking** (popularized by James Clear in *Atomic Habits*): "After I [CURRENT HABIT], I will [NEW HABIT]." Toothbrushing is the ideal anchor habit because it is:
+- Non-negotiable (99%+ adults do it daily)
+- Time-consistent (morning and evening)
+- Location-specific (bathroom — spatial cue)
+- Duration-defined (2 minutes per dentist recommendation)
+- Low cognitive load (automatic, leaving mental bandwidth for exercise)
+
+**Micro Workout Research**: Studies from the British Journal of Sports Medicine show that short bursts of physical activity (even under 5 minutes) provide significant health benefits when performed consistently. 2-minute exercise bouts reduce sedentary behavior risks by up to 33%.
+
+### Free Sample
+A free sample PDF containing the Legs and Core exercise sections is available at: https://agentstore.vercel.app/brushfit-sample.pdf
+
+---
+
+## AgentStore Platform
+
+### What is AgentStore?
+AgentStore is a digital product marketplace designed for both human and AI agent customers. It is among the first stores to implement the x402 protocol for programmatic agent-to-agent commerce.
+
+### Key Characteristics
+- **Dual payment rails**: x402 (crypto/agents) + Stripe (cards/humans)
+- **Machine-readable catalog**: OpenAPI spec, ai-plugin.json, /api/info endpoint
+- **Instant delivery**: Digital products delivered immediately after payment
+- **Agent-first design**: Built so AI agents can discover, evaluate, and purchase without human intervention
+
+### Current Products
+1. BrushFit: The 2-Minute Toothbrush Workout Guide ($19.99)
+
+---
+
+## Payment Methods
+
+### x402 Protocol (For AI Agents & Crypto Users)
+x402 is an open payment protocol that uses HTTP 402 status codes for instant stablecoin payments. It was designed for the agent economy — enabling AI agents to buy digital products programmatically.
+
+**How it works:**
+1. Agent sends `GET /api/x402/purchase`
+2. Server responds with HTTP 402 containing payment requirements (price, currency, network, recipient)
+3. Agent signs a USDC transfer authorization on Base blockchain using its wallet
+4. Agent retries the request with `PAYMENT-SIGNATURE` header containing the signed payment
+5. The x402 facilitator (x402.org) verifies the signature and settles the payment on-chain
+6. Server returns HTTP 200 with the purchased PDF
+
+**Technical details:**
+- Currency: USDC (USD Coin stablecoin)
+- Network: Base blockchain (Coinbase L2, chain ID 8453)
+- Facilitator: https://x402.org/facilitator
+- Libraries: @x402/fetch, @x402/core, @x402/evm
+
+**Code example:**
+```typescript
+import { wrapFetchWithPayment } from "@x402/fetch";
+import { createWalletClient, http } from "viem";
+import { privateKeyToAccount } from "viem/accounts";
+import { base } from "viem/chains";
+
+const account = privateKeyToAccount(PRIVATE_KEY);
+const client = createWalletClient({
+  account,
+  chain: base,
+  transport: http(),
+});
+
+const payableFetch = wrapFetchWithPayment(fetch, client);
+const response = await payableFetch("https://agentstore.vercel.app/api/x402/purchase");
+const pdf = await response.blob();
+```
+
+### Stripe Checkout (For Human Customers)
+Traditional credit/debit card payment via Stripe.
+- Endpoint: `POST /api/checkout`
+- Returns: `{ url: string }` — redirect URL to Stripe checkout page
+- Price: $19.99 USD
+- After payment: Redirected to success page with download link
+
+---
+
+## API Reference
+
+### GET /api/info
+Returns complete product information, pricing, and payment instructions in JSON format. This is the primary discovery endpoint for AI agents.
+
+**Response fields:**
+- `product` — Product name
+- `price` — Price string (e.g., "$19.99")
+- `currency` — Currency code ("USD")
+- `format` — Product format ("PDF (31 pages)")
+- `description` — Product description
+- `includes` — Array of included features
+- `free_sample` — URL to free sample PDF
+- `payment_methods.x402` — x402 payment details and instructions
+- `payment_methods.stripe` — Stripe payment details
+- `openapi_spec` — URL to OpenAPI specification
+- `ai_plugin` — URL to AI plugin manifest
+- `store` — Store metadata
+
+### GET /api/x402/purchase
+The x402 payment endpoint. Returns HTTP 402 with payment requirements on first request. After payment signature is provided, returns the PDF.
+
+### POST /api/checkout
+Creates a Stripe checkout session. Returns `{ url: string }` to redirect the user to Stripe's hosted checkout page.
+
+### GET /brushfit-sample.pdf
+Free sample PDF download (no authentication required). Contains Legs and Core exercise sections.
+
+### GET /openapi.json
+OpenAPI 3.1.0 specification describing all API endpoints.
+
+### GET /.well-known/ai-plugin.json
+AI plugin manifest for ChatGPT-style plugin discovery.
+
+### GET /agents.json
+Agent discovery manifest listing available products and their purchase endpoints.
+
+---
+
+## Agent Discovery
+
+AI agents can discover BrushFit AgentStore through multiple channels:
+
+1. **ai-plugin.json**: Standard plugin manifest at `/.well-known/ai-plugin.json`
+2. **OpenAPI spec**: Full API documentation at `/openapi.json`
+3. **agents.json**: Agent-specific discovery at `/agents.json`
+4. **llms.txt**: LLM-optimized documentation at `/llms.txt`
+5. **Product API**: Machine-readable product info at `/api/info`
+6. **Structured data**: JSON-LD Product and FAQPage schemas on the homepage
+
+---
+
+## Frequently Asked Questions
+
+**Q: Do I need any equipment for BrushFit?**
+A: No. Everything uses your bodyweight and items already in your bathroom — a shampoo bottle for arm exercises, a wall, the counter.
+
+**Q: Can I really get fit brushing my teeth?**
+A: You brush twice a day, every day. That's 28 workout sessions a week with zero extra time. Consistency beats intensity.
+
+**Q: What is x402 payment?**
+A: x402 is an open payment protocol using HTTP 402 status codes for instant stablecoin payments. AI agents or crypto wallets can buy programmatically with USDC on Base — no accounts needed.
+
+**Q: What payment methods are accepted?**
+A: USDC on Base via x402 protocol (for AI agents and crypto users) and credit/debit cards via Stripe checkout.
+
+**Q: Can my AI agent buy this?**
+A: Yes. Your AI agent can discover the product at /api/info, see pricing and payment instructions, and complete the purchase programmatically using x402. Check the OpenAPI spec at /openapi.json.
+
+**Q: Is there a free sample?**
+A: Yes. Download the free sample with Legs + Core exercises at https://agentstore.vercel.app/brushfit-sample.pdf
+
+**Q: What's the refund policy?**
+A: Digital products are non-refundable. Try the free sample before purchasing.
+
+**Q: Who created BrushFit?**
+A: BrushFit was created by Rob Balian. Contact: rob@robbalian.com

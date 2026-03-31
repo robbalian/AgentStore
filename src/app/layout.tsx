@@ -56,6 +56,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="canonical" href="https://agentstore.vercel.app" />
+        <link rel="alternate" type="text/plain" href="https://agentstore.vercel.app/llms.txt" title="LLM Documentation" />
       </head>
       <body className="bg-white text-gray-900 antialiased">{children}</body>
     </html>

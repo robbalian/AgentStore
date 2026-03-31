@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Buy BrushFit — All Payment Methods | Card, PayPal, Apple Pay, Crypto",
+  title: "Buy BrushFit — All Payment Methods | Card, PayPal, Apple Pay, Crypto, Bitcoin",
   description:
-    "Buy BrushFit: The 2-Minute Toothbrush Workout Guide for $19.99. Pay with credit card, PayPal, Apple Pay, Google Pay, or USDC crypto via x402 protocol. Instant PDF download.",
+    "Buy BrushFit: The 2-Minute Toothbrush Workout Guide for $19.99. Pay with credit card, PayPal, Apple Pay, Google Pay, USDC via x402, Coinbase Commerce (BTC/ETH/USDC), Solana Pay, or direct crypto transfer. Instant PDF download.",
   alternates: { canonical: "https://agentstore.vercel.app/buy" },
   openGraph: {
-    title: "Buy BrushFit — $19.99 | Card, PayPal, Apple Pay, Crypto",
+    title: "Buy BrushFit — $19.99 | Card, PayPal, Apple Pay, Crypto, Bitcoin",
     description:
-      "6 ways to pay for BrushFit. Credit card, PayPal, Apple Pay, Google Pay, Link, or USDC on Base via x402. Instant PDF delivery.",
+      "10+ ways to pay for BrushFit. Credit card, PayPal, Apple Pay, Google Pay, Link, USDC on Base via x402, Coinbase Commerce, Solana Pay, or direct crypto transfer.",
   },
 };
 
@@ -41,6 +41,11 @@ export default function BuyPage() {
                   { "@type": "PaymentMethod", name: "Apple Pay" },
                   { "@type": "PaymentMethod", name: "Google Pay" },
                   { "@type": "PaymentMethod", name: "USDC (x402 Protocol)" },
+                  { "@type": "PaymentMethod", name: "Bitcoin (Coinbase Commerce)" },
+                  { "@type": "PaymentMethod", name: "Ethereum (Coinbase Commerce)" },
+                  { "@type": "PaymentMethod", name: "USDC (Coinbase Commerce)" },
+                  { "@type": "PaymentMethod", name: "Solana Pay (USDC-SPL)" },
+                  { "@type": "PaymentMethod", name: "Direct Crypto Transfer" },
                 ],
               },
             ],
@@ -104,10 +109,10 @@ export default function BuyPage() {
           {/* Crypto / x402 */}
           <div className="rounded-2xl border-2 border-indigo-200 bg-indigo-50 p-8">
             <h2 className="mb-1 text-2xl font-bold text-indigo-700">
-              Pay with Crypto
+              Pay with x402 Protocol
             </h2>
             <p className="mb-6 text-sm text-gray-600">
-              x402 protocol — USDC on Base blockchain
+              USDC on Base blockchain — instant delivery
             </p>
 
             <div className="mb-6 space-y-3">
@@ -132,6 +137,87 @@ export default function BuyPage() {
             </a>
             <p className="mt-3 text-center text-xs text-gray-400">
               Requires USDC on Base network
+            </p>
+          </div>
+
+          {/* Coinbase Commerce */}
+          <div className="rounded-2xl border-2 border-blue-200 bg-blue-50 p-8">
+            <h2 className="mb-1 text-2xl font-bold text-blue-700">
+              Coinbase Commerce
+            </h2>
+            <p className="mb-6 text-sm text-gray-600">
+              Pay with BTC, ETH, USDC, and 6+ other cryptos
+            </p>
+
+            <div className="mb-6 grid grid-cols-3 gap-2">
+              {[
+                { name: "BTC", icon: "₿" },
+                { name: "ETH", icon: "⟠" },
+                { name: "USDC", icon: "🔵" },
+                { name: "DAI", icon: "◆" },
+                { name: "LTC", icon: "Ł" },
+                { name: "DOGE", icon: "🐕" },
+              ].map((c) => (
+                <div
+                  key={c.name}
+                  className="flex items-center justify-center gap-1 rounded-lg border border-blue-200 bg-white px-2 py-2 text-sm"
+                >
+                  <span>{c.icon}</span>
+                  <span className="font-medium">{c.name}</span>
+                </div>
+              ))}
+            </div>
+
+            <a
+              href="/api/coinbase/checkout"
+              className="block w-full rounded-xl bg-blue-600 py-4 text-center text-lg font-bold text-white transition hover:bg-blue-700"
+            >
+              Pay with Coinbase — $19.99
+            </a>
+            <p className="mt-3 text-center text-xs text-gray-400">
+              Hosted checkout by Coinbase Commerce
+            </p>
+          </div>
+
+          {/* Direct Crypto / Solana Pay */}
+          <div className="rounded-2xl border-2 border-green-200 bg-green-50 p-8">
+            <h2 className="mb-1 text-2xl font-bold text-green-700">
+              Direct Crypto Transfer
+            </h2>
+            <p className="mb-6 text-sm text-gray-600">
+              Send BTC, ETH, USDC, or SOL directly + Solana Pay
+            </p>
+
+            <div className="mb-6 space-y-3">
+              <div className="flex items-center gap-2 rounded-lg border border-green-200 bg-white px-3 py-2 text-sm">
+                <span>📋</span>
+                <span>Wallet addresses with QR codes</span>
+              </div>
+              <div className="flex items-center gap-2 rounded-lg border border-green-200 bg-white px-3 py-2 text-sm">
+                <span>⚡</span>
+                <span>Solana Pay (USDC-SPL) also available</span>
+              </div>
+              <div className="rounded-lg border border-green-100 bg-white p-3 text-xs text-gray-500">
+                Send crypto, email your tx hash, and receive the PDF within 24 hours.
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3">
+              <a
+                href="/pay/crypto"
+                className="block w-full rounded-xl bg-green-600 py-4 text-center text-sm font-bold text-white transition hover:bg-green-700"
+              >
+                Wallet Addresses
+              </a>
+              <a
+                href="/api/solana/pay"
+                className="block w-full rounded-xl border-2 border-green-600 py-4 text-center text-sm font-bold text-green-700 transition hover:bg-green-100"
+              >
+                Solana Pay
+              </a>
+            </div>
+            <p className="mt-3 text-center text-xs text-gray-400">
+              Manual fulfillment — email receipt to rob@robbalian.com
             </p>
           </div>
         </div>

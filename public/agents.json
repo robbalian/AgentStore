@@ -4,14 +4,25 @@
   "description": "Digital product marketplace for humans and AI agents. Buy fitness guides with x402 protocol (USDC on Base), credit cards, PayPal, Apple Pay, or Google Pay.",
   "url": "https://agentstore.vercel.app",
   "contact": "rob@robbalian.com",
-  "protocols": ["x402", "stripe"],
+  "protocols": ["x402", "stripe", "coinbase_commerce", "solana_pay", "direct_crypto"],
   "accepted_payment_methods": [
     "USDC on Base (x402 protocol)",
     "Credit/Debit Card (Stripe)",
     "PayPal (Stripe)",
     "Apple Pay (Stripe)",
     "Google Pay (Stripe)",
-    "Link by Stripe"
+    "Link by Stripe",
+    "BTC (Coinbase Commerce)",
+    "ETH (Coinbase Commerce)",
+    "USDC (Coinbase Commerce)",
+    "DAI (Coinbase Commerce)",
+    "LTC (Coinbase Commerce)",
+    "DOGE (Coinbase Commerce)",
+    "USDC-SPL (Solana Pay)",
+    "BTC (Direct Transfer)",
+    "ETH (Direct Transfer)",
+    "USDC on Base (Direct Transfer)",
+    "USDC-SPL on Solana (Direct Transfer)"
   ],
   "discovery": {
     "openapi": "https://agentstore.vercel.app/openapi.json",
@@ -52,6 +63,25 @@
           "payment_currency": "USD",
           "accepted": ["card", "paypal", "apple_pay", "google_pay", "link"],
           "flow": "POST → receive { url } → redirect to Stripe checkout → PDF download on success"
+        },
+        "coinbase_commerce": {
+          "endpoint": "https://agentstore.vercel.app/api/coinbase/checkout",
+          "method": "POST",
+          "payment_currency": "USD",
+          "accepted": ["BTC", "ETH", "USDC", "DAI", "LTC", "BCH", "DOGE", "SHIB", "APE"],
+          "flow": "POST → receive { url } → redirect to Coinbase Commerce hosted checkout → email confirmation"
+        },
+        "solana_pay": {
+          "endpoint": "https://agentstore.vercel.app/api/solana/pay",
+          "method": "GET",
+          "payment_currency": "USDC-SPL",
+          "payment_network": "solana:mainnet",
+          "flow": "GET → receive transaction request with recipient, amount, spl-token → send USDC-SPL transfer → email tx signature for fulfillment"
+        },
+        "direct_crypto": {
+          "page": "https://agentstore.vercel.app/pay/crypto",
+          "accepted": ["USDC on Base", "ETH", "BTC", "USDC-SPL on Solana"],
+          "flow": "Visit page → copy wallet address → send $19.99 equivalent → email tx hash to rob@robbalian.com → receive PDF within 24h"
         }
       },
       "free_sample": "https://agentstore.vercel.app/brushfit-sample.pdf",

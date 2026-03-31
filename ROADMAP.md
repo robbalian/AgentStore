@@ -37,10 +37,13 @@ Make AgentStore the reference implementation for selling digital products to AI 
 - [ ] **GitHub Topics** — tag repo with `agentic-commerce`, `x402`, `ai-payments`, `stablecoin`
 
 #### x402 Directories & Marketplaces (submit AgentStore to these)
-- [ ] **[x402.org/ecosystem](https://www.x402.org/ecosystem)** — the official x402 ecosystem directory. Submit AgentStore as a reference store / demo implementation
-- [ ] **[x402scan.com](https://www.x402scan.com/)** — x402 ecosystem explorer. Get indexed so agents can discover AgentStore by category, see pricing, and view transaction volume
-- [ ] **x402 Bazaar (Coinbase)** — the emerging "App Store" for x402 services. Discovery layer where agents find and pay for APIs/resources in ~200ms
+- [ ] **[x402.org/ecosystem](https://www.x402.org/ecosystem)** — official x402 ecosystem directory (150+ projects). Submit via PR to [coinbase/x402](https://github.com/coinbase/x402) GitHub repo
+- [ ] **[x402scan.com](https://www.x402scan.com/)** — ecosystem explorer with tx volumes, server stats, embedded wallet. Submit at [x402scan.com/resources/register](https://www.x402scan.com/resources/register)
+- [ ] **x402 Bazaar (Coinbase)** — protocol-native discovery layer. Enable `discoverable: true` in x402 middleware + add schemas → auto-listed after first payment. [Docs](https://docs.cdp.coinbase.com/x402/bazaar)
+- [ ] **[402index.io](https://402index.io/)** — aggregates 15,000+ paid API endpoints across x402/L402/MPP. Self-register at `/api/v1/register`, verify via `/.well-known/402index-verify.txt`
+- [ ] **[x402list.fun](https://x402list.fun)** — auto-indexed from facilitator data once payments process (no action needed beyond having live payments)
 - [ ] **[x402.eco](https://www.x402.eco/)** — "The Payment Layer for AI Agents" ecosystem directory
+- [ ] **[x402apis.io](https://www.x402apis.io/)** — decentralized marketplace for pay-per-call APIs on Solana
 
 #### Crypto & Payments
 - [ ] **Base ecosystem** — submit to Base directory, Base builder programs
@@ -50,9 +53,11 @@ Make AgentStore the reference implementation for selling digital products to AI 
 
 #### AI Agent Directories & Marketplaces
 - [ ] **[aiagentstore.ai](https://aiagentstore.ai)** — AI agent marketplace/directory for finding and listing agents and agent-purchasable resources
+- [ ] **[aiagentsdirectory.com](https://aiagentsdirectory.com/)** — 1,300+ agents listed, independent directory
 - [ ] **Hugging Face** — demo space showing agent purchasing workflow
 - [ ] **Replicate** — example model/workflow that purchases resources via x402
 - [ ] **Mirakl Nexus** — marketplace interoperability platform for agentic commerce
+- [ ] **[nullpath](https://docs.nullpath.com/)** — registry for agent-to-agent service discovery via x402
 
 #### Content & Community
 - [ ] **Twitter/X thread** — "Your AI agent can now buy things on the internet" with demo video

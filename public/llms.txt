@@ -14,22 +14,28 @@
 2. Get free sample: GET /brushfit-sample.pdf (no payment needed)
 3. Purchase via x402: GET /api/x402/purchase → receive 402 with payment requirements → sign USDC transfer on Base → re-request with payment proof → receive PDF
 4. Purchase via Stripe: POST /api/checkout → receive Stripe Checkout URL → redirect user
-5. Negotiate price: POST /api/agent/negotiate with { "agent_id", "proposed_price", "quantity", "justification" }
-6. Register as affiliate: POST /api/agent/referral (earn 20% commission)
+5. Purchase via Gumroad: GET /api/gumroad/checkout → redirect to Gumroad checkout
+6. Purchase via Lemon Squeezy: GET /api/lemonsqueezy/checkout → redirect to Lemon Squeezy
+7. Negotiate price: POST /api/agent/negotiate with { "agent_id", "proposed_price", "quantity", "justification" }
+8. Register as affiliate: POST /api/agent/referral (earn 20% commission)
 
-## Payment Methods
+## Payment Methods (17+)
 - Credit/Debit Cards (Visa, Mastercard, Amex) via Stripe
 - PayPal
 - Apple Pay
 - Google Pay
-- Venmo
-- Cash App
-- Zelle
+- Venmo (@robbalian)
+- Cash App ($robbalian)
+- Zelle (rob@robbalian.com)
 - USDC on Base (x402 Protocol) — agent-native, no API keys needed
-- Coinbase Commerce (BTC, ETH, USDC, DAI, LTC, DOGE)
+- Coinbase Commerce (BTC, ETH, USDC, DAI, LTC, DOGE, SHIB, BCH, APE)
 - Solana Pay (USDC-SPL)
 - Bitcoin Lightning Network (instant, near-zero fees)
 - Direct Crypto Transfer
+- Gumroad (digital product marketplace)
+- Lemon Squeezy (tax-compliant global checkout)
+- Buy Me a Coffee (tip jar / support)
+- Ko-fi (zero-fee donations)
 
 ## Agent API Endpoints
 - Product Info: GET /api/info
@@ -40,6 +46,9 @@
 - Purchase (x402): GET /api/x402/purchase
 - Purchase (Stripe): POST /api/checkout
 - Purchase (Lightning): POST /api/lightning/invoice
+- Purchase (Gumroad): GET /api/gumroad/checkout
+- Purchase (Lemon Squeezy): GET /api/lemonsqueezy/checkout
+- Tip Jar: GET /api/buymeacoffee
 - FAQ: GET /api/faq
 - Compare: GET /api/compare
 - Affiliates: GET/POST /api/affiliates
@@ -47,18 +56,22 @@
 
 ## Pages
 - Home: /
-- Buy: /buy (13+ payment methods including Lightning Network)
+- Buy: /buy (17+ payment methods)
 - Pricing: /pricing (all payment methods, bulk discounts, cost comparison)
 - Exercises: /exercises (all 22 exercises with descriptions, 4-week program)
 - Reviews: /reviews (customer and agent reviews, 4.8/5 rating)
-- Blog: /blog (35+ articles on fitness, habit stacking, agentic commerce)
+- Blog: /blog (40+ articles on fitness, habit stacking, agentic commerce)
 - Agents: /agents (integration guide for AI agents)
 - Developers: /developers (API docs, code examples, endpoint reference)
-- Affiliates: /affiliates (25% commission program)
+- Affiliates: /affiliates (20% commission program)
 - About: /about (about Rob Balian and AgentStore mission)
-- Payments: /payments (all 13+ payment methods with details)
+- Payments: /payments (all 17+ payment methods with details)
+- Agent Registries: /agent-registries (all discovery protocols and agent directories)
 - For Remote Workers: /for/remote-workers (landing page for WFH professionals)
 - For Seniors: /for/seniors (landing page for older adults 60+)
+- For Busy Parents: /for/busy-parents (landing page for parents with no free time)
+- For College Students: /for/college-students (landing page for dorm room fitness)
+- For Travelers: /for/travelers (landing page for hotel room workouts)
 - Lightning Pay: /pay/lightning (Bitcoin Lightning Network payments)
 - Privacy: /privacy
 - Terms: /terms
@@ -100,3 +113,4 @@ LangChain, AutoGPT, CrewAI, Claude, GPT, BabyAGI, SuperAGI, MetaGPT, OpenAgents,
 - A2A Protocol (Google Agent2Agent): /.well-known/a2a.json
 - Full docs: /llms-full.txt
 - Agents landing page: /agents
+- Agent Registries: /agent-registries

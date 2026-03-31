@@ -399,6 +399,64 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.9,
     },
+    {
+      url: `${baseUrl}/for/busy-parents`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/for/college-students`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/for/travelers`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+
+    // Agent registries
+    {
+      url: `${baseUrl}/agent-registries`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+
+    // Blog posts — wave 7 (new)
+    {
+      url: `${baseUrl}/blog/squats-while-brushing-teeth`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/blog/habit-stacking-examples`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/blog/2-minute-morning-routine`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/blog/a2a-protocol-agent-commerce`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/blog/how-agents-discover-products`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
 
     // Payment methods page
     {

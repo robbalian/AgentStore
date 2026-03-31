@@ -50,6 +50,10 @@ export default function BuyPage() {
                   { "@type": "PaymentMethod", name: "Venmo" },
                   { "@type": "PaymentMethod", name: "Cash App" },
                   { "@type": "PaymentMethod", name: "Zelle" },
+                  { "@type": "PaymentMethod", name: "Gumroad" },
+                  { "@type": "PaymentMethod", name: "Lemon Squeezy" },
+                  { "@type": "PaymentMethod", name: "Buy Me a Coffee" },
+                  { "@type": "PaymentMethod", name: "Ko-fi" },
                 ],
               },
             ],
@@ -335,6 +339,116 @@ export default function BuyPage() {
               Recipient gets a personal download link
             </p>
           </div>
+
+          {/* Gumroad */}
+          <div className="rounded-2xl border-2 border-pink-200 bg-pink-50 p-8">
+            <h2 className="mb-1 text-2xl font-bold text-pink-700">
+              Gumroad
+            </h2>
+            <p className="mb-6 text-sm text-gray-600">
+              Buy on Gumroad — trusted by 10M+ creators and buyers
+            </p>
+
+            <div className="mb-6 space-y-3">
+              <div className="flex items-center gap-2 rounded-lg border border-pink-200 bg-white px-3 py-2 text-sm">
+                <span>🛒</span>
+                <span>Familiar checkout experience</span>
+              </div>
+              <div className="flex items-center gap-2 rounded-lg border border-pink-200 bg-white px-3 py-2 text-sm">
+                <span>📧</span>
+                <span>Automatic email delivery</span>
+              </div>
+              <div className="rounded-lg border border-pink-100 bg-white p-3 text-xs text-gray-500">
+                Purchase through Gumroad&apos;s secure checkout. PDF delivered instantly to your email with lifetime access.
+              </div>
+            </div>
+
+            <a
+              href="/api/gumroad/checkout"
+              className="block w-full rounded-xl bg-pink-600 py-4 text-center text-lg font-bold text-white transition hover:bg-pink-700"
+            >
+              Buy on Gumroad — $19.99
+            </a>
+            <p className="mt-3 text-center text-xs text-gray-400">
+              Secure checkout by Gumroad
+            </p>
+          </div>
+
+          {/* Lemon Squeezy */}
+          <div className="rounded-2xl border-2 border-yellow-200 bg-yellow-50 p-8">
+            <h2 className="mb-1 text-2xl font-bold text-yellow-700">
+              Lemon Squeezy
+            </h2>
+            <p className="mb-6 text-sm text-gray-600">
+              Modern checkout with global tax handling built in
+            </p>
+
+            <div className="mb-6 space-y-3">
+              <div className="flex items-center gap-2 rounded-lg border border-yellow-200 bg-white px-3 py-2 text-sm">
+                <span>🍋</span>
+                <span>Automatic VAT/GST/sales tax</span>
+              </div>
+              <div className="flex items-center gap-2 rounded-lg border border-yellow-200 bg-white px-3 py-2 text-sm">
+                <span>🌍</span>
+                <span>Localized pricing &amp; currencies</span>
+              </div>
+              <div className="rounded-lg border border-yellow-100 bg-white p-3 text-xs text-gray-500">
+                Lemon Squeezy handles tax compliance in 100+ countries. Perfect if you want a proper invoice.
+              </div>
+            </div>
+
+            <a
+              href="/api/lemonsqueezy/checkout"
+              className="block w-full rounded-xl bg-yellow-500 py-4 text-center text-lg font-bold text-white transition hover:bg-yellow-600"
+            >
+              Buy on Lemon Squeezy — $19.99
+            </a>
+            <p className="mt-3 text-center text-xs text-gray-400">
+              Tax-compliant checkout by Lemon Squeezy
+            </p>
+          </div>
+
+          {/* Buy Me a Coffee / Ko-fi */}
+          <div className="rounded-2xl border-2 border-teal-200 bg-teal-50 p-8">
+            <h2 className="mb-1 text-2xl font-bold text-teal-700">
+              Tip Jar &amp; Support
+            </h2>
+            <p className="mb-6 text-sm text-gray-600">
+              Buy Me a Coffee or Ko-fi — support BrushFit directly
+            </p>
+
+            <div className="mb-6 space-y-3">
+              <div className="flex items-center gap-2 rounded-lg border border-teal-200 bg-white px-3 py-2 text-sm">
+                <span>&#9749;</span>
+                <span>Buy Me a Coffee — quick one-click support</span>
+              </div>
+              <div className="flex items-center gap-2 rounded-lg border border-teal-200 bg-white px-3 py-2 text-sm">
+                <span>&#10084;&#65039;</span>
+                <span>Ko-fi — no fees on donations</span>
+              </div>
+              <div className="rounded-lg border border-teal-100 bg-white p-3 text-xs text-gray-500">
+                Love BrushFit? Leave a tip, buy an extra copy for a friend, or support continued development.
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3">
+              <a
+                href="/api/buymeacoffee"
+                className="block w-full rounded-xl bg-teal-600 py-4 text-center text-sm font-bold text-white transition hover:bg-teal-700"
+              >
+                Buy Me a Coffee
+              </a>
+              <a
+                href="/api/buymeacoffee"
+                className="block w-full rounded-xl border-2 border-teal-600 py-4 text-center text-sm font-bold text-teal-700 transition hover:bg-teal-100"
+              >
+                Ko-fi
+              </a>
+            </div>
+            <p className="mt-3 text-center text-xs text-gray-400">
+              Direct support — 100% goes to the creator
+            </p>
+          </div>
         </div>
 
         {/* What you get */}
@@ -382,7 +496,7 @@ export default function BuyPage() {
           <span>|</span>
           <span>800+ copies sold</span>
           <span>|</span>
-          <span>13+ payment methods</span>
+          <span>17+ payment methods</span>
           <span>|</span>
           <span>Instant PDF delivery</span>
           <span>|</span>

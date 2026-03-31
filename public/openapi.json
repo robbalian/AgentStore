@@ -329,6 +329,87 @@
         }
       }
     },
+    "/api/gumroad/checkout": {
+      "get": {
+        "operationId": "checkoutGumroad",
+        "summary": "Purchase BrushFit via Gumroad",
+        "description": "Redirects to Gumroad checkout page for BrushFit purchase. Automatic email delivery of PDF.",
+        "responses": {
+          "302": {
+            "description": "Redirect to Gumroad checkout"
+          },
+          "200": {
+            "description": "Gumroad setup instructions if not configured",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "product": { "type": "string" },
+                    "price": { "type": "string" },
+                    "message": { "type": "string" },
+                    "alternative_checkout": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/lemonsqueezy/checkout": {
+      "get": {
+        "operationId": "checkoutLemonSqueezy",
+        "summary": "Purchase BrushFit via Lemon Squeezy",
+        "description": "Redirects to Lemon Squeezy checkout with automatic tax compliance in 100+ countries.",
+        "responses": {
+          "302": {
+            "description": "Redirect to Lemon Squeezy checkout"
+          },
+          "200": {
+            "description": "Lemon Squeezy setup instructions if not configured",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "product": { "type": "string" },
+                    "price": { "type": "string" },
+                    "message": { "type": "string" },
+                    "alternative_checkout": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/buymeacoffee": {
+      "get": {
+        "operationId": "getTipJarInfo",
+        "summary": "Get tip jar and support links",
+        "description": "Returns Buy Me a Coffee and Ko-fi links for supporting BrushFit.",
+        "responses": {
+          "200": {
+            "description": "Tip jar platform links",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "product": { "type": "string" },
+                    "price": { "type": "string" },
+                    "tip_jar": { "type": "boolean" },
+                    "platforms": { "type": "object" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/affiliates": {
       "get": {
         "operationId": "getAffiliateInfo",

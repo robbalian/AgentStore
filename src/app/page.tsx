@@ -92,7 +92,7 @@ export default function Home() {
                 name: "What payment methods are accepted?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "We accept credit/debit cards, PayPal, Apple Pay, Google Pay, and Stripe Link for human customers. For AI agents and crypto users, we accept USDC on Base via x402 protocol. Visit our buy page for all payment options.",
+                  text: "We accept 17+ payment methods: credit/debit cards, PayPal, Apple Pay, Google Pay, Venmo, Cash App, Zelle, Gumroad, Lemon Squeezy, Buy Me a Coffee, Ko-fi, USDC on Base via x402 protocol, Coinbase Commerce (BTC/ETH/USDC), Solana Pay, Bitcoin Lightning, and direct crypto transfers. Visit our buy page for all options.",
                 },
               },
             ],
@@ -407,7 +407,7 @@ const pdf = await res.blob(); // BrushFit Guide PDF`}</pre>
               },
               {
                 q: "What payment methods do you accept?",
-                a: "We accept credit/debit cards, PayPal, Apple Pay, Google Pay, and Stripe Link for humans. For AI agents and crypto users, we accept USDC on Base via x402 protocol. All methods deliver the PDF instantly.",
+                a: "We accept 17+ payment methods: credit/debit cards, PayPal, Apple Pay, Google Pay, Venmo, Cash App, Zelle, Gumroad, Lemon Squeezy, Buy Me a Coffee, Ko-fi, USDC on Base via x402, Coinbase Commerce (BTC/ETH/USDC), Solana Pay, Bitcoin Lightning, and direct crypto transfers. All methods deliver the PDF instantly.",
               },
               {
                 q: "What is x402?",
@@ -613,6 +613,31 @@ const pdf = await res.blob(); // BrushFit Guide PDF`}</pre>
                 slug: "exercise-while-waiting",
                 title: "Exercises While Waiting",
                 desc: "Turn dead time into workout time. 15 exercises for daily waiting moments.",
+              },
+              {
+                slug: "squats-while-brushing-teeth",
+                title: "Squats While Brushing Teeth",
+                desc: "Master bathroom squats during your brushing routine. Form, variations, and progressions.",
+              },
+              {
+                slug: "habit-stacking-examples",
+                title: "25 Habit Stacking Examples That Work",
+                desc: "Real habit stacking examples including the BrushFit method. Build habits that stick.",
+              },
+              {
+                slug: "2-minute-morning-routine",
+                title: "The Perfect 2-Minute Morning Routine",
+                desc: "Build a morning routine around toothbrushing. Zero extra time needed.",
+              },
+              {
+                slug: "a2a-protocol-agent-commerce",
+                title: "Google A2A Protocol for Agent Commerce",
+                desc: "How agent-to-agent protocols enable autonomous product discovery and purchases.",
+              },
+              {
+                slug: "how-agents-discover-products",
+                title: "How AI Agents Discover Products in 2026",
+                desc: "The 7 protocols agents use to find and buy products. The complete AgentEO guide.",
               },
             ].map((post) => (
               <a

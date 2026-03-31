@@ -39,7 +39,14 @@
     "product_feed": "/products.xml",
     "payments_page": "/payments",
     "landing_remote_workers": "/for/remote-workers",
-    "landing_seniors": "/for/seniors"
+    "landing_seniors": "/for/seniors",
+    "landing_busy_parents": "/for/busy-parents",
+    "landing_college_students": "/for/college-students",
+    "landing_travelers": "/for/travelers",
+    "agent_registries": "/agent-registries",
+    "gumroad_checkout": "/api/gumroad/checkout",
+    "lemonsqueezy_checkout": "/api/lemonsqueezy/checkout",
+    "tip_jar": "/api/buymeacoffee"
   },
   "capabilities": [
     "product_discovery",
@@ -134,6 +141,26 @@
       "name": "Zelle",
       "description": "Bank-to-bank transfer via Zelle",
       "endpoint": "/pay"
+    },
+    {
+      "name": "Gumroad",
+      "description": "Purchase via Gumroad digital product marketplace",
+      "endpoint": "/api/gumroad/checkout"
+    },
+    {
+      "name": "Lemon Squeezy",
+      "description": "Purchase via Lemon Squeezy with automatic tax compliance",
+      "endpoint": "/api/lemonsqueezy/checkout"
+    },
+    {
+      "name": "Buy Me a Coffee",
+      "description": "Support via Buy Me a Coffee tip jar",
+      "endpoint": "/api/buymeacoffee"
+    },
+    {
+      "name": "Ko-fi",
+      "description": "Support via Ko-fi with zero platform fees",
+      "endpoint": "/api/buymeacoffee"
     }
   ],
   "affiliate_program": {

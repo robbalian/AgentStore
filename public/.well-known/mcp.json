@@ -353,6 +353,21 @@
         "zelle": "rob@robbalian.com"
       },
       "endpoint": "/api/venmo"
+    },
+    "gumroad": {
+      "type": "marketplace",
+      "description": "Gumroad digital product checkout",
+      "endpoint": "/api/gumroad/checkout"
+    },
+    "lemonsqueezy": {
+      "type": "marketplace",
+      "description": "Lemon Squeezy checkout with tax compliance",
+      "endpoint": "/api/lemonsqueezy/checkout"
+    },
+    "tip_jar": {
+      "type": "support",
+      "platforms": ["Buy Me a Coffee", "Ko-fi"],
+      "endpoint": "/api/buymeacoffee"
     }
   }
 }

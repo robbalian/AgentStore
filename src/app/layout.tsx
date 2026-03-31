@@ -107,6 +107,10 @@ export default function RootLayout({
             <div className="mt-2 flex flex-wrap justify-center gap-6 text-xs text-gray-500">
               <a href="/for/remote-workers" className="hover:text-indigo-600">For Remote Workers</a>
               <a href="/for/seniors" className="hover:text-indigo-600">For Seniors</a>
+              <a href="/for/busy-parents" className="hover:text-indigo-600">For Busy Parents</a>
+              <a href="/for/college-students" className="hover:text-indigo-600">For College Students</a>
+              <a href="/for/travelers" className="hover:text-indigo-600">For Travelers</a>
+              <a href="/agent-registries" className="hover:text-indigo-600">Agent Registries</a>
             </div>
             <div className="mt-3 flex flex-wrap justify-center gap-6 text-xs text-gray-400">
               <a href="/privacy" className="hover:text-gray-600">Privacy</a>

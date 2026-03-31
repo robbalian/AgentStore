@@ -2,10 +2,12 @@
   "openapi": "3.1.0",
   "info": {
     "title": "BrushFit AgentStore API",
-    "description": "API for purchasing BrushFit: The 2-Minute Toothbrush Workout Guide. Supports x402 protocol (USDC on Base) and Stripe (card, PayPal, Apple Pay, Google Pay, Link) payments. Agent discovery via /agents.json, /llms.txt, and /.well-known/ai-plugin.json. Buy page at /buy.",
-    "version": "1.2.0",
+    "description": "API for purchasing BrushFit: The 2-Minute Toothbrush Workout Guide. Supports x402 protocol (USDC on Base) and Stripe (card, PayPal, Apple Pay, Google Pay, Link) payments. Agent discovery via /.well-known/mcp.json, /agents.json, /llms.txt, and /.well-known/ai-plugin.json. Buy page at /buy. Structured FAQs at /api/faq. Product comparisons at /api/compare. Agent referral at /api/agent/referral.",
+    "version": "2.0.0",
     "contact": {
-      "email": "rob@robbalian.com"
+      "email": "rob@robbalian.com",
+      "name": "Rob Balian",
+      "url": "https://agentstore.vercel.app"
     }
   },
   "servers": [
@@ -41,6 +43,15 @@
         "summary": "Purchase BrushFit PDF via x402 protocol",
         "description": "Returns HTTP 402 with payment requirements. After signing a USDC transfer on Base, retry with PAYMENT-SIGNATURE header to receive the PDF. Use @x402/fetch wrapFetchWithPayment() to automate.",
         "tags": ["purchase"],
+        "parameters": [
+          {
+            "name": "ref",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" },
+            "description": "Optional referral code from /api/agent/referral"
+          }
+        ],
         "responses": {
           "200": {
             "description": "PDF file (after valid payment)",
@@ -116,11 +127,135 @@
         }
       }
     },
+    "/api/faq": {
+      "get": {
+        "operationId": "getFrequentlyAskedQuestions",
+        "summary": "Get structured FAQs about BrushFit and AgentStore",
+        "description": "Returns all frequently asked questions in structured JSON format. Supports filtering by category and keyword search. 16 FAQs across 6 categories: product, payment, agent, purchase, pricing, about.",
+        "tags": ["discovery"],
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["product", "payment", "agent", "purchase", "pricing", "about"]
+            },
+            "description": "Filter FAQs by category"
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Search FAQs by keyword"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Structured FAQ list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FAQResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/compare": {
+      "get": {
+        "operationId": "compareProducts",
+        "summary": "Compare BrushFit to fitness alternatives",
+        "description": "Returns structured comparison data for BrushFit vs gym membership, personal trainer, fitness apps, and YouTube workouts. Includes pricing, time requirements, pros/cons, and a quick comparison matrix.",
+        "tags": ["discovery"],
+        "parameters": [
+          {
+            "name": "compare_with",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Comma-separated list of alternatives to compare (gym, personal_trainer, fitness_app, youtube). Always includes BrushFit."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product comparison data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompareResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/agent/referral": {
+      "get": {
+        "operationId": "getReferralInfo",
+        "summary": "Get agent referral program information",
+        "description": "Returns documentation about the agent referral program including required fields, examples, and available discovery channels.",
+        "tags": ["agent"],
+        "responses": {
+          "200": {
+            "description": "Referral program documentation",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "registerAgentReferral",
+        "summary": "Register as a referring agent for sales attribution",
+        "description": "Register your AI agent to receive a unique referral link. Sales driven through the link are attributed to your agent. Returns both human referral link (/buy?ref=CODE) and agent referral link (/api/x402/purchase?ref=CODE).",
+        "tags": ["agent"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReferralRequest"
+              },
+              "example": {
+                "agent_id": "claude-agent-001",
+                "agent_name": "Claude Shopping Assistant",
+                "referral_source": "mcp"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Referral registration successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReferralResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing required fields or invalid JSON"
+          }
+        }
+      }
+    },
     "/brushfit-sample.pdf": {
       "get": {
         "operationId": "getFreeSample",
         "summary": "Download free sample PDF (Legs + Core exercises)",
-        "description": "Free preview of the BrushFit guide containing the Legs and Core exercise sections. No payment or authentication required.",
+        "description": "Free preview of the BrushFit guide containing the Legs and Core exercise sections (10 exercises). No payment or authentication required.",
         "tags": ["discovery"],
         "responses": {
           "200": {
@@ -162,17 +297,115 @@
             }
           }
         }
+      },
+      "FAQResponse": {
+        "type": "object",
+        "properties": {
+          "product": { "type": "string" },
+          "store": { "type": "string" },
+          "store_url": { "type": "string" },
+          "last_updated": { "type": "string" },
+          "total_faqs": { "type": "integer" },
+          "returned_faqs": { "type": "integer" },
+          "filters_applied": {
+            "type": "object",
+            "properties": {
+              "category": { "type": "string" },
+              "query": { "type": "string", "nullable": true }
+            }
+          },
+          "faqs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": { "type": "string" },
+                "question": { "type": "string" },
+                "answer": { "type": "string" },
+                "category": { "type": "string" }
+              }
+            }
+          },
+          "categories": { "type": "array", "items": { "type": "string" } },
+          "related_endpoints": { "type": "object" }
+        }
+      },
+      "CompareResponse": {
+        "type": "object",
+        "properties": {
+          "product": { "type": "string" },
+          "last_updated": { "type": "string" },
+          "comparison_summary": { "type": "string" },
+          "comparison_matrix": { "type": "object" },
+          "alternatives": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": { "type": "string" },
+                "name": { "type": "string" },
+                "type": { "type": "string" },
+                "price": { "type": "string" },
+                "monthly_cost": { "type": "string" },
+                "annual_cost": { "type": "string" },
+                "cost_per_session": { "type": "string" },
+                "time_required": { "type": "string" },
+                "equipment": { "type": "string" },
+                "pros": { "type": "array", "items": { "type": "string" } },
+                "cons": { "type": "array", "items": { "type": "string" } },
+                "best_for": { "type": "string" },
+                "ai_agent_purchasable": { "type": "boolean" }
+              }
+            }
+          },
+          "recommendation": { "type": "string" },
+          "links": { "type": "object" }
+        }
+      },
+      "ReferralRequest": {
+        "type": "object",
+        "required": ["agent_id", "agent_name"],
+        "properties": {
+          "agent_id": {
+            "type": "string",
+            "description": "Unique identifier for the referring agent"
+          },
+          "agent_name": {
+            "type": "string",
+            "description": "Display name of the referring agent"
+          },
+          "referral_source": {
+            "type": "string",
+            "description": "How the agent discovered BrushFit (e.g., 'llms.txt', 'mcp', 'openapi', 'web_search')"
+          }
+        }
+      },
+      "ReferralResponse": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "referral_code": { "type": "string" },
+          "referral_link": { "type": "string", "description": "Referral link for human customers (/buy?ref=CODE)" },
+          "referral_link_x402": { "type": "string", "description": "Referral link for agent customers (/api/x402/purchase?ref=CODE)" },
+          "agent_id": { "type": "string" },
+          "agent_name": { "type": "string" },
+          "message": { "type": "string" }
+        }
       }
     }
   },
   "tags": [
     {
       "name": "discovery",
-      "description": "Product discovery and information endpoints"
+      "description": "Product discovery, information, FAQs, and comparison endpoints"
     },
     {
       "name": "purchase",
       "description": "Payment and download endpoints"
+    },
+    {
+      "name": "agent",
+      "description": "Agent-specific endpoints (referral registration, attribution)"
     }
   ]
 }

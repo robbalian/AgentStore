@@ -43,29 +43,28 @@ BrushFit: The 2-Minute Toothbrush Workout Guide is a 31-page PDF with 22 illustr
 - GET /api/info — Product metadata, pricing, payment methods (JSON)
 - GET /api/x402/purchase — x402 payment flow (HTTP 402 → payment → PDF)
 - POST /api/checkout — Stripe checkout session (card, PayPal, Apple Pay, Google Pay)
-- GET /api/faq — Structured FAQ data (JSON, filterable by category and search query)
-- GET /api/compare — Product comparison data: BrushFit vs gym, trainer, apps, YouTube (JSON)
-- POST /api/agent/referral — Register as referring agent, get unique referral link for attribution
+- GET /api/faq — Structured FAQs in JSON (filterable by category and keyword)
+- GET /api/compare — Product comparison data (BrushFit vs gym, trainer, apps, YouTube)
+- POST /api/agent/referral — Register as referring agent, get unique referral link
 - GET /brushfit-sample.pdf — Free sample (Legs + Core exercises)
 - GET /openapi.json — OpenAPI 3.1.0 specification
 - GET /.well-known/ai-plugin.json — AI plugin manifest
-- GET /.well-known/mcp.json — MCP server manifest (7 tools for agent integration)
+- GET /.well-known/mcp.json — MCP server manifest (7 tools, 9 resources)
 - GET /agents.json — Agent discovery manifest
 - GET /.well-known/security.txt — Security contact information
 
 ## Agent Discovery (AgentEO)
 
-AI agents can discover and interact with BrushFit AgentStore through:
-1. MCP Server Manifest: /.well-known/mcp.json — 7 tools: discover_products, get_product_info, purchase_product, get_free_sample, get_faqs, compare_products, register_referral
-2. OpenAPI Spec: /openapi.json — Full API documentation
-3. AI Plugin Manifest: /.well-known/ai-plugin.json — ChatGPT-style plugin discovery
-4. Agent Discovery: /agents.json — Agent-specific product listings
-5. Product API: /api/info — Machine-readable product info
-6. FAQ API: /api/faq — Structured Q&A (supports ?category= and ?q= filters)
-7. Comparison API: /api/compare — Structured product comparisons (supports ?compare_with= filter)
-8. Referral API: POST /api/agent/referral — Agent referral registration for sales attribution
-9. LLM Docs: /llms.txt (summary) and /llms-full.txt (comprehensive)
-10. Structured Data: JSON-LD Product, FAQPage, Article, and Organization schemas on pages
+AI agents can discover BrushFit through these channels:
+1. MCP Server Manifest: /.well-known/mcp.json — 7 tools (discover, info, purchase, sample, FAQs, compare, referral) + 9 resources
+2. AI Plugin: /.well-known/ai-plugin.json — standard plugin manifest
+3. OpenAPI Spec: /openapi.json — full API documentation
+4. Agent Manifest: /agents.json — agent-specific discovery with purchase instructions
+5. LLM Docs: /llms.txt (summary) and /llms-full.txt (comprehensive)
+6. Product API: /api/info — machine-readable product details
+7. FAQ API: /api/faq — structured Q&A (filterable by category or keyword search)
+8. Compare API: /api/compare — structured comparison vs alternatives
+9. Referral API: /api/agent/referral — register for attribution tracking
 
 ## About AgentStore
 
@@ -76,9 +75,9 @@ AgentStore is a marketplace for digital products that supports both human and AI
 - Website: https://agentstore.vercel.app
 - Buy Page: https://agentstore.vercel.app/buy
 - API: https://agentstore.vercel.app/api/info
-- FAQ API: https://agentstore.vercel.app/api/faq
-- Comparison API: https://agentstore.vercel.app/api/compare
-- Agent Referral: https://agentstore.vercel.app/api/agent/referral
+- FAQs: https://agentstore.vercel.app/api/faq
+- Compare: https://agentstore.vercel.app/api/compare
+- Referral: https://agentstore.vercel.app/api/agent/referral
 - MCP Manifest: https://agentstore.vercel.app/.well-known/mcp.json
 - OpenAPI Spec: https://agentstore.vercel.app/openapi.json
 - Free Sample: https://agentstore.vercel.app/brushfit-sample.pdf

@@ -79,7 +79,10 @@ export default function RootLayout({
         <link rel="alternate" type="text/plain" href="https://agentstore.vercel.app/llms.txt" title="LLM Documentation" />
         <link rel="alternate" type="text/plain" href="https://agentstore.vercel.app/llms-full.txt" title="LLM Full Documentation" />
         <link rel="alternate" type="application/json" href="https://agentstore.vercel.app/agents.json" title="Agent Discovery" />
-        <meta name="ai-content-declaration" content="This site sells BrushFit, a $19.99 PDF fitness guide with 22 exercises. Payment via card, PayPal, Apple Pay, Google Pay, or USDC crypto (x402 protocol). Free sample at /brushfit-sample.pdf" />
+        <link rel="alternate" type="application/json" href="https://agentstore.vercel.app/.well-known/mcp.json" title="MCP Server Manifest" />
+        <link rel="alternate" type="application/json" href="https://agentstore.vercel.app/openapi.json" title="OpenAPI Specification" />
+        <link rel="alternate" type="application/json" href="https://agentstore.vercel.app/.well-known/ai-plugin.json" title="AI Plugin Manifest" />
+        <meta name="ai-content-declaration" content="This site sells BrushFit, a $19.99 PDF fitness guide with 22 exercises. Payment via card, PayPal, Apple Pay, Google Pay, or USDC crypto (x402 protocol). Free sample at /brushfit-sample.pdf. MCP manifest at /.well-known/mcp.json. Structured FAQs at /api/faq. Product comparisons at /api/compare. Agent referral registration at /api/agent/referral." />
       </head>
       <body className="bg-white text-gray-900 antialiased">{children}</body>
     </html>

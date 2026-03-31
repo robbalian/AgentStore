@@ -46,7 +46,7 @@
 - No equipment: Uses bodyweight + bathroom items (wall, counter, shampoo bottle)
 - Consistency beats intensity: 2 minutes twice daily > 1 hour at the gym once
 
-## Payment Methods (12+ Options)
+## Payment Methods (13+ Options)
 
 ### For AI Agents (Programmatic)
 1. **x402 Protocol** — USDC on Base blockchain, instant delivery, no accounts needed
@@ -67,10 +67,15 @@
 8. **Solana Pay** — USDC-SPL on Solana
 9. **Direct Crypto Transfer** — Send to wallet addresses with QR codes
 
+### Bitcoin Lightning
+10. **Lightning Network** — Instant Bitcoin payment, near-zero fees
+    - Endpoint: POST /api/lightning/invoice
+    - Page: /pay/lightning
+
 ### Peer-to-Peer
-10. **Venmo** — @robbalian
-11. **Cash App** — $robbalian
-12. **Zelle** — rob@robbalian.com
+11. **Venmo** — @robbalian
+12. **Cash App** — $robbalian
+13. **Zelle** — rob@robbalian.com
 
 All payment methods: https://agentstore.vercel.app/buy
 
@@ -216,12 +221,19 @@ LangChain, AutoGPT, CrewAI, Claude, GPT, OpenAI Agents SDK, Google ADK, Anthropi
 
 ## Pages
 - Homepage: /
-- Buy (all payment methods): /buy
+- Buy (13+ payment methods): /buy
 - Pricing details: /pricing
 - Exercise catalog: /exercises
-- Blog: /blog
+- Reviews (customer + agent): /reviews
+- Blog (30+ articles): /blog
 - Agent integration guide: /agents
+- API Documentation: /developers
 - Affiliate program: /affiliates
+- About: /about
+- Lightning payments: /pay/lightning
+- Privacy policy: /privacy
+- Terms of service: /terms
+- Refund policy: /refund-policy
 - Free sample PDF: /brushfit-sample.pdf
 
 ## Frequently Asked Questions

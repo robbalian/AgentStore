@@ -23,6 +23,11 @@
     "agent_discover": "/api/agent/discover",
     "agent_negotiate": "/api/agent/negotiate",
     "agent_reviews": "/api/agent/review",
+    "agent_referrals": "/api/agent/referral",
+    "faq": "/api/faq",
+    "compare": "/api/compare",
+    "affiliates": "/api/affiliates",
+    "lightning_invoice": "/api/lightning/invoice",
     "openapi_spec": "/openapi.json",
     "mcp_manifest": "/.well-known/mcp.json",
     "agent_protocol": "/.well-known/agent-protocol.json",
@@ -104,6 +109,11 @@
       "name": "Solana Pay",
       "description": "Pay with USDC-SPL on Solana blockchain",
       "endpoint": "/api/solana/pay"
+    },
+    {
+      "name": "Bitcoin Lightning",
+      "description": "Instant Bitcoin payment via Lightning Network with near-zero fees",
+      "endpoint": "/api/lightning/invoice"
     },
     {
       "name": "Venmo",

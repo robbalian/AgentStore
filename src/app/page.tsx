@@ -564,6 +564,31 @@ const pdf = await res.blob(); // BrushFit Guide PDF`}</pre>
                 title: "Bodyweight Exercises for Beginners",
                 desc: "Start your fitness journey with these beginner-friendly bodyweight moves.",
               },
+              {
+                slug: "isometric-exercises-guide",
+                title: "Complete Guide to Isometric Exercises",
+                desc: "Build strength without moving. The science behind static holds and how BrushFit uses them.",
+              },
+              {
+                slug: "how-to-stay-consistent-with-exercise",
+                title: "How to Stay Consistent with Exercise",
+                desc: "The habit stacking method that makes exercise automatic. Never skip a workout again.",
+              },
+              {
+                slug: "agentic-payments-explained",
+                title: "Agentic Payments Explained",
+                desc: "How AI agents pay for things in 2026. x402 protocol, stablecoins, and machine-to-machine commerce.",
+              },
+              {
+                slug: "best-exercises-for-small-apartments",
+                title: "Best Exercises for Small Apartments",
+                desc: "Full-body workout in any space. Perfect for tiny apartments and bathrooms.",
+              },
+              {
+                slug: "digital-product-agent-economy",
+                title: "Selling Digital Products in the Agent Economy",
+                desc: "How to sell to AI agents. Protocols, payment rails, and the BrushFit case study.",
+              },
             ].map((post) => (
               <a
                 key={post.slug}
@@ -622,11 +647,23 @@ const pdf = await res.blob(); // BrushFit Guide PDF`}</pre>
               <a href="/exercises" className="hover:text-indigo-600">
                 Exercises
               </a>
+              <a href="/reviews" className="hover:text-indigo-600">
+                Reviews
+              </a>
+              <a href="/blog" className="hover:text-indigo-600">
+                Blog
+              </a>
+              <a href="/developers" className="hover:text-indigo-600">
+                Developers
+              </a>
+              <a href="/agents" className="hover:text-indigo-600">
+                Agents
+              </a>
               <a href="/affiliates" className="hover:text-indigo-600">
                 Affiliates
               </a>
-              <a href="/api/info" className="hover:text-indigo-600">
-                API
+              <a href="/about" className="hover:text-indigo-600">
+                About
               </a>
               <a href="/openapi.json" className="hover:text-indigo-600">
                 OpenAPI
@@ -637,12 +674,14 @@ const pdf = await res.blob(); // BrushFit Guide PDF`}</pre>
               <a href="/llms.txt" className="hover:text-indigo-600">
                 llms.txt
               </a>
-              <a href="/blog" className="hover:text-indigo-600">
-                Blog
-              </a>
               <a href="mailto:rob@robbalian.com" className="hover:text-indigo-600">
                 Contact
               </a>
+            </div>
+            <div className="mt-3 flex flex-wrap justify-center gap-4 text-xs text-gray-400">
+              <a href="/privacy" className="hover:text-gray-600">Privacy</a>
+              <a href="/terms" className="hover:text-gray-600">Terms</a>
+              <a href="/refund-policy" className="hover:text-gray-600">Refund Policy</a>
             </div>
           </div>
         </div>

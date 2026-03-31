@@ -48,6 +48,52 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
 
+    // New pages
+    {
+      url: `${baseUrl}/about`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/reviews`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/developers`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/privacy`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+    {
+      url: `${baseUrl}/terms`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+    {
+      url: `${baseUrl}/refund-policy`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "yearly",
+      priority: 0.4,
+    },
+
+    // Lightning payment
+    {
+      url: `${baseUrl}/pay/lightning`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+
     // Affiliates
     {
       url: `${baseUrl}/affiliates`,
@@ -191,6 +237,38 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/blog/bodyweight-exercises-for-beginners`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+
+    // Blog posts — new wave (SEO + AgentEO)
+    {
+      url: `${baseUrl}/blog/isometric-exercises-guide`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/blog/how-to-stay-consistent-with-exercise`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/blog/agentic-payments-explained`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/blog/best-exercises-for-small-apartments`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/blog/digital-product-agent-economy`,
       lastModified: new Date("2026-03-31"),
       changeFrequency: "monthly",
       priority: 0.8,

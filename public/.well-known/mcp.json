@@ -337,6 +337,14 @@
       "currency": "USDC-SPL",
       "endpoint": "/api/solana/pay"
     },
+    "lightning": {
+      "type": "crypto",
+      "currency": "BTC",
+      "network": "Lightning Network",
+      "endpoint": "/api/lightning/invoice",
+      "instant": true,
+      "fees": "near-zero"
+    },
     "peer_to_peer": {
       "type": "manual",
       "methods": {

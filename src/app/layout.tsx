@@ -95,10 +95,18 @@ export default function RootLayout({
               <a href="/buy" className="hover:text-indigo-600">Buy</a>
               <a href="/pricing" className="hover:text-indigo-600">Pricing</a>
               <a href="/exercises" className="hover:text-indigo-600">Exercises</a>
+              <a href="/reviews" className="hover:text-indigo-600">Reviews</a>
               <a href="/blog" className="hover:text-indigo-600">Blog</a>
               <a href="/agents" className="hover:text-indigo-600">Agents</a>
+              <a href="/developers" className="hover:text-indigo-600">Developers</a>
               <a href="/affiliates" className="hover:text-indigo-600">Affiliates</a>
-              <a href="/api/info" className="hover:text-indigo-600">API</a>
+              <a href="/about" className="hover:text-indigo-600">About</a>
+            </div>
+            <div className="mt-3 flex flex-wrap justify-center gap-6 text-xs text-gray-400">
+              <a href="/privacy" className="hover:text-gray-600">Privacy</a>
+              <a href="/terms" className="hover:text-gray-600">Terms</a>
+              <a href="/refund-policy" className="hover:text-gray-600">Refund Policy</a>
+              <a href="mailto:rob@robbalian.com" className="hover:text-gray-600">Contact</a>
             </div>
           </div>
         </nav>

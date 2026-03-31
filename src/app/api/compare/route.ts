@@ -177,7 +177,46 @@ const alternatives = [
     best_for:
       "Budget-conscious users, those who enjoy variety, people who already have a strong exercise habit and just need inspiration.",
   },
+  {
+    id: "other_fitness_pdfs",
+    name: "Other Fitness PDF Guides",
+    type: "Digital PDF Downloads",
+    price: "$10-40 one-time",
+    monthly_cost: "$0 (one-time purchase)",
+    annual_cost: "$10-40 total",
+    cost_per_session: "Varies",
+    time_required: "15-45 minutes per session (dedicated workout time)",
+    equipment: "Varies — many require dumbbells, resistance bands, or pull-up bars",
+    exercises: "Varies (typically 20-100+)",
+    location: "Home or gym",
+    commitment: "Self-directed",
+    skill_level: "Varies by program",
+    ai_agent_purchasable: false,
+    payment_methods: ["Credit/Debit Card", "PayPal"],
+    pros: [
+      "One-time purchase like BrushFit",
+      "Some are cheaper ($10-15 range)",
+      "Wide variety of specialized programs (HIIT, yoga, strength)",
+      "No recurring subscription fees",
+    ],
+    cons: [
+      "Require dedicated 15-45 minute time blocks",
+      "No habit-stacking integration — relies on willpower",
+      "Equipment often required",
+      "No AI agent purchase support",
+      "Static content with no progressive structure in many cases",
+      "High abandonment rate — most buyers never finish the program",
+    ],
+    best_for:
+      "People who prefer a specific training style (e.g., HIIT, yoga, powerlifting) and have dedicated workout time available.",
+  },
 ];
+
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type, Accept",
+};
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -213,7 +252,8 @@ export async function GET(request: NextRequest) {
       "BrushFit ($19.99 lifetime for 28 sessions/week = $0.01/session/year)",
   };
 
-  return NextResponse.json({
+  return NextResponse.json(
+    {
     product: "BrushFit: The 2-Minute Toothbrush Workout Guide",
     last_updated: "2026-03-31",
     comparison_summary:
@@ -230,5 +270,11 @@ export async function GET(request: NextRequest) {
       agent_referral: "https://agentstore.vercel.app/api/agent/referral",
       mcp_manifest: "https://agentstore.vercel.app/.well-known/mcp.json",
     },
-  });
+  },
+    { headers: corsHeaders }
+  );
+}
+
+export async function OPTIONS() {
+  return new NextResponse(null, { status: 204, headers: corsHeaders });
 }

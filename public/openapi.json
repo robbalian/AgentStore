@@ -229,6 +229,68 @@
         }
       }
     },
+    "/api/lightning/invoice": {
+      "get": {
+        "operationId": "getLightningInfo",
+        "summary": "Get Lightning Network payment info",
+        "description": "Returns information about Bitcoin Lightning Network payment option for BrushFit.",
+        "responses": {
+          "200": {
+            "description": "Lightning payment info",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "payment_method": { "type": "string" },
+                    "network": { "type": "string" },
+                    "price_usd": { "type": "string" },
+                    "approximate_sats": { "type": "integer" },
+                    "features": { "type": "array", "items": { "type": "string" } }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createLightningInvoice",
+        "summary": "Create a Lightning Network invoice",
+        "description": "Generates a BOLT11 Lightning invoice for purchasing BrushFit with Bitcoin.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": { "type": "string", "format": "email", "description": "Email for PDF delivery" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Lightning invoice",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "bolt11": { "type": "string" },
+                    "payment_hash": { "type": "string" },
+                    "amount_sats": { "type": "integer" },
+                    "amount_usd": { "type": "string" },
+                    "expires_at": { "type": "string", "format": "date-time" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/venmo": {
       "post": {
         "operationId": "purchaseWithVenmo",

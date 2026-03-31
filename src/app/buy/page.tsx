@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Buy BrushFit — All Payment Methods | Card, PayPal, Apple Pay, Venmo, Cash App, Zelle, Crypto, Bitcoin",
+  title: "Buy BrushFit — All Payment Methods | Card, PayPal, Apple Pay, Venmo, Cash App, Zelle, Crypto, Bitcoin, Lightning",
   description:
     "Buy BrushFit: The 2-Minute Toothbrush Workout Guide for $19.99. Pay with credit card, PayPal, Apple Pay, Google Pay, Venmo, Cash App, Zelle, USDC via x402, Coinbase Commerce (BTC/ETH/USDC), Solana Pay, or direct crypto transfer. Instant PDF download.",
   alternates: { canonical: "https://agentstore.vercel.app/buy" },
@@ -46,6 +46,7 @@ export default function BuyPage() {
                   { "@type": "PaymentMethod", name: "USDC (Coinbase Commerce)" },
                   { "@type": "PaymentMethod", name: "Solana Pay (USDC-SPL)" },
                   { "@type": "PaymentMethod", name: "Direct Crypto Transfer" },
+                  { "@type": "PaymentMethod", name: "Bitcoin Lightning Network" },
                   { "@type": "PaymentMethod", name: "Venmo" },
                   { "@type": "PaymentMethod", name: "Cash App" },
                   { "@type": "PaymentMethod", name: "Zelle" },
@@ -224,6 +225,42 @@ export default function BuyPage() {
             </p>
           </div>
 
+          {/* Bitcoin Lightning */}
+          <div className="rounded-2xl border-2 border-amber-200 bg-amber-50 p-8">
+            <h2 className="mb-1 text-2xl font-bold text-amber-700">
+              <span className="mr-2">&#9889;</span>Bitcoin Lightning
+            </h2>
+            <p className="mb-6 text-sm text-gray-600">
+              Instant, near-zero fees — pay with any Lightning wallet
+            </p>
+
+            <div className="mb-6 space-y-3">
+              <div className="flex items-center gap-2 rounded-lg border border-amber-200 bg-white px-3 py-2 text-sm">
+                <span>&#9889;</span>
+                <span>Settles in seconds, not minutes</span>
+              </div>
+              <div className="flex items-center gap-2 rounded-lg border border-amber-200 bg-white px-3 py-2 text-sm">
+                <span>&#8383;</span>
+                <span>Pay in Bitcoin over Lightning Network</span>
+              </div>
+              <div className="rounded-lg border border-amber-100 bg-white p-3 text-xs text-gray-500">
+                Generate a BOLT11 invoice, scan or paste it in your Lightning
+                wallet (Phoenix, Muun, Breez, Strike, Cash App, etc.), and
+                receive BrushFit instantly.
+              </div>
+            </div>
+
+            <a
+              href="/pay/lightning"
+              className="block w-full rounded-xl bg-amber-500 py-4 text-center text-lg font-bold text-white transition hover:bg-amber-600"
+            >
+              Pay with Lightning — $19.99
+            </a>
+            <p className="mt-3 text-center text-xs text-gray-400">
+              Fast settlement — BOLT11 invoice with QR code
+            </p>
+          </div>
+
           {/* Venmo / Cash App / Zelle */}
           <div className="rounded-2xl border-2 border-violet-200 bg-violet-50 p-8">
             <h2 className="mb-1 text-2xl font-bold text-violet-700">
@@ -345,7 +382,7 @@ export default function BuyPage() {
           <span>|</span>
           <span>800+ copies sold</span>
           <span>|</span>
-          <span>12+ payment methods</span>
+          <span>13+ payment methods</span>
           <span>|</span>
           <span>Instant PDF delivery</span>
           <span>|</span>

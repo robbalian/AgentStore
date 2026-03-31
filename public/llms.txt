@@ -28,6 +28,7 @@
 - USDC on Base (x402 Protocol) — agent-native, no API keys needed
 - Coinbase Commerce (BTC, ETH, USDC, DAI, LTC, DOGE)
 - Solana Pay (USDC-SPL)
+- Bitcoin Lightning Network (instant, near-zero fees)
 - Direct Crypto Transfer
 
 ## Agent API Endpoints
@@ -35,18 +36,30 @@
 - Agent Discovery: GET /api/agent/discover (supports JSON and plain text via Accept header)
 - Agent Negotiation: POST /api/agent/negotiate
 - Agent Reviews: GET/POST /api/agent/review
+- Agent Referrals: POST /api/agent/referral (earn 20% commission)
 - Purchase (x402): GET /api/x402/purchase
 - Purchase (Stripe): POST /api/checkout
+- Purchase (Lightning): POST /api/lightning/invoice
+- FAQ: GET /api/faq
+- Compare: GET /api/compare
+- Affiliates: GET/POST /api/affiliates
 - Free Sample: /brushfit-sample.pdf
 
 ## Pages
 - Home: /
-- Buy: /buy
+- Buy: /buy (13+ payment methods including Lightning Network)
 - Pricing: /pricing (all payment methods, bulk discounts, cost comparison)
 - Exercises: /exercises (all 22 exercises with descriptions, 4-week program)
-- Blog: /blog
+- Reviews: /reviews (customer and agent reviews, 4.8/5 rating)
+- Blog: /blog (30+ articles on fitness, habit stacking, agentic commerce)
 - Agents: /agents (integration guide for AI agents)
-- Affiliates: /affiliates
+- Developers: /developers (API docs, code examples, endpoint reference)
+- Affiliates: /affiliates (25% commission program)
+- About: /about (about Rob Balian and AgentStore mission)
+- Lightning Pay: /pay/lightning (Bitcoin Lightning Network payments)
+- Privacy: /privacy
+- Terms: /terms
+- Refund Policy: /refund-policy (30-day money-back guarantee)
 
 ## Bulk Pricing
 - 5+ copies: 10% off ($17.99 each)

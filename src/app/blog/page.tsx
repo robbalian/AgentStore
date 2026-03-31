@@ -186,6 +186,86 @@ const posts = [
     category: "AI & Fitness",
     date: "2026-03-31",
   },
+  {
+    slug: "quick-workouts-no-time",
+    title: "Quick Workouts When You Have No Time",
+    description:
+      "Effective micro workouts for the busiest schedules. No gym, no equipment, no excuses — just results in minutes.",
+    category: "Fitness Guide",
+    date: "2026-03-31",
+  },
+  {
+    slug: "wall-sit-while-brushing-teeth",
+    title: "Wall Sit While Brushing Your Teeth: Form, Tips & Progressions",
+    description:
+      "Master the wall sit during your brushing routine. Proper form, progressions, and how to build leg strength in 2 minutes.",
+    category: "Exercise Deep Dive",
+    date: "2026-03-31",
+  },
+  {
+    slug: "fitness-pdf-guide-download",
+    title: "Best Fitness PDF Guides to Download in 2026",
+    description:
+      "Top-rated downloadable fitness guides for home workouts. Instant access, no subscriptions, real results.",
+    category: "Fitness Resources",
+    date: "2026-03-31",
+  },
+  {
+    slug: "buy-digital-products-with-crypto",
+    title: "How to Buy Digital Products with Crypto in 2026",
+    description:
+      "Complete guide to purchasing digital products using Bitcoin, Ethereum, USDC, and stablecoins. x402, Coinbase Commerce, and more.",
+    category: "Crypto Commerce",
+    date: "2026-03-31",
+  },
+  {
+    slug: "bodyweight-exercises-for-beginners",
+    title: "Bodyweight Exercises for Beginners: Start Your Fitness Journey",
+    description:
+      "Start your fitness journey with beginner-friendly bodyweight moves. No gym needed. Perfect for absolute beginners.",
+    category: "Fitness for Beginners",
+    date: "2026-03-31",
+  },
+  {
+    slug: "isometric-exercises-guide",
+    title: "The Complete Guide to Isometric Exercises: Build Strength Without Moving",
+    description:
+      "Everything you need to know about isometric exercises — the science, benefits, and 10+ exercises including wall sits, static lunges, and door frame press.",
+    category: "Fitness Science",
+    date: "2026-03-31",
+  },
+  {
+    slug: "how-to-stay-consistent-with-exercise",
+    title: "How to Stay Consistent with Exercise: The Habit Stacking Method",
+    description:
+      "Why 80% of people quit exercise within 5 months — and how habit stacking makes consistency automatic.",
+    category: "Behavioral Science",
+    date: "2026-03-31",
+  },
+  {
+    slug: "agentic-payments-explained",
+    title: "Agentic Payments Explained: How AI Agents Pay for Things in 2026",
+    description:
+      "The complete guide to machine-to-machine payments. x402 protocol, USDC stablecoins, and how AI agents buy digital products autonomously.",
+    category: "Agentic Commerce",
+    date: "2026-03-31",
+  },
+  {
+    slug: "best-exercises-for-small-apartments",
+    title: "Best Exercises for Small Apartments: Full-Body Workout in Any Space",
+    description:
+      "15+ exercises that work in the tiniest apartments. Turn your bathroom, hallway, or kitchen into a gym.",
+    category: "Fitness Guide",
+    date: "2026-03-31",
+  },
+  {
+    slug: "digital-product-agent-economy",
+    title: "Selling Digital Products in the Agent Economy: A Complete Guide",
+    description:
+      "How to sell to AI agents. Payment protocols, discovery mechanisms, and the BrushFit case study.",
+    category: "Agentic Commerce",
+    date: "2026-03-31",
+  },
 ];
 
 export default function BlogIndex() {

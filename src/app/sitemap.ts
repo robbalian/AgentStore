@@ -353,5 +353,73 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.5,
     },
+
+    // New blog posts — wave 6
+    {
+      url: `${baseUrl}/blog/calf-raises-while-brushing-teeth`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/blog/remote-worker-fitness-routine`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/blog/senior-fitness-exercises-at-home`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/blog/mcp-protocol-agent-commerce`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/blog/exercise-while-waiting`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+
+    // Landing pages
+    {
+      url: `${baseUrl}/for/remote-workers`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/for/seniors`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+
+    // Payment methods page
+    {
+      url: `${baseUrl}/payments`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+
+    // Feeds
+    {
+      url: `${baseUrl}/feed.xml`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "daily",
+      priority: 0.4,
+    },
+    {
+      url: `${baseUrl}/products.xml`,
+      lastModified: new Date("2026-03-31"),
+      changeFrequency: "weekly",
+      priority: 0.4,
+    },
   ];
 }

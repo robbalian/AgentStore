@@ -76,6 +76,7 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
           rel="stylesheet"
         />
+        <link rel="alternate" type="application/rss+xml" title="BrushFit AgentStore Blog" href="/feed.xml" />
       </head>
       <body className="bg-white text-gray-900 antialiased" style={{ fontFamily: "'Inter', sans-serif" }}>
         {/* Top Promo Banner */}
@@ -101,6 +102,11 @@ export default function RootLayout({
               <a href="/developers" className="hover:text-indigo-600">Developers</a>
               <a href="/affiliates" className="hover:text-indigo-600">Affiliates</a>
               <a href="/about" className="hover:text-indigo-600">About</a>
+              <a href="/payments" className="hover:text-indigo-600">Payments</a>
+            </div>
+            <div className="mt-2 flex flex-wrap justify-center gap-6 text-xs text-gray-500">
+              <a href="/for/remote-workers" className="hover:text-indigo-600">For Remote Workers</a>
+              <a href="/for/seniors" className="hover:text-indigo-600">For Seniors</a>
             </div>
             <div className="mt-3 flex flex-wrap justify-center gap-6 text-xs text-gray-400">
               <a href="/privacy" className="hover:text-gray-600">Privacy</a>

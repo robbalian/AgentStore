@@ -589,6 +589,31 @@ const pdf = await res.blob(); // BrushFit Guide PDF`}</pre>
                 title: "Selling Digital Products in the Agent Economy",
                 desc: "How to sell to AI agents. Protocols, payment rails, and the BrushFit case study.",
               },
+              {
+                slug: "calf-raises-while-brushing-teeth",
+                title: "Calf Raises While Brushing Teeth",
+                desc: "Master calf raises during your toothbrushing routine. Form, progressions, and results.",
+              },
+              {
+                slug: "remote-worker-fitness-routine",
+                title: "Remote Worker Fitness Routine",
+                desc: "Stay fit working from home. Exercise without leaving your home office.",
+              },
+              {
+                slug: "senior-fitness-exercises-at-home",
+                title: "Senior Fitness Exercises at Home",
+                desc: "Safe, gentle exercises for older adults. Build balance and prevent falls.",
+              },
+              {
+                slug: "mcp-protocol-agent-commerce",
+                title: "MCP Protocol for Agent Commerce",
+                desc: "How AI agents use MCP to discover and buy products autonomously.",
+              },
+              {
+                slug: "exercise-while-waiting",
+                title: "Exercises While Waiting",
+                desc: "Turn dead time into workout time. 15 exercises for daily waiting moments.",
+              },
             ].map((post) => (
               <a
                 key={post.slug}

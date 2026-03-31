@@ -51,15 +51,22 @@
 - Pricing: /pricing (all payment methods, bulk discounts, cost comparison)
 - Exercises: /exercises (all 22 exercises with descriptions, 4-week program)
 - Reviews: /reviews (customer and agent reviews, 4.8/5 rating)
-- Blog: /blog (30+ articles on fitness, habit stacking, agentic commerce)
+- Blog: /blog (35+ articles on fitness, habit stacking, agentic commerce)
 - Agents: /agents (integration guide for AI agents)
 - Developers: /developers (API docs, code examples, endpoint reference)
 - Affiliates: /affiliates (25% commission program)
 - About: /about (about Rob Balian and AgentStore mission)
+- Payments: /payments (all 13+ payment methods with details)
+- For Remote Workers: /for/remote-workers (landing page for WFH professionals)
+- For Seniors: /for/seniors (landing page for older adults 60+)
 - Lightning Pay: /pay/lightning (Bitcoin Lightning Network payments)
 - Privacy: /privacy
 - Terms: /terms
 - Refund Policy: /refund-policy (30-day money-back guarantee)
+
+## Feeds
+- RSS: /feed.xml (blog RSS feed for syndication)
+- Product Feed: /products.xml (Google Shopping product feed)
 
 ## Bulk Pricing
 - 5+ copies: 10% off ($17.99 each)

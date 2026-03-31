@@ -266,6 +266,46 @@ const posts = [
     category: "Agentic Commerce",
     date: "2026-03-31",
   },
+  {
+    slug: "calf-raises-while-brushing-teeth",
+    title: "Calf Raises While Brushing Teeth: Build Stronger Legs in 2 Minutes",
+    description:
+      "Master calf raises during your toothbrushing routine. Proper form, sets, reps, and progressions for building calf strength.",
+    category: "Exercise Deep Dive",
+    date: "2026-03-31",
+  },
+  {
+    slug: "remote-worker-fitness-routine",
+    title: "Remote Worker Fitness Routine: Stay Fit Working From Home",
+    description:
+      "The complete fitness routine for remote workers. Exercise without leaving your home office with zero extra time.",
+    category: "Remote Work Fitness",
+    date: "2026-03-31",
+  },
+  {
+    slug: "senior-fitness-exercises-at-home",
+    title: "Senior Fitness Exercises at Home: Safe Workouts for Older Adults",
+    description:
+      "Safe, gentle exercises for seniors. Build balance, prevent falls, and stay active while brushing your teeth.",
+    category: "Senior Fitness",
+    date: "2026-03-31",
+  },
+  {
+    slug: "mcp-protocol-agent-commerce",
+    title: "MCP Protocol for Agent Commerce: How AI Agents Discover and Buy Products",
+    description:
+      "Complete guide to Model Context Protocol for agent commerce. How agents discover, evaluate, and purchase products.",
+    category: "AgentEO & Commerce",
+    date: "2026-03-31",
+  },
+  {
+    slug: "exercise-while-waiting",
+    title: "Exercises While Waiting: Turn Dead Time Into Workout Time",
+    description:
+      "15 exercises you can do while waiting — brushing teeth, microwave, coffee, elevator, checkout line.",
+    category: "Fitness Tips",
+    date: "2026-03-31",
+  },
 ];
 
 export default function BlogIndex() {

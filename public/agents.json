@@ -34,7 +34,12 @@
     "a2a_discovery": "/.well-known/a2a.json",
     "llms_txt": "/llms.txt",
     "llms_full_txt": "/llms-full.txt",
-    "agents_page": "/agents"
+    "agents_page": "/agents",
+    "rss_feed": "/feed.xml",
+    "product_feed": "/products.xml",
+    "payments_page": "/payments",
+    "landing_remote_workers": "/for/remote-workers",
+    "landing_seniors": "/for/seniors"
   },
   "capabilities": [
     "product_discovery",

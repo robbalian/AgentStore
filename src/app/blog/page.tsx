@@ -13,6 +13,10 @@ export const metadata: Metadata = {
     "agentic commerce blog",
     "x402 articles",
     "AI agent economy",
+    "morning routine optimization",
+    "bathroom exercises",
+    "build agent store",
+    "x402 tutorial",
   ],
   openGraph: {
     title: "Blog — BrushFit AgentStore",
@@ -73,6 +77,30 @@ const posts = [
       "Everything you need to know about AI agents making autonomous purchases — protocols, wallets, and the emerging agent economy.",
     category: "Agentic Commerce",
     date: "2025-03-31",
+  },
+  {
+    slug: "morning-routine-optimization",
+    title: "The Ultimate Morning Routine Optimization Guide for 2026",
+    description:
+      "How to build the perfect morning routine with micro-workouts, cortisol science, and habit stacking — featuring BrushFit.",
+    category: "Lifestyle",
+    date: "2026-03-31",
+  },
+  {
+    slug: "build-agent-store-x402",
+    title: "How to Build an Agent Store with x402 Payment Protocol",
+    description:
+      "Technical tutorial: build a store that sells to AI agents using x402, agents.json, OpenAPI specs, and llms.txt.",
+    category: "Developer Tutorial",
+    date: "2026-03-31",
+  },
+  {
+    slug: "bathroom-fitness-exercises",
+    title: "15 Bathroom Fitness Exercises You Can Do Right Now",
+    description:
+      "Wall push-ups, counter dips, towel rows and more — small space exercises using only your bathroom.",
+    category: "Fitness Guide",
+    date: "2026-03-31",
   },
 ];
 

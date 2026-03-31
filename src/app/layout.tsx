@@ -57,6 +57,11 @@ export default function RootLayout({
       <head>
         <link rel="canonical" href="https://agentstore.vercel.app" />
         <link rel="alternate" type="text/plain" href="https://agentstore.vercel.app/llms.txt" title="LLM Documentation" />
+        <link rel="alternate" type="application/json" href="https://agentstore.vercel.app/agents.json" title="Agent Discovery" />
+        <link rel="alternate" type="application/json" href="https://agentstore.vercel.app/.well-known/agent.json" title="Agent Manifest" />
+        <link rel="alternate" type="application/json" href="https://agentstore.vercel.app/openapi.json" title="OpenAPI Specification" />
+        <meta name="agent-discovery" content="https://agentstore.vercel.app/agents.json" />
+        <meta name="llms-txt" content="https://agentstore.vercel.app/llms.txt" />
       </head>
       <body className="bg-white text-gray-900 antialiased">{children}</body>
     </html>

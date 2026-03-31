@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "type": "commerce",
+  "name": "BrushFit AgentStore",
+  "description": "Digital product store accepting payments from AI agents via x402 protocol and humans via Stripe. Sells BrushFit: The 2-Minute Toothbrush Workout Guide.",
+  "url": "https://agentstore.vercel.app",
+  "contact": {
+    "email": "rob@robbalian.com",
+    "name": "Rob Balian"
+  },
+  "capabilities": {
+    "commerce": true,
+    "autonomous_purchase": true,
+    "instant_delivery": true,
+    "no_auth_required": true,
+    "free_trial": true
+  },
+  "payment_protocols": [
+    {
+      "name": "x402",
+      "version": "2.8",
+      "description": "HTTP 402 payment protocol with USDC on Base",
+      "endpoint": "/api/x402/purchase",
+      "currency": "USDC",
+      "network": "eip155:8453",
+      "facilitator": "https://x402.org/facilitator"
+    },
+    {
+      "name": "stripe",
+      "description": "Traditional card payment via Stripe checkout",
+      "endpoint": "/api/checkout",
+      "currency": "USD"
+    }
+  ],
+  "discovery_endpoints": {
+    "product_info": "/api/info",
+    "openapi_spec": "/openapi.json",
+    "agents_json": "/agents.json",
+    "ai_plugin": "/.well-known/ai-plugin.json",
+    "llms_txt": "/llms.txt",
+    "llms_full": "/llms-full.txt",
+    "free_sample": "/brushfit-sample.pdf"
+  },
+  "products": [
+    {
+      "id": "brushfit-guide",
+      "name": "BrushFit: The 2-Minute Toothbrush Workout Guide",
+      "price": { "amount": 19.99, "currency": "USD" },
+      "format": "application/pdf",
+      "instant_delivery": true,
+      "purchase_url": "/api/x402/purchase",
+      "sample_url": "/brushfit-sample.pdf"
+    }
+  ],
+  "agent_quickstart": "To purchase: import { wrapFetchWithPayment } from '@x402/fetch'; const pay = wrapFetchWithPayment(fetch, walletClient); const res = await pay('https://agentstore.vercel.app/api/x402/purchase'); const pdf = await res.blob();"
+}

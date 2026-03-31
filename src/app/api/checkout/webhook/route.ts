@@ -70,7 +70,7 @@ export async function POST(req: NextRequest) {
         console.log(`Payment completed: ${sessionId}, email: ${email}`);
 
         // Create a download token for this purchase
-        const downloadToken = createDownloadToken();
+        const downloadToken = await createDownloadToken();
         const downloadUrl = `${SITE_URL}/api/download?token=${downloadToken}`;
 
         console.log(`Download token created for ${email}: ${downloadUrl}`);

@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
 
   try {
     // Create a download token upfront and embed it in the success URL
-    const downloadToken = createDownloadToken();
+    const downloadToken = await createDownloadToken();
 
     const body = new URLSearchParams({
       "payment_method_types[]": "card",

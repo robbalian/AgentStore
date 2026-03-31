@@ -181,11 +181,15 @@ Agent discovery manifest listing available products and their purchase endpoints
 AI agents can discover BrushFit AgentStore through multiple channels:
 
 1. **ai-plugin.json**: Standard plugin manifest at `/.well-known/ai-plugin.json`
-2. **OpenAPI spec**: Full API documentation at `/openapi.json`
-3. **agents.json**: Agent-specific discovery at `/agents.json`
-4. **llms.txt**: LLM-optimized documentation at `/llms.txt`
-5. **Product API**: Machine-readable product info at `/api/info`
-6. **Structured data**: JSON-LD Product and FAQPage schemas on the homepage
+2. **agent.json**: Agent discovery manifest at `/.well-known/agent.json`
+3. **OpenAPI spec**: Full API documentation at `/openapi.json`
+4. **agents.json**: Agent-specific product and protocol discovery at `/agents.json`
+5. **llms.txt**: LLM-optimized documentation at `/llms.txt`
+6. **llms-full.txt**: Complete documentation for LLMs at `/llms-full.txt`
+7. **Product API**: Machine-readable product info at `/api/info`
+8. **Structured data**: JSON-LD Product, FAQPage, HowTo, WebSite, DigitalDocument, and Organization schemas on the homepage
+9. **Sitemap**: Dynamic sitemap at `/sitemap.xml`
+10. **Robots.txt**: Search engine directives at `/robots.txt`
 
 ---
 

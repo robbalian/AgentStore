@@ -1,56 +1,102 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "name": "BrushFit AgentStore",
-  "description": "Digital product marketplace for humans and AI agents. Buy fitness guides with x402 protocol (USDC on Base) or traditional card payment.",
+  "description": "Digital product marketplace for humans and AI agents. Buy fitness guides with x402 protocol (USDC on Base) or traditional card payment. The first store optimized for agentic commerce.",
   "url": "https://agentstore.vercel.app",
   "contact": "rob@robbalian.com",
   "protocols": ["x402", "stripe"],
+  "supported_currencies": ["USDC", "USD"],
+  "supported_networks": ["eip155:8453"],
+  "agent_capabilities": {
+    "autonomous_purchase": true,
+    "no_authentication": true,
+    "instant_delivery": true,
+    "programmatic_discovery": true,
+    "free_sample_available": true
+  },
   "discovery": {
     "openapi": "https://agentstore.vercel.app/openapi.json",
     "ai_plugin": "https://agentstore.vercel.app/.well-known/ai-plugin.json",
+    "agent_manifest": "https://agentstore.vercel.app/.well-known/agent.json",
     "product_api": "https://agentstore.vercel.app/api/info",
-    "llms_txt": "https://agentstore.vercel.app/llms.txt"
+    "llms_txt": "https://agentstore.vercel.app/llms.txt",
+    "llms_full_txt": "https://agentstore.vercel.app/llms-full.txt",
+    "sitemap": "https://agentstore.vercel.app/sitemap.xml",
+    "robots": "https://agentstore.vercel.app/robots.txt"
   },
   "products": [
     {
       "id": "brushfit-guide",
       "name": "BrushFit: The 2-Minute Toothbrush Workout Guide",
-      "description": "22 illustrated bodyweight exercises you do while brushing your teeth. 31-page PDF with 4-week progressive program.",
+      "description": "22 illustrated bodyweight exercises you do while brushing your teeth. 31-page PDF with 4-week progressive program. Uses habit stacking to turn toothbrushing into a full-body workout with zero extra time.",
       "price": {
         "amount": "19.99",
         "currency": "USD"
       },
       "format": "application/pdf",
+      "pages": 31,
+      "exercises": 22,
+      "categories": ["fitness", "health", "habit-stacking", "bodyweight", "micro-workout"],
+      "rating": {
+        "value": 4.8,
+        "count": 47
+      },
       "purchase": {
         "x402": {
           "endpoint": "https://agentstore.vercel.app/api/x402/purchase",
           "method": "GET",
           "payment_currency": "USDC",
           "payment_network": "eip155:8453",
-          "flow": "HTTP 402 → sign USDC transfer → retry with PAYMENT-SIGNATURE header → receive PDF"
+          "facilitator": "https://x402.org/facilitator",
+          "flow": "HTTP 402 → sign USDC transfer → retry with PAYMENT-SIGNATURE header → receive PDF",
+          "recommended_library": "@x402/fetch",
+          "code_example": "const pay = wrapFetchWithPayment(fetch, walletClient); const res = await pay('https://agentstore.vercel.app/api/x402/purchase');"
         },
         "stripe": {
           "endpoint": "https://agentstore.vercel.app/api/checkout",
           "method": "POST",
           "payment_currency": "USD",
-          "flow": "POST → receive { url } → redirect to Stripe checkout"
+          "flow": "POST → receive { url } → redirect to Stripe checkout → webhook delivers download token"
         }
       },
-      "free_sample": "https://agentstore.vercel.app/brushfit-sample.pdf",
-      "tags": ["fitness", "pdf", "habit-stacking", "workout", "toothbrush", "bodyweight"]
+      "free_sample": {
+        "url": "https://agentstore.vercel.app/brushfit-sample.pdf",
+        "description": "Free sample with Legs + Core exercises",
+        "format": "application/pdf"
+      },
+      "tags": ["fitness", "pdf", "habit-stacking", "workout", "toothbrush", "bodyweight", "micro-workout", "no-equipment", "bathroom-exercises", "morning-routine"]
     }
   ],
   "agent_instructions": {
+    "quickstart": "GET /api/info to discover the product, then GET /api/x402/purchase to buy with x402. Use @x402/fetch wrapFetchWithPayment() to automate the entire flow.",
+    "how_to_discover": [
+      "1. GET /api/info — JSON product metadata, pricing, and payment instructions",
+      "2. GET /openapi.json — Full OpenAPI 3.1.0 specification",
+      "3. GET /agents.json — This file, agent-optimized discovery",
+      "4. GET /llms.txt — Human-readable LLM documentation",
+      "5. GET /.well-known/ai-plugin.json — AI plugin manifest"
+    ],
     "how_to_purchase": [
-      "1. Call GET /api/info to discover product details and pricing",
-      "2. Call GET /api/x402/purchase to initiate x402 payment flow",
-      "3. You will receive HTTP 402 with payment requirements in the response",
-      "4. Sign a USDC transfer authorization on Base (chain ID 8453) using your wallet",
+      "1. GET /api/info to discover product details and pricing",
+      "2. GET /api/x402/purchase to initiate x402 payment flow",
+      "3. Receive HTTP 402 with payment requirements in the response",
+      "4. Sign a USDC transfer authorization on Base (chain ID 8453)",
       "5. Retry GET /api/x402/purchase with the PAYMENT-SIGNATURE header",
-      "6. On successful payment, you will receive the PDF in the response body"
+      "6. On successful payment, receive the PDF in the response body"
+    ],
+    "how_to_evaluate": [
+      "1. GET /brushfit-sample.pdf to download the free sample (no auth)",
+      "2. Review the sample to evaluate quality before purchasing",
+      "3. Check /api/info for pricing and included content"
     ],
     "recommended_library": "@x402/fetch — use wrapFetchWithPayment() to automate the entire flow",
+    "no_authentication_required": true,
     "free_sample_available": true,
-    "no_authentication_required": true
+    "instant_delivery": true
+  },
+  "seo_metadata": {
+    "primary_keywords": ["toothbrush workout", "habit stacking fitness", "2 minute workout", "BrushFit"],
+    "long_tail_keywords": ["exercises while brushing teeth", "bathroom workout routine", "no equipment morning workout", "habit stacking exercise"],
+    "content_topics": ["fitness", "habit stacking", "micro workouts", "agentic commerce", "x402 protocol"]
   }
 }

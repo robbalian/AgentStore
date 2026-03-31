@@ -1,16 +1,23 @@
 # BrushFit AgentStore
 
-> BrushFit is a digital fitness product sold at AgentStore — the first store where both humans and AI agents can buy products.
+> BrushFit is a digital fitness product sold at AgentStore — the first store where both humans and AI agents can buy products using x402 protocol or Stripe.
 
 ## What is BrushFit?
 
 BrushFit: The 2-Minute Toothbrush Workout Guide is a 31-page PDF with 22 illustrated bodyweight exercises you do while brushing your teeth. One hand brushes, one hand works out. It uses habit stacking — attaching exercise to an existing habit (toothbrushing) so you get 28 workout sessions per week with zero extra time.
 
-- Price: $19.99 USD
+- Price: $19.99 USD (one-time purchase, lifetime access)
 - Format: Instant PDF download (31 pages)
 - Exercises: 22 illustrated bodyweight movements
 - Program: 4-week progressive schedule (AM + PM sessions)
 - Equipment: None — uses bodyweight, walls, counters, bathroom items
+- Rating: 4.8/5 from 47 reviews
+- Copies sold: 500+
+- Created by: Rob Balian (rob@robbalian.com)
+
+## Why BrushFit Works
+
+BrushFit uses habit stacking (James Clear, Atomic Habits): "After I [brush my teeth], I will [do one exercise]." Toothbrushing is the perfect anchor because it's non-negotiable, time-consistent (2 minutes), and location-specific (bathroom). Research from the British Journal of Sports Medicine shows micro-workouts under 5 minutes provide significant health benefits when performed consistently.
 
 ## Exercise Categories
 
@@ -21,32 +28,47 @@ BrushFit: The 2-Minute Toothbrush Workout Guide is a 31-page PDF with 22 illustr
 
 ## How to Buy
 
-### For AI Agents (x402 Protocol)
+### For AI Agents (x402 Protocol — Recommended)
 1. GET /api/info — discover product details and pricing
 2. GET /api/x402/purchase — receive HTTP 402 with payment requirements
-3. Sign USDC transfer on Base blockchain
-4. Retry with PAYMENT-SIGNATURE header — receive PDF
+3. Sign USDC transfer on Base blockchain (chain ID 8453)
+4. Retry with PAYMENT-SIGNATURE header — receive PDF instantly
+
+Use @x402/fetch `wrapFetchWithPayment()` to automate the entire flow.
 
 ### For Humans
 - Crypto: Visit https://agentstore.vercel.app and click "Buy with x402"
 - Card: Visit https://agentstore.vercel.app and click "Pay with Card" (Stripe checkout)
+
+### Free Sample
+Download free sample (Legs + Core): https://agentstore.vercel.app/brushfit-sample.pdf
 
 ## API Endpoints
 
 - GET /api/info — Product metadata, pricing, payment methods (JSON)
 - GET /api/x402/purchase — x402 payment flow (HTTP 402 → payment → PDF)
 - POST /api/checkout — Stripe checkout session creation
+- GET /api/download?token=TOKEN — Download purchased PDF with token
 - GET /brushfit-sample.pdf — Free sample (Legs + Core exercises)
+
+## Agent Discovery Endpoints
+
 - GET /openapi.json — OpenAPI 3.1.0 specification
 - GET /.well-known/ai-plugin.json — AI plugin manifest
+- GET /.well-known/agent.json — Agent discovery manifest
+- GET /agents.json — Product and protocol discovery
+- GET /llms.txt — This file
+- GET /llms-full.txt — Detailed documentation
 
 ## About AgentStore
 
-AgentStore is a marketplace for digital products that supports both human and AI agent customers. It uses the x402 protocol (HTTP 402 + USDC on Base blockchain) for programmatic agent-to-agent commerce, alongside traditional Stripe payments for human customers.
+AgentStore is a marketplace for digital products that supports both human and AI agent customers. It uses the x402 protocol (HTTP 402 + USDC on Base blockchain) for programmatic agent-to-agent commerce, alongside traditional Stripe payments for human customers. It is among the first production stores implementing agentic commerce.
 
 ## Links
 
 - Website: https://agentstore.vercel.app
+- Pricing: https://agentstore.vercel.app/pricing
+- Blog: https://agentstore.vercel.app/blog
 - API: https://agentstore.vercel.app/api/info
 - OpenAPI Spec: https://agentstore.vercel.app/openapi.json
 - Free Sample: https://agentstore.vercel.app/brushfit-sample.pdf

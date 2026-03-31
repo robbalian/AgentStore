@@ -100,6 +100,94 @@ export default function Home() {
         }}
       />
 
+      {/* GEO: WebSite schema for sitelinks search */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: "BrushFit AgentStore",
+            url: "https://agentstore.vercel.app",
+            description:
+              "The first digital product store for both humans and AI agents. Buy fitness guides with x402 crypto protocol or card.",
+            potentialAction: {
+              "@type": "SearchAction",
+              target: "https://agentstore.vercel.app/blog?q={search_term_string}",
+              "query-input": "required name=search_term_string",
+            },
+          }),
+        }}
+      />
+      {/* GEO: HowTo schema for "how to exercise while brushing teeth" */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            name: "How to Exercise While Brushing Your Teeth",
+            description:
+              "Turn your 2-minute toothbrushing routine into a workout with BrushFit exercises. No equipment needed.",
+            totalTime: "PT2M",
+            supply: [
+              { "@type": "HowToSupply", name: "Toothbrush" },
+              { "@type": "HowToSupply", name: "Toothpaste" },
+            ],
+            tool: [
+              { "@type": "HowToTool", name: "Bathroom wall (for support)" },
+              { "@type": "HowToTool", name: "Counter or vanity" },
+            ],
+            step: [
+              {
+                "@type": "HowToStep",
+                name: "Start brushing",
+                text: "Begin brushing your teeth as normal with your dominant hand.",
+              },
+              {
+                "@type": "HowToStep",
+                name: "Choose an exercise",
+                text: "Pick one exercise from the BrushFit guide — wall sits, calf raises, squats, or standing knee raises work great for beginners.",
+              },
+              {
+                "@type": "HowToStep",
+                name: "Exercise while brushing",
+                text: "Perform the exercise with your free hand or lower body while you continue brushing. Each exercise is designed to be done one-handed.",
+              },
+              {
+                "@type": "HowToStep",
+                name: "Finish both together",
+                text: "Complete your 2-minute brushing session and your exercise simultaneously. Rinse and done — workout complete!",
+              },
+            ],
+          }),
+        }}
+      />
+      {/* GEO: VideoObject placeholder for rich snippets */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "DigitalDocument",
+            name: "BrushFit: The 2-Minute Toothbrush Workout Guide",
+            description:
+              "31-page illustrated PDF with 22 bodyweight exercises and a 4-week progressive program. Designed for exercising while brushing your teeth.",
+            author: { "@type": "Person", name: "Rob Balian" },
+            publisher: { "@type": "Organization", name: "AgentStore" },
+            fileFormat: "application/pdf",
+            numberOfPages: 31,
+            inLanguage: "en",
+            isAccessibleForFree: false,
+            hasDigitalDocumentPermission: {
+              "@type": "DigitalDocumentPermission",
+              permissionType: "https://schema.org/ReadPermission",
+              grantee: { "@type": "Audience", audienceType: "Purchasers" },
+            },
+          }),
+        }}
+      />
+
       {/* Hero */}
       <section className="mx-auto max-w-3xl px-6 pt-20 pb-16 text-center">
         <p className="mb-4 text-sm font-semibold tracking-widest text-indigo-600 uppercase">
@@ -439,6 +527,21 @@ const pdf = await res.blob(); // BrushFit Guide PDF`}</pre>
                 title: "How AI Agents Buy Products",
                 desc: "The complete guide to agent commerce — protocols, wallets, and the agent economy.",
               },
+              {
+                slug: "morning-routine-optimization",
+                title: "Morning Routine Optimization 2026",
+                desc: "Build the perfect morning routine with micro-workouts and habit stacking science.",
+              },
+              {
+                slug: "bathroom-fitness-exercises",
+                title: "15 Bathroom Fitness Exercises",
+                desc: "Wall push-ups, counter dips, towel rows — small space exercises you can do right now.",
+              },
+              {
+                slug: "build-agent-store-x402",
+                title: "Build an Agent Store with x402",
+                desc: "Technical tutorial: sell to AI agents using x402, agents.json, and OpenAPI specs.",
+              },
             ].map((post) => (
               <a
                 key={post.slug}
@@ -460,6 +563,41 @@ const pdf = await res.blob(); // BrushFit Guide PDF`}</pre>
               View all articles &rarr;
             </a>
           </div>
+        </div>
+      </section>
+
+      {/* Email Capture / Newsletter */}
+      <section className="bg-indigo-600 py-16">
+        <div className="mx-auto max-w-2xl px-6 text-center">
+          <h2 className="mb-2 text-3xl font-bold text-white">
+            Free Fitness Tips Every Week
+          </h2>
+          <p className="mb-8 text-lg text-indigo-100">
+            Join 500+ BrushFit fans. Get habit stacking tips, new exercise
+            ideas, and exclusive discounts. No spam — unsubscribe anytime.
+          </p>
+          <form
+            action="/api/subscribe"
+            method="POST"
+            className="mx-auto flex max-w-md flex-col gap-3 sm:flex-row"
+          >
+            <input
+              type="email"
+              name="email"
+              placeholder="you@example.com"
+              required
+              className="flex-1 rounded-xl border-2 border-indigo-400 bg-white px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-white focus:outline-none"
+            />
+            <button
+              type="submit"
+              className="rounded-xl bg-white px-6 py-3 font-bold text-indigo-600 transition hover:bg-indigo-50"
+            >
+              Subscribe
+            </button>
+          </form>
+          <p className="mt-4 text-sm text-indigo-200">
+            Plus get a free bathroom workout cheat sheet when you subscribe.
+          </p>
         </div>
       </section>
 
@@ -496,6 +634,9 @@ const pdf = await res.blob(); // BrushFit Guide PDF`}</pre>
               </a>
               <a href="/openapi.json" className="hover:text-indigo-600">
                 OpenAPI
+              </a>
+              <a href="/pricing" className="hover:text-indigo-600">
+                Pricing
               </a>
               <a href="/agents.json" className="hover:text-indigo-600">
                 agents.json

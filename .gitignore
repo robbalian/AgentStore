@@ -38,6 +38,9 @@ WALLETS.md
 # test artifacts
 BrushFit-Guide-PURCHASED.pdf
 
+# subscriber data (contains PII)
+subscribers.csv
+
 # vercel
 .vercel
 

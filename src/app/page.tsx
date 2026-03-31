@@ -664,8 +664,13 @@ const pdf = await res.blob(); // BrushFit Guide PDF`}</pre>
                 desc: "Complete beginner guide to bodyweight calisthenics in any room.",
               },
               {
-                slug: "mcp-protocol-ai-agent-commerce",
+                slug: "mcp-protocol-agent-commerce",
                 title: "MCP Protocol for Agent Commerce",
+                desc: "How AI agents use MCP to discover and buy products autonomously.",
+              },
+              {
+                slug: "mcp-protocol-ai-agent-commerce",
+                title: "MCP Protocol for AI Agent Commerce",
                 desc: "How Model Context Protocol enables AI agents to shop autonomously.",
               },
               {

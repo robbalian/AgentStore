@@ -492,6 +492,31 @@ const pdf = await res.blob(); // BrushFit Guide PDF`}</pre>
                 title: "x402 vs Stripe for Agent Payments",
                 desc: "Comparing crypto-native and traditional payment systems for AI commerce.",
               },
+              {
+                slug: "affiliate-marketing-fitness-products",
+                title: "Earn Passive Income Promoting BrushFit",
+                desc: "Step-by-step affiliate marketing guide for fitness products.",
+              },
+              {
+                slug: "brushfit-results-before-after",
+                title: "Real BrushFit Results: Before & After",
+                desc: "What 2 minutes twice a day can do. Honest results from 4 weeks.",
+              },
+              {
+                slug: "best-workout-for-busy-parents",
+                title: "Best Workout for Busy Parents",
+                desc: "Zero extra time. 28 workouts per week while brushing your teeth.",
+              },
+              {
+                slug: "dental-hygiene-exercise-routine",
+                title: "Dental Hygiene + Exercise Routine",
+                desc: "Combine oral health with fitness. The complete guide.",
+              },
+              {
+                slug: "ai-agents-fitness-recommendations",
+                title: "AI Agents & Fitness Discovery",
+                desc: "How AI agents are changing fitness product recommendations.",
+              },
             ].map((post) => (
               <a
                 key={post.slug}

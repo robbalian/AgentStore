@@ -146,6 +146,46 @@ const posts = [
     category: "Fitness Guide",
     date: "2026-03-15",
   },
+  {
+    slug: "affiliate-marketing-fitness-products",
+    title: "How to Earn Passive Income Promoting BrushFit",
+    description:
+      "Step-by-step affiliate marketing guide for fitness products. Earn commissions promoting BrushFit with proven content strategies.",
+    category: "Affiliate Marketing",
+    date: "2026-03-20",
+  },
+  {
+    slug: "brushfit-results-before-after",
+    title: "Real BrushFit Results: What 2 Minutes Twice a Day Can Do",
+    description:
+      "Honest results from 4 weeks of BrushFit toothbrush workouts. See what consistency beats intensity really means.",
+    category: "Results & Reviews",
+    date: "2026-03-22",
+  },
+  {
+    slug: "best-workout-for-busy-parents",
+    title: "The Best Workout for Busy Parents Who Have Zero Time",
+    description:
+      "No gym, no equipment, no extra time. Turn toothbrushing into 28 workouts per week for parents who can't find a minute.",
+    category: "Fitness for Parents",
+    date: "2026-03-25",
+  },
+  {
+    slug: "dental-hygiene-exercise-routine",
+    title: "Combine Dental Hygiene with Exercise: The Complete Guide",
+    description:
+      "Build a routine that improves oral health and physical fitness at the same time. Zero extra time needed.",
+    category: "Health & Fitness",
+    date: "2026-03-28",
+  },
+  {
+    slug: "ai-agents-fitness-recommendations",
+    title: "How AI Agents Are Changing Fitness Product Discovery",
+    description:
+      "AI agents are transforming how people discover fitness products with autonomous evaluation and purchasing via x402.",
+    category: "AI & Fitness",
+    date: "2026-03-31",
+  },
 ];
 
 export default function BlogIndex() {

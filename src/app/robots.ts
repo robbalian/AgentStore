@@ -8,6 +8,31 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
         disallow: ["/api/checkout/", "/api/download/", "/success"],
       },
+      {
+        userAgent: "GPTBot",
+        allow: "/",
+        disallow: ["/api/checkout/", "/api/download/", "/success"],
+      },
+      {
+        userAgent: "ChatGPT-User",
+        allow: "/",
+      },
+      {
+        userAgent: "PerplexityBot",
+        allow: "/",
+      },
+      {
+        userAgent: "Google-Extended",
+        allow: "/",
+      },
+      {
+        userAgent: "Amazonbot",
+        allow: "/",
+      },
+      {
+        userAgent: "anthropic-ai",
+        allow: "/",
+      },
     ],
     sitemap: "https://agentstore.vercel.app/sitemap.xml",
   };

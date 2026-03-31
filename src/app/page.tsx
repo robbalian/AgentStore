@@ -92,7 +92,7 @@ export default function Home() {
                 name: "What payment methods are accepted?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "We accept USDC on Base via x402 protocol (for AI agents and crypto users) and credit/debit cards via Stripe checkout.",
+                  text: "We accept credit/debit cards, PayPal, Apple Pay, Google Pay, and Stripe Link for human customers. For AI agents and crypto users, we accept USDC on Base via x402 protocol. Visit our buy page for all payment options.",
                 },
               },
             ],
@@ -171,7 +171,7 @@ export default function Home() {
       <section className="py-16">
         <div className="mx-auto max-w-3xl px-6">
           <h2 className="mb-2 text-center text-sm font-semibold tracking-widest text-indigo-600 uppercase">
-            Two Ways to Pay
+            Every Way to Pay
           </h2>
           <h3 className="mb-8 text-center text-3xl font-bold">
             Humans or Agents — We Accept Both
@@ -195,19 +195,27 @@ export default function Home() {
             </div>
             <div className="rounded-xl border-2 border-gray-200 bg-gray-50 p-6">
               <h4 className="mb-2 text-lg font-bold text-gray-700">
-                Card Payment (Stripe)
+                Card, PayPal &amp; Wallets
               </h4>
               <p className="mb-4 text-sm text-gray-600">
-                Traditional checkout with credit or debit card. Secure payment
-                via Stripe. PDF delivered to your email instantly.
+                Pay with credit/debit card, PayPal, Apple Pay, Google Pay, or
+                Stripe Link. Secure checkout via Stripe with instant PDF delivery.
               </p>
               <a
                 href="/api/checkout"
                 className="inline-block rounded-lg bg-gray-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-gray-800"
               >
-                Pay with Card — $19.99
+                Checkout — $19.99
               </a>
+              <p className="mt-2 text-xs text-gray-400">
+                Apple Pay &amp; Google Pay on supported devices
+              </p>
             </div>
+          </div>
+          <div className="mt-4 text-center">
+            <a href="/buy" className="text-sm font-semibold text-indigo-600 hover:text-indigo-700">
+              View all payment options &rarr;
+            </a>
           </div>
         </div>
       </section>
@@ -377,7 +385,7 @@ const pdf = await res.blob(); // BrushFit Guide PDF`}</pre>
               },
               {
                 q: "What payment methods do you accept?",
-                a: "We accept USDC on Base via x402 protocol (perfect for AI agents and crypto wallets) and credit/debit cards via Stripe. Both get you instant PDF delivery.",
+                a: "We accept credit/debit cards, PayPal, Apple Pay, Google Pay, and Stripe Link for humans. For AI agents and crypto users, we accept USDC on Base via x402 protocol. All methods deliver the PDF instantly.",
               },
               {
                 q: "What is x402?",
@@ -438,6 +446,26 @@ const pdf = await res.blob(); // BrushFit Guide PDF`}</pre>
                 slug: "ai-agents-buying-products",
                 title: "How AI Agents Buy Products",
                 desc: "The complete guide to agent commerce — protocols, wallets, and the agent economy.",
+              },
+              {
+                slug: "morning-routine-workout",
+                title: "Best Morning Routine Workout",
+                desc: "Exercise while brushing your teeth. Zero extra time required.",
+              },
+              {
+                slug: "bathroom-exercises-small-spaces",
+                title: "15 Bathroom Exercises for Small Spaces",
+                desc: "Full-body workout using only your bathroom. No equipment needed.",
+              },
+              {
+                slug: "how-to-build-agent-store",
+                title: "How to Build an Agent Store",
+                desc: "Sell digital products to AI agents using x402 protocol and Stripe.",
+              },
+              {
+                slug: "x402-vs-stripe-agent-payments",
+                title: "x402 vs Stripe for Agent Payments",
+                desc: "Comparing crypto-native and traditional payment systems for AI commerce.",
               },
             ].map((post) => (
               <a

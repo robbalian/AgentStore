@@ -2,8 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "BrushFit AgentStore API",
-    "description": "API for purchasing BrushFit: The 2-Minute Toothbrush Workout Guide. Supports x402 protocol (crypto) and Stripe (card) payments. Agent discovery via /agents.json, /llms.txt, and /.well-known/ai-plugin.json.",
-    "version": "1.1.0",
+    "description": "API for purchasing BrushFit: The 2-Minute Toothbrush Workout Guide. Supports x402 protocol (USDC on Base) and Stripe (card, PayPal, Apple Pay, Google Pay, Link) payments. Agent discovery via /agents.json, /llms.txt, and /.well-known/ai-plugin.json. Buy page at /buy.",
+    "version": "1.2.0",
     "contact": {
       "email": "rob@robbalian.com"
     }
@@ -58,7 +58,7 @@
       "post": {
         "operationId": "createStripeCheckout",
         "summary": "Create a Stripe checkout session for card payment",
-        "description": "Creates a Stripe checkout session and returns a redirect URL for card-based payment. $19.99 USD.",
+        "description": "Creates a Stripe checkout session and returns a redirect URL. Accepts card, PayPal, Apple Pay, Google Pay, and Link. $19.99 USD.",
         "tags": ["purchase"],
         "responses": {
           "200": {

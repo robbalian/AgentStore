@@ -42,7 +42,8 @@ export async function GET() {
         endpoint: `${baseUrl}/api/checkout`,
         method: "POST",
         currency: "USD",
-        description: "Traditional card payment via Stripe Checkout. Returns a redirect URL.",
+        accepted_methods: ["card", "paypal", "apple_pay", "google_pay", "link"],
+        description: "Pay with credit/debit card, PayPal, Apple Pay, Google Pay, or Stripe Link. Returns a redirect URL to Stripe hosted checkout.",
       },
     },
 

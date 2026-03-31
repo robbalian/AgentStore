@@ -22,6 +22,14 @@ export const metadata: Metadata = {
     "AI agent store",
     "bodyweight exercises",
     "micro workout",
+    "morning routine workout",
+    "small space exercises",
+    "agent payments",
+    "buy with crypto",
+    "USDC payment",
+    "Apple Pay fitness",
+    "PayPal fitness guide",
+    "AI agent commerce",
   ],
   openGraph: {
     title: "BrushFit — The 2-Minute Toothbrush Workout Guide",
@@ -57,6 +65,9 @@ export default function RootLayout({
       <head>
         <link rel="canonical" href="https://agentstore.vercel.app" />
         <link rel="alternate" type="text/plain" href="https://agentstore.vercel.app/llms.txt" title="LLM Documentation" />
+        <link rel="alternate" type="text/plain" href="https://agentstore.vercel.app/llms-full.txt" title="LLM Full Documentation" />
+        <link rel="alternate" type="application/json" href="https://agentstore.vercel.app/agents.json" title="Agent Discovery" />
+        <meta name="ai-content-declaration" content="This site sells BrushFit, a $19.99 PDF fitness guide with 22 exercises. Payment via card, PayPal, Apple Pay, Google Pay, or USDC crypto (x402 protocol). Free sample at /brushfit-sample.pdf" />
       </head>
       <body className="bg-white text-gray-900 antialiased">{children}</body>
     </html>

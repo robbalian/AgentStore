@@ -74,6 +74,38 @@ const posts = [
     category: "Agentic Commerce",
     date: "2025-03-31",
   },
+  {
+    slug: "morning-routine-workout",
+    title: "Best Morning Routine Workout: Exercise While Brushing Teeth",
+    description:
+      "Build a morning workout routine that requires zero extra time. Learn how to exercise while brushing your teeth.",
+    category: "Fitness Guide",
+    date: "2025-06-15",
+  },
+  {
+    slug: "how-to-build-agent-store",
+    title: "How to Build an Agent Store: Sell Digital Products to AI Agents",
+    description:
+      "Step-by-step guide to building a store where AI agents can discover and buy digital products programmatically using x402.",
+    category: "Agentic Commerce",
+    date: "2025-07-01",
+  },
+  {
+    slug: "bathroom-exercises-small-spaces",
+    title: "15 Bathroom Exercises for Small Spaces — No Equipment Needed",
+    description:
+      "The best exercises you can do in your bathroom with zero equipment. Wall push-ups, squats, calf raises, and more.",
+    category: "Fitness Guide",
+    date: "2025-08-10",
+  },
+  {
+    slug: "x402-vs-stripe-agent-payments",
+    title: "x402 vs Stripe: Which Payment System for AI Agent Commerce?",
+    description:
+      "Comparing x402 protocol (crypto) and Stripe (cards) for selling to AI agents. When to use each and why we use both.",
+    category: "Agent Payments",
+    date: "2025-09-05",
+  },
 ];
 
 export default function BlogIndex() {

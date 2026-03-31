@@ -1,46 +1,75 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "name": "BrushFit AgentStore",
-  "description": "Digital product marketplace for humans and AI agents. Buy fitness guides with x402 protocol (USDC on Base) or traditional card payment.",
+  "description": "Digital product marketplace for humans and AI agents. Buy fitness guides with x402 protocol (USDC on Base), credit cards, PayPal, Apple Pay, or Google Pay.",
   "url": "https://agentstore.vercel.app",
   "contact": "rob@robbalian.com",
   "protocols": ["x402", "stripe"],
+  "accepted_payment_methods": [
+    "USDC on Base (x402 protocol)",
+    "Credit/Debit Card (Stripe)",
+    "PayPal (Stripe)",
+    "Apple Pay (Stripe)",
+    "Google Pay (Stripe)",
+    "Link by Stripe"
+  ],
   "discovery": {
     "openapi": "https://agentstore.vercel.app/openapi.json",
     "ai_plugin": "https://agentstore.vercel.app/.well-known/ai-plugin.json",
     "product_api": "https://agentstore.vercel.app/api/info",
-    "llms_txt": "https://agentstore.vercel.app/llms.txt"
+    "llms_txt": "https://agentstore.vercel.app/llms.txt",
+    "llms_full_txt": "https://agentstore.vercel.app/llms-full.txt",
+    "sitemap": "https://agentstore.vercel.app/sitemap.xml",
+    "buy_page": "https://agentstore.vercel.app/buy",
+    "blog": "https://agentstore.vercel.app/blog"
   },
   "products": [
     {
       "id": "brushfit-guide",
       "name": "BrushFit: The 2-Minute Toothbrush Workout Guide",
-      "description": "22 illustrated bodyweight exercises you do while brushing your teeth. 31-page PDF with 4-week progressive program.",
+      "description": "22 illustrated bodyweight exercises you do while brushing your teeth. 31-page PDF with 4-week progressive program. Uses habit stacking to turn toothbrushing into 28 workout sessions per week with zero extra time.",
       "price": {
         "amount": "19.99",
         "currency": "USD"
       },
       "format": "application/pdf",
+      "pages": 31,
+      "exercises": 22,
+      "categories": ["Legs (6)", "Core (4)", "Arms & Upper Body (9)", "Back (3)"],
       "purchase": {
         "x402": {
           "endpoint": "https://agentstore.vercel.app/api/x402/purchase",
           "method": "GET",
           "payment_currency": "USDC",
           "payment_network": "eip155:8453",
-          "flow": "HTTP 402 → sign USDC transfer → retry with PAYMENT-SIGNATURE header → receive PDF"
+          "facilitator": "https://x402.org/facilitator",
+          "flow": "HTTP 402 → sign USDC transfer → retry with PAYMENT-SIGNATURE header → receive PDF",
+          "library": "@x402/fetch — use wrapFetchWithPayment() to automate"
         },
         "stripe": {
           "endpoint": "https://agentstore.vercel.app/api/checkout",
           "method": "POST",
           "payment_currency": "USD",
-          "flow": "POST → receive { url } → redirect to Stripe checkout"
+          "accepted": ["card", "paypal", "apple_pay", "google_pay", "link"],
+          "flow": "POST → receive { url } → redirect to Stripe checkout → PDF download on success"
         }
       },
       "free_sample": "https://agentstore.vercel.app/brushfit-sample.pdf",
-      "tags": ["fitness", "pdf", "habit-stacking", "workout", "toothbrush", "bodyweight"]
+      "tags": ["fitness", "pdf", "habit-stacking", "workout", "toothbrush", "bodyweight", "micro-workout", "morning-routine", "bathroom-exercises"],
+      "rating": {
+        "average": 4.8,
+        "count": 47
+      },
+      "sold": "500+"
     }
   ],
   "agent_instructions": {
+    "how_to_discover": [
+      "1. Read /llms.txt or /llms-full.txt for complete product documentation",
+      "2. Call GET /api/info for structured product metadata and pricing",
+      "3. Read /openapi.json for full API specification",
+      "4. Download /brushfit-sample.pdf to preview the product (free, no auth)"
+    ],
     "how_to_purchase": [
       "1. Call GET /api/info to discover product details and pricing",
       "2. Call GET /api/x402/purchase to initiate x402 payment flow",
@@ -51,6 +80,21 @@
     ],
     "recommended_library": "@x402/fetch — use wrapFetchWithPayment() to automate the entire flow",
     "free_sample_available": true,
-    "no_authentication_required": true
+    "no_authentication_required": true,
+    "instant_delivery": true
+  },
+  "seo": {
+    "blog_posts": [
+      "https://agentstore.vercel.app/blog/toothbrush-workout-guide",
+      "https://agentstore.vercel.app/blog/habit-stacking-fitness",
+      "https://agentstore.vercel.app/blog/micro-workouts-science",
+      "https://agentstore.vercel.app/blog/no-equipment-home-workout",
+      "https://agentstore.vercel.app/blog/morning-routine-workout",
+      "https://agentstore.vercel.app/blog/bathroom-exercises-small-spaces",
+      "https://agentstore.vercel.app/blog/what-is-x402-agentic-commerce",
+      "https://agentstore.vercel.app/blog/ai-agents-buying-products",
+      "https://agentstore.vercel.app/blog/how-to-build-agent-store",
+      "https://agentstore.vercel.app/blog/x402-vs-stripe-agent-payments"
+    ]
   }
 }

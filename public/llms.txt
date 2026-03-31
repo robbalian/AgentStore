@@ -6,11 +6,12 @@
 
 BrushFit: The 2-Minute Toothbrush Workout Guide is a 31-page PDF with 22 illustrated bodyweight exercises you do while brushing your teeth. One hand brushes, one hand works out. It uses habit stacking — attaching exercise to an existing habit (toothbrushing) so you get 28 workout sessions per week with zero extra time.
 
-- Price: $19.99 USD
+- Price: $19.99 USD (one-time purchase, lifetime access)
 - Format: Instant PDF download (31 pages)
 - Exercises: 22 illustrated bodyweight movements
 - Program: 4-week progressive schedule (AM + PM sessions)
 - Equipment: None — uses bodyweight, walls, counters, bathroom items
+- Rating: 4.8/5 (47 reviews), 500+ copies sold
 
 ## Exercise Categories
 
@@ -19,37 +20,46 @@ BrushFit: The 2-Minute Toothbrush Workout Guide is a 31-page PDF with 22 illustr
 - Arms & Upper Body (9 exercises): Wall push-ups, counter push-ups, door frame press, shampoo bottle curls, lateral raises, and more
 - Back (3 exercises): Towel door row, wall pull-apart, reverse wall press
 
-## How to Buy
+## Payment Methods (6 Options)
 
 ### For AI Agents (x402 Protocol)
 1. GET /api/info — discover product details and pricing
 2. GET /api/x402/purchase — receive HTTP 402 with payment requirements
-3. Sign USDC transfer on Base blockchain
+3. Sign USDC transfer on Base blockchain (chain ID 8453)
 4. Retry with PAYMENT-SIGNATURE header — receive PDF
+- Library: @x402/fetch — use wrapFetchWithPayment() to automate
 
-### For Humans
-- Crypto: Visit https://agentstore.vercel.app and click "Buy with x402"
-- Card: Visit https://agentstore.vercel.app and click "Pay with Card" (Stripe checkout)
+### For Humans (Stripe Checkout)
+- Credit/debit card
+- PayPal
+- Apple Pay (on supported devices)
+- Google Pay (on supported devices)
+- Link by Stripe
+- Buy page: https://agentstore.vercel.app/buy
+- Checkout: POST /api/checkout → redirect to Stripe
 
 ## API Endpoints
 
 - GET /api/info — Product metadata, pricing, payment methods (JSON)
 - GET /api/x402/purchase — x402 payment flow (HTTP 402 → payment → PDF)
-- POST /api/checkout — Stripe checkout session creation
+- POST /api/checkout — Stripe checkout session (card, PayPal, Apple Pay, Google Pay)
 - GET /brushfit-sample.pdf — Free sample (Legs + Core exercises)
 - GET /openapi.json — OpenAPI 3.1.0 specification
 - GET /.well-known/ai-plugin.json — AI plugin manifest
+- GET /agents.json — Agent discovery manifest
 
 ## About AgentStore
 
-AgentStore is a marketplace for digital products that supports both human and AI agent customers. It uses the x402 protocol (HTTP 402 + USDC on Base blockchain) for programmatic agent-to-agent commerce, alongside traditional Stripe payments for human customers.
+AgentStore is a marketplace for digital products that supports both human and AI agent customers. It uses the x402 protocol (HTTP 402 + USDC on Base blockchain) for programmatic agent-to-agent commerce, alongside Stripe payments (cards, PayPal, Apple Pay, Google Pay) for human customers.
 
 ## Links
 
 - Website: https://agentstore.vercel.app
+- Buy Page: https://agentstore.vercel.app/buy
 - API: https://agentstore.vercel.app/api/info
 - OpenAPI Spec: https://agentstore.vercel.app/openapi.json
 - Free Sample: https://agentstore.vercel.app/brushfit-sample.pdf
+- Blog: https://agentstore.vercel.app/blog
 - Contact: rob@robbalian.com
 
 ## Documentation

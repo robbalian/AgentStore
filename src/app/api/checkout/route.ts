@@ -16,8 +16,11 @@ export async function POST(req: NextRequest) {
     // Create a download token upfront and embed it in the success URL
     const downloadToken = createDownloadToken();
 
-    const body = new URLSearchParams({
-      "payment_method_types[]": "card",
+    const body = new URLSearchParams();
+    // Accept card, Apple Pay, Google Pay, and PayPal
+    const paymentMethods = ["card", "paypal", "link"];
+    paymentMethods.forEach((pm) => body.append("payment_method_types[]", pm));
+    Object.entries({
       "line_items[0][price_data][currency]": "usd",
       "line_items[0][price_data][product_data][name]":
         "BrushFit: The 2-Minute Toothbrush Workout Guide",
@@ -29,7 +32,7 @@ export async function POST(req: NextRequest) {
       success_url: `${SITE_URL}/success?session_id={CHECKOUT_SESSION_ID}&token=${downloadToken}`,
       cancel_url: `${SITE_URL}/?canceled=true`,
       "metadata[download_token]": downloadToken,
-    });
+    }).forEach(([k, v]) => body.append(k, v));
 
     const response = await fetch("https://api.stripe.com/v1/checkout/sessions", {
       method: "POST",
